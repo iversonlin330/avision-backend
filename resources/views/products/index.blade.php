@@ -21,14 +21,23 @@
 			<th>編輯</th>
 		</thead>
 		<tbody>
-			<tr>
+		@foreach($products as $product)
+		<tr>
+			<td>{{ $product->title }}</td>
+			<td>
+				<a class="btn btn-primary edit_btn" href="{{ url('products/'.$product->id.'/edit') }}">編輯</a>
+				<a class="btn btn-primary delete_btn" href="product-create.html">刪除</a>
+			</td>
+		</tr>
+		@endforeach
+			<!--tr>
 				<td>AN240</td>
 				<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
 			</tr>
 			<tr>
 				<td>AN240</td>
 				<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-			</tr>
+			</tr-->
 		</tbody>
 	</table>
 	</div>
