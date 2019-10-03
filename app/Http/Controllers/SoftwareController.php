@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\Software;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class SoftwareController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,6 @@ class ProductController extends Controller
     public function index()
     {
         //
-		$products = Product::all();
-		return view('products.index',compact('products'));
     }
 
     /**
@@ -27,7 +25,6 @@ class ProductController extends Controller
     public function create()
     {
         //
-		return view('products.create');
     }
 
     /**
@@ -40,18 +37,18 @@ class ProductController extends Controller
     {
         //
 		$data = $request->all();
-		$data['picture'] = $request->file('picture')->store('products');
-		Product::create($data);
+		$data['file'] = $request->file('file')->store('downloads');
+		Software::create($data);
 		return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Software $software)
     {
         //
     }
@@ -59,23 +56,22 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Software $software)
     {
         //
-		return view('products.create',compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Software $software)
     {
         //
     }
@@ -83,13 +79,13 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Software $software)
     {
         //
-		$product->delete();
+		$software->delete();
 		return back();
     }
 }

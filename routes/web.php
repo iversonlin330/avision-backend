@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('products','ProductController');
+Route::resource('downloads','DownloadController');
+Route::resource('softwares','SoftwareController');
+Route::resource('faqs','FaqController');
+Route::resource('accessories','AccessoryController');

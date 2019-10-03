@@ -27,7 +27,7 @@
 <!--Info-->
 <div class="row">
 <div class="col-12">
-<form action="{{ url('products') }}" method="post">
+<form id="product_form" action="{{ url('products') }}" enctype="multipart/form-data" method="post">
   <div class="form-group">
 	<label for="exampleInputEmail1">產品名稱</label>
 	<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="產品名稱" required>
@@ -126,169 +126,209 @@
 </div>
 <!--Info-->
 </div>
-<div class="tab-pane fade" id="pills-download" role="tabpanel" aria-labelledby="pills-profile-tab">
-<div class="row mt-2">
-	<div class="col-12">
-		<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#group">新增手冊</a>
-		<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#spec">新增軟體程式</a>
+@if(isset($product))
+	<div class="tab-pane fade" id="pills-download" role="tabpanel" aria-labelledby="pills-profile-tab">
+	<div class="row mt-2">
+		<div class="col-12">
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#group">新增手冊</a>
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#spec">新增軟體程式</a>
+		</div>
 	</div>
-</div>
-<div class="row mt-2">
-	<div class="col-12">
-	<div class="card">
-		<div class="card-header">手冊</div>
-		  <div class="card-body">
-			<table class="table">
-				<thead>
-					<th>文件類型</th>
-					<th>文件名稱</th>
-					<th>檔案大小</th>
-					<th>文件語系</th>
-					<th>編輯</th>
-				</thead>
-				<tbody>
-					<tr>
-						<td>用戶手冊</td>
-						<td>用戶手冊一</td>
-						<td>30MB</td>
-						<td>zh-tw</td>
-						<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-					</tr>
-					<tr>
-						<td>型錄</td>
-						<td>型錄一</td>
-						<td>30MB</td>
-						<td>zh-tw</td>
-						<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-					</tr>
-				</tbody>
-			</table>
-		  </div>
+	<div class="row mt-2">
+		<div class="col-12">
+		<div class="card">
+			<div class="card-header">手冊</div>
+			  <div class="card-body">
+				<table class="table">
+					<thead>
+						<th>文件類型</th>
+						<th>文件名稱</th>
+						<th>檔案大小</th>
+						<th>文件語系</th>
+						<th>編輯</th>
+					</thead>
+					<tbody>
+					@foreach($product->downloads as $download)
+						<tr>
+							<td>{{ $download->type_text }}</td>
+							<td>{{ $download->title }}</td>
+							<td>{{ $download->file_size }}</td>
+							<td>{{ $download->lang }}</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr>
+					@endforeach
+						<!--tr>
+							<td>用戶手冊</td>
+							<td>用戶手冊一</td>
+							<td>30MB</td>
+							<td>zh-tw</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr>
+						<tr>
+							<td>型錄</td>
+							<td>型錄一</td>
+							<td>30MB</td>
+							<td>zh-tw</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr-->
+					</tbody>
+				</table>
+			  </div>
+		</div>
+		</div>
 	</div>
-	</div>
-</div>
-<div class="row mt-2">
-	<div class="col-12">
-	<div class="card">
-		<div class="card-header">軟體程式</div>
-		  <div class="card-body">
-			<table class="table">
-				<thead>
-					<th>文件類型</th>
-					<th>文件名稱</th>
-					<th>版本</th>
-					<th>檔案大小</th>
-					<th>系統相容性</th>
-					<th>檢查碼(sha1)</th>
-					<th>編輯</th>
-				</thead>
-				<tbody>
-					<tr>
-						<td>驅動程式</td>
-						<td>驅動程式一</td>
-						<td>版本一</td>
-						<td>30MB</td>
-						<td>系統相容性一</td>
-						<td>檢查碼一</td>
-						<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-					</tr>
-					<tr>
-						<td>驅動程式</td>
-						<td>驅動程式一</td>
-						<td>版本一</td>
-						<td>30MB</td>
-						<td>系統相容性一</td>
-						<td>檢查碼一</td>
-						<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-					</tr>
-				</tbody>
-			</table>
-		  </div>
-	</div>
-	</div>
-</div>
-</div>
-<div class="tab-pane fade" id="pills-acc" role="tabpanel" aria-labelledby="pills-contact-tab">
-<div class="row mt-2">
-	<div class="col-12">
-		<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#add-acc">新增配件</a>
-	</div>
-</div>
-<div class="row mt-2">
-	<div class="col-12">
-	<div class="card">
-		<div class="card-header">配件</div>
-		  <div class="card-body">
-			<table class="table">
-				<thead>
-					<th>配件名稱</th>
-					<th>配件說明</th>
-					<th>配件圖片</th>
-					<th>聯絡我們</th>
-					<th>編輯</th>
-				</thead>
-				<tbody>
-					<tr>
-						<td>配件名稱</td>
-						<td>配件說明</td>
-						<td>配件圖片</td>
-						<td>聯絡我們URL</td>
-						<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-					</tr>
-					<tr>
-						<td>配件名稱</td>
-						<td>配件說明</td>
-						<td>配件圖片</td>
-						<td>聯絡我們URL</td>
-						<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-					</tr>
-				</tbody>
-			</table>
-		  </div>
+	<div class="row mt-2">
+		<div class="col-12">
+		<div class="card">
+			<div class="card-header">軟體程式</div>
+			  <div class="card-body">
+				<table class="table">
+					<thead>
+						<th>文件類型</th>
+						<th>文件名稱</th>
+						<th>版本</th>
+						<th>檔案大小</th>
+						<th>系統相容性</th>
+						<th>檢查碼(sha1)</th>
+						<th>編輯</th>
+					</thead>
+					<tbody>
+					@foreach($product->softwares as $software)
+						<tr>
+							<td>{{ $software->type_text }}</td>
+							<td>{{ $software->title }}</td>
+							<td>{{ $software->version }}</td>
+							<td>{{ $software->file_size }}</td>
+							<td>{{ $software->compatibility }}</td>
+							<td>{{ $software->sha1 }}</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr>
+					@endforeach
+						<!--tr>
+							<td>驅動程式</td>
+							<td>驅動程式一</td>
+							<td>版本一</td>
+							<td>30MB</td>
+							<td>系統相容性一</td>
+							<td>檢查碼一</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr>
+						<tr>
+							<td>驅動程式</td>
+							<td>驅動程式一</td>
+							<td>版本一</td>
+							<td>30MB</td>
+							<td>系統相容性一</td>
+							<td>檢查碼一</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr-->
+					</tbody>
+				</table>
+			  </div>
+		</div>
+		</div>
 	</div>
 	</div>
-</div>
-</div>
-<div class="tab-pane fade" id="pills-qa" role="tabpanel" aria-labelledby="pills-contact-tab">
-<div class="row mt-2">
-	<div class="col-12">
-		<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#add-qa">新增常見問答</a>
+	<div class="tab-pane fade" id="pills-acc" role="tabpanel" aria-labelledby="pills-contact-tab">
+	<div class="row mt-2">
+		<div class="col-12">
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#add-acc">新增配件</a>
+		</div>
 	</div>
-</div>
-<div class="row mt-2">
-	<div class="col-12">
-	<div class="card">
-		<div class="card-header">常見問答</div>
-		  <div class="card-body">
-			<table class="table">
-				<thead>
-					<th>分類</th>
-					<th>題目</th>
-					<th>內容</th>
-					<th>編輯</th>
-				</thead>
-				<tbody>
-					<tr>
-						<td>硬體常見問題</td>
-						<td>硬體常見問題一</td>
-						<td>內容</td>
-						<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-					</tr>
-					<tr>
-						<td>硬體常見問題</td>
-						<td>硬體常見問題一</td>
-						<td>內容</td>
-						<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-					</tr>
-				</tbody>
-			</table>
-		  </div>
+	<div class="row mt-2">
+		<div class="col-12">
+		<div class="card">
+			<div class="card-header">配件</div>
+			  <div class="card-body">
+				<table class="table">
+					<thead>
+						<th>配件名稱</th>
+						<th>配件說明</th>
+						<th>配件圖片</th>
+						<th>聯絡我們</th>
+						<th>編輯</th>
+					</thead>
+					<tbody>
+					@foreach($product->accessories as $accessory)
+						<tr>
+							<td>{{ $accessory->title }}</td>
+							<td>{{ $accessory->description }}</td>
+							<td>{{ $accessory->version }}</td>
+							<td>{{ $accessory->file }}</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr>
+					@endforeach
+						<!--tr>
+							<td>配件名稱</td>
+							<td>配件說明</td>
+							<td>配件圖片</td>
+							<td>聯絡我們URL</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr>
+						<tr>
+							<td>配件名稱</td>
+							<td>配件說明</td>
+							<td>配件圖片</td>
+							<td>聯絡我們URL</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr-->
+					</tbody>
+				</table>
+			  </div>
+		</div>
+		</div>
 	</div>
 	</div>
-</div>
-</div>
+	<div class="tab-pane fade" id="pills-qa" role="tabpanel" aria-labelledby="pills-contact-tab">
+	<div class="row mt-2">
+		<div class="col-12">
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#add-qa">新增常見問答</a>
+		</div>
+	</div>
+	<div class="row mt-2">
+		<div class="col-12">
+		<div class="card">
+			<div class="card-header">常見問答</div>
+			  <div class="card-body">
+				<table class="table">
+					<thead>
+						<th>分類</th>
+						<th>題目</th>
+						<th>內容</th>
+						<th>編輯</th>
+					</thead>
+					<tbody>
+					@foreach($product->faqs as $faq)
+						<tr>
+							<td>{{ $faq->type_text }}</td>
+							<td>{{ $faq->title }}</td>
+							<td>{{ $faq->description }}</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr>
+					@endforeach
+						<!--tr>
+							<td>硬體常見問題</td>
+							<td>硬體常見問題一</td>
+							<td>內容</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr>
+						<tr>
+							<td>硬體常見問題</td>
+							<td>硬體常見問題一</td>
+							<td>內容</td>
+							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+						</tr-->
+					</tbody>
+				</table>
+			  </div>
+		</div>
+		</div>
+	</div>
+	</div>
+	@endif
 </div>
 <!--modal-->
+@if(isset($product))
 <div id="group" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
 	<div class="modal-content">
@@ -298,30 +338,35 @@
 		  <span aria-hidden="true">&times;</span>
 		</button>
 	  </div>
+	  <form action="{{ url('downloads') }}" enctype="multipart/form-data" method="post">
 	  <div class="modal-body">
-		<form action="create.php" method="post">
+		  <input name="product_id" value="{{ $product->id}}" hidden>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">文件類型</label>
-			<select class="form-control" name="">
-				<option>用戶手冊</option>
-				<option>型錄</option>
-				<option>快速指南</option>
+			<select class="form-control" name="type" required>
+				<option value="1">用戶手冊</option>
+				<option value="2">型錄</option>
+				<option value="3">快速指南</option>
 			</select>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">文件名稱</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="文件名稱">
+			<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="文件名稱" required>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">文件語系</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="文件語系">
+			<input type="text" class="form-control" name="lang" aria-describedby="emailHelp" placeholder="文件語系" required>
 		  </div>
-		  </form>
+		  <div class="form-group">
+			<label for="exampleInputEmail1">檔案</label>
+			<input type="file" class="form-control" name="file" required>
+		  </div>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
-		<button type="button" class="btn btn-primary add-btn">儲存</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
 	  </div>
+	  </form>
 	</div>
   </div>
 </div>
@@ -336,37 +381,42 @@
 		  <span aria-hidden="true">&times;</span>
 		</button>
 	  </div>
+	  <form action="{{ url('softwares') }}" enctype="multipart/form-data" method="post">
 	  <div class="modal-body">
-		<form action="create.php" method="post">
+	  <input name="product_id" value="{{ $product->id}}" hidden>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">文件類型</label>
-			<select class="form-control" name="">
-				<option>驅動程式</option>
-				<option>應用軟體</option>
+			<select class="form-control" name="type" required>
+				<option value="1">驅動程式</option>
+				<option value="2">應用軟體</option>
 			</select>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">文件名稱</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="文件名稱">
+			<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="文件名稱" required>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">版本</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="版本">
+			<input type="text" class="form-control" name="version" aria-describedby="emailHelp" placeholder="版本" required>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">系統相容性</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="系統相容性">
+			<input type="text" class="form-control" name="compatibility" aria-describedby="emailHelp" placeholder="系統相容性" required>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">檢查碼(sha1)	</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="檢查碼(sha1)	">
+			<input type="text" class="form-control" name="sha1" aria-describedby="emailHelp" placeholder="檢查碼(sha1)	" required>
 		  </div>
-		  </form>
+		  <div class="form-group">
+			<label for="exampleInputEmail1">檔案</label>
+			<input type="file" class="form-control" name="file" required>
+		  </div>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
-		<button type="button" class="btn btn-primary add-btn">儲存</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
 	  </div>
+	  </form>
 	</div>
   </div>
 </div>
@@ -381,30 +431,32 @@
 		  <span aria-hidden="true">&times;</span>
 		</button>
 	  </div>
+	  <form action="{{ url('accessories') }}" enctype="multipart/form-data" method="post">
 	  <div class="modal-body">
-		<form action="create.php" method="post">
+		<input name="product_id" value="{{ $product->id}}" hidden>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">配件名稱</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="配件名稱">
+			<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="配件名稱" required>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">配件說明</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="配件說明">
+			<input type="text" class="form-control" name="description" aria-describedby="emailHelp" placeholder="配件說明" required>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">配件圖片</label>
-			<input type="file" class="form-control" name="" aria-describedby="emailHelp">
+			<input type="file" class="form-control" name="file" aria-describedby="emailHelp" required>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">連絡我們</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="url">
+			<input type="text" class="form-control" name="url" aria-describedby="emailHelp" placeholder="url" required>
 		  </div>
-		  </form>
+		  
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
-		<button type="button" class="btn btn-primary add-btn">儲存</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
 	  </div>
+	  </form>
 	</div>
   </div>
 </div>
@@ -419,34 +471,38 @@
 		  <span aria-hidden="true">&times;</span>
 		</button>
 	  </div>
+	  <form action="{{ url('faqs') }}" enctype="multipart/form-data" method="post">
 	  <div class="modal-body">
-		<form action="create.php" method="post">
+	  <input name="product_id" value="{{ $product->id}}" hidden>
+		
 		  <div class="form-group">
 			<label for="exampleInputEmail1">分類</label>
-			<select class="form-control" name="">
-				<option>硬體常見問題</option>
-				<option>軟體常見問題</option>
-				<option>操作指南</option>
+			<select class="form-control" name="type">
+				<option value="1">硬體常見問題</option>
+				<option value="2">軟體常見問題</option>
+				<option value="3">操作指南</option>
 			</select>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">題目</label>
-			<input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="題目">
+			<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="題目">
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">內容</label>
-			<textarea class="form-control editor" name="" aria-describedby="emailHelp" placeholder="內容"></textarea>
+			<textarea class="form-control editor" name="description" aria-describedby="emailHelp" placeholder="內容"></textarea>
 		  </div>
-		  </form>
+		  
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
-		<button type="button" class="btn btn-primary add-btn">儲存</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
 	  </div>
+	  </form>
 	</div>
   </div>
 </div>
 <!--modal-->
+@endif
 @endsection
 
 @section('script')
@@ -455,20 +511,20 @@
 @if(isset($product))
 	var product = {!! json_encode($product) !!};
 	console.log(product.title);
-	$("[name='title']").val(product.title);
-	$("[name='model']").val(product.model);
-	$("[name='type_id']").val(product.type_id);
+	$("#product_form [name='title']").val(product.title);
+	$("#product_form [name='model']").val(product.model);
+	$("#product_form [name='type_id']").val(product.type_id);
 	//$("[name='picture']").val(product.picture);
-	$("[name='flag']").val(product.flag);
-	$("[name='characteristic_1']").val(product.characteristic_1);
-	$("[name='characteristic_2']").val(product.characteristic_2);
-	$("[name='characteristic_3']").val(product.characteristic_3);
-	$("[name='description']").val(product.description);
-	$("[name='spec[]']").val(product.spec);
-	$("[name='software[]']").val(product.software);
-	$("[name='cert[]']").val(product.cert);
-	$("[name='filter[]']").val(product.filter);
-	$("[name='status']").val(product.status);
+	$("#product_form  [name='flag']").val(product.flag);
+	$("#product_form  [name='characteristic_1']").val(product.characteristic_1);
+	$("#product_form  [name='characteristic_2']").val(product.characteristic_2);
+	$("#product_form  [name='characteristic_3']").val(product.characteristic_3);
+	$("#product_form  [name='description']").val(product.description);
+	$("#product_form  [name='spec[]']").val(product.spec);
+	$("#product_form  [name='software[]']").val(product.software);
+	$("#product_form  [name='cert[]']").val(product.cert);
+	$("#product_form  [name='filter[]']").val(product.filter);
+	$("#product_form  [name='status']").val(product.status);
 	//$("[name='picture']").val(product.picture);
 	
 	/*

@@ -18,15 +18,20 @@
 	<table class="table">
 		<thead>
 			<th>產品名稱</th>
+			<th>圖片</th>
 			<th>編輯</th>
 		</thead>
 		<tbody>
 		@foreach($products as $product)
 		<tr>
 			<td>{{ $product->title }}</td>
+			<td><img src="{{ asset('storage/'.$product->picture) }}"></td>
 			<td>
 				<a class="btn btn-primary edit_btn" href="{{ url('products/'.$product->id.'/edit') }}">編輯</a>
-				<a class="btn btn-primary delete_btn" href="product-create.html">刪除</a>
+				<form method="POST" action="/products/{{$product->id}}">
+					{{ method_field('DELETE') }}
+					<button type="submit" class="btn btn-primary delete_btn">刪除</button>
+				 </form>
 			</td>
 		</tr>
 		@endforeach

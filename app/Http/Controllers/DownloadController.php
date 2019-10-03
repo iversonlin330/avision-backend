@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\Download;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class DownloadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,6 @@ class ProductController extends Controller
     public function index()
     {
         //
-		$products = Product::all();
-		return view('products.index',compact('products'));
     }
 
     /**
@@ -24,10 +22,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
-		return view('products.create');
     }
 
     /**
@@ -40,18 +37,18 @@ class ProductController extends Controller
     {
         //
 		$data = $request->all();
-		$data['picture'] = $request->file('picture')->store('products');
-		Product::create($data);
+		$data['file'] = $request->file('file')->store('downloads');
+		Download::create($data);
 		return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Download  $download
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Download $download)
     {
         //
     }
@@ -59,23 +56,22 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Download  $download
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Download $download)
     {
         //
-		return view('products.create',compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\Download  $download
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Download $download)
     {
         //
     }
@@ -83,13 +79,13 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Download  $download
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Download $download)
     {
         //
-		$product->delete();
+		$download->delete();
 		return back();
     }
 }
