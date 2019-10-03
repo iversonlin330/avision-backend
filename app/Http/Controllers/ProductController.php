@@ -42,7 +42,7 @@ class ProductController extends Controller
 		$data = $request->all();
 		$data['picture'] = $request->file('picture')->store('products');
 		Product::create($data);
-		return back();
+		return redirect('products');
     }
 
     /**
@@ -78,6 +78,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+		$data = $request->all();
+		Product::update($data);
+		return redirect('products');
     }
 
     /**

@@ -73,6 +73,9 @@ class FaqController extends Controller
     public function update(Request $request, Faq $faq)
     {
         //
+		$data = $request->all();
+		$faq->update($data);
+		return back();
     }
 
     /**

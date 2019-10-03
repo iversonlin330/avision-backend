@@ -74,6 +74,10 @@ class DownloadController extends Controller
     public function update(Request $request, Download $download)
     {
         //
+		$data = $request->all();
+		$data['file'] = $request->file('file')->store('downloads');
+		$download->update($data);
+		return back();
     }
 
     /**

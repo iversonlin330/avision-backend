@@ -9,25 +9,32 @@
 @endsection
 @section('content')
 <ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
-<li class="nav-item">
-<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-home" aria-selected="true">產品資訊</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-download" role="tab" aria-controls="pills-profile" aria-selected="false">下載</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-contact" aria-selected="false">配件</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-qa" role="tab" aria-controls="pills-contact" aria-selected="false">常見問答</a>
-</li>
+	<li class="nav-item">
+	<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-home" aria-selected="true">產品資訊</a>
+	</li>
+	@if(isset($product))
+	<li class="nav-item">
+	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-download" role="tab" aria-controls="pills-profile" aria-selected="false">下載</a>
+	</li>
+	<li class="nav-item">
+	<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-contact" aria-selected="false">配件</a>
+	</li>
+	<li class="nav-item">
+	<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-qa" role="tab" aria-controls="pills-contact" aria-selected="false">常見問答</a>
+	</li>
+	@endif
 </ul>
 <div class="tab-content" id="pills-tabContent">
 <div class="tab-pane fade show active" id="pills-product" role="tabpanel" aria-labelledby="pills-home-tab">
 <!--Info-->
 <div class="row">
 <div class="col-12">
+@if(isset($product))
+<form id="product_form" action="{{url('products/'.$product->id)}}" method="POST">
+@method('PUT')
+@else
 <form id="product_form" action="{{ url('products') }}" enctype="multipart/form-data" method="post">
+@endif
   <div class="form-group">
 	<label for="exampleInputEmail1">產品名稱</label>
 	<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="產品名稱" required>
@@ -130,7 +137,7 @@
 	<div class="tab-pane fade" id="pills-download" role="tabpanel" aria-labelledby="pills-profile-tab">
 	<div class="row mt-2">
 		<div class="col-12">
-			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#group">新增手冊</a>
+			<a class="btn btn-primary add-btn" onclick="download_modal('create')">新增手冊</a>
 			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#spec">新增軟體程式</a>
 		</div>
 	</div>
@@ -149,12 +156,15 @@
 					</thead>
 					<tbody>
 					@foreach($product->downloads as $download)
-						<tr>
-							<td>{{ $download->type_text }}</td>
+						<tr data-id="{{ $download->id }}">
+							<td data-val="{{ $download->type }}">{{ $download->type_text }}</td>
 							<td>{{ $download->title }}</td>
 							<td>{{ $download->file_size }}</td>
 							<td>{{ $download->lang }}</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+							<td>
+								<a class="btn btn-primary edit_btn" href="#" onclick="download_modal(this)">編輯</a>
+								<a class="btn btn-primary delete_btn" href="product-create.html">刪除</a>
+							</td>
 						</tr>
 					@endforeach
 						<!--tr>
@@ -339,6 +349,7 @@
 		</button>
 	  </div>
 	  <form action="{{ url('downloads') }}" enctype="multipart/form-data" method="post">
+	  @method('PUT')
 	  <div class="modal-body">
 		  <input name="product_id" value="{{ $product->id}}" hidden>
 		  <div class="form-group">
@@ -359,7 +370,7 @@
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">檔案</label>
-			<input type="file" class="form-control" name="file" required>
+			<input type="file" class="form-control" name="file">
 		  </div>
 	  </div>
 	  <div class="modal-footer">
@@ -542,6 +553,20 @@
 		$("[name^='subject']").filter('[value='+teacher.subject[x]+']').prop('checked', true);
 	}
 	*/
+	
+	function download_modal(obj){
+		if(obj == 'create'){
+			$("#group [name='_method']").val('POST');
+			$("#group form").attr('action',"{{ url('downloads') }}");
+		}else{
+			$("#group [name='_method']").val('PUT');
+			$("#group [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
+			$("#group [name='title']").val($(obj).closest('tr').find('td:eq(1)').text());
+			$("#group [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
+			$("#group form").attr('action',"{{ url('downloads') }}/"+$(obj).closest('tr').data('id'));
+		}
+		$("#group").modal('show');
+	}
 @endif
 </script>
 @endsection

@@ -62,6 +62,10 @@ class AccessoryController extends Controller
     public function edit(Accessory $accessory)
     {
         //
+		$data = $request->all();
+		$data['file'] = $request->file('file')->store('accessories');
+		$accessory->update($data);
+		return back();
     }
 
     /**

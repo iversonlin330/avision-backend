@@ -62,6 +62,10 @@ class SoftwareController extends Controller
     public function edit(Software $software)
     {
         //
+		$data = $request->all();
+		$data['file'] = $request->file('file')->store('downloads');
+		$software->update($data);
+		return back();
     }
 
     /**
