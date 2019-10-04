@@ -11,7 +11,9 @@
  <div class="row mt-2">
 	<div class="col-12">
 		<a class="btn btn-primary add-btn" onclick="group_modal('create')">新增群組</a>
+		<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#group_sort_modal">群組排序</a>
 		<a class="btn btn-primary add-btn" onclick="spec_modal('create')">新增規格</a>
+		<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#spec_sort_modal">規格排序</a>
 	</div>
 </div>
 <div class="row mt-2">
@@ -165,10 +167,71 @@
   </div>
 </div>
 <!--modal-->
+<!--modal-->
+<div id="group_sort_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title">群組排序</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <form action="{{ url('groups') }}" enctype="multipart/form-data" method="post">
+	  <div class="modal-body">
+		  <ul id="group_sort">
+				@foreach($groups as $group)
+					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $group->title }}
+						<input name="order[]" value="{{ $group->id }}" hidden>
+					</li>
+				@endforeach
+			<ul>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
+	  </div>
+	  </form>
+	</div>
+  </div>
+</div>
+<!--modal-->
+<!--modal-->
+<div id="spec_sort_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title">群組排序</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <form action="{{ url('specs') }}" enctype="multipart/form-data" method="post">
+	  <div class="modal-body">
+		  <ul id="spec_sort">
+		  @foreach($groups as $group)
+				@foreach($group->specs as $spec)
+					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $spec->title }}
+						<input name="order[]" value="{{ $spec->id  }}" hidden>
+					</li>
+				@endforeach
+			@endforeach
+			<ul>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
+	  </div>
+	  </form>
+	</div>
+  </div>
+</div>
+<!--modal-->
 @endsection
 @section('script')
 @parent
 <script>
+$("#group_sort,#spec_sort").sortable();
 function group_modal(obj){
 	if(obj == 'create'){
 		$("#spec_modal [name='title']").val('');

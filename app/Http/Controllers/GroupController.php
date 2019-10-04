@@ -18,7 +18,7 @@ class GroupController extends Controller
         //
 		$data = $request->all();
 		$type = $data['type'];
-		$groups = Group::where('type',$type)->get();
+		$groups = Group::where('type',$type)->orderBy('order')->get();
 		return view('groups.index',compact('groups','type'));
     }
 
