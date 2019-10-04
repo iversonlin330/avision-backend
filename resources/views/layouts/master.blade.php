@@ -17,18 +17,45 @@
   </style>
   <body>
 	<div class="d-flex" id="wrapper">
-
+	<?php
+		$sidebar_active = array_fill(1, 7, '');
+		//$sidebar_active[] = '';
+		switch (Request::fullUrl()) {
+		  case url('products'):
+		  case url('products/create'):
+			$sidebar_active[1] = 'sidebar-active';
+			break;
+		  case url('groups?type=1'):
+			$sidebar_active[2] = 'sidebar-active';
+			break;
+		case url('groups?type=2'):
+			$sidebar_active[3] = 'sidebar-active';
+			break;
+		case url('logos?type=1'):
+			$sidebar_active[4] = 'sidebar-active';
+			break;
+		case url('logos?type=2'):
+			$sidebar_active[5] = 'sidebar-active';
+			break;
+		case url('logos?type=3'):
+			$sidebar_active[6] = 'sidebar-active';
+			break;
+		case url('filters'):
+			$sidebar_active[7] = 'sidebar-active';
+			break;
+		}
+	?>
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading"><img src="{{ asset('images/logo.png') }}" alt=""></div>
       <div class="list-group list-group-flush">
-        <a href="{{ url('products') }}" class="list-group-item list-group-item-action bg-light">產品</a>
-        <a href="{{ url('groups?type=1') }}" class="list-group-item list-group-item-action bg-light">產品規格(印表機)</a>
-		<a href="{{ url('groups?type=2') }}" class="list-group-item list-group-item-action bg-light">產品規格(掃描器)</a>
-		<a href="{{ url('logos?type=1') }}" class="list-group-item list-group-item-action bg-light">機台規格</a>
-		<a href="{{ url('logos?type=2') }}" class="list-group-item list-group-item-action bg-light">附贈軟體</a>
-		<a href="{{ url('logos?type=3') }}" class="list-group-item list-group-item-action bg-light">認證標章</a>
-		<a href="{{ url('filters') }}" class="list-group-item list-group-item-action bg-light">篩選</a>
+        <a href="{{ url('products') }}"           class="list-group-item list-group-item-action bg-light {{ $sidebar_active[1] }}">產品</a>
+        <a href="{{ url('groups?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[2] }}">產品規格(印表機)</a>
+		<a href="{{ url('groups?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">產品規格(掃描器)</a>
+		<a href="{{ url('logos?type=1') }}"   class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">機台規格</a>
+		<a href="{{ url('logos?type=2') }}"   class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">附贈軟體</a>
+		<a href="{{ url('logos?type=3') }}"   class="list-group-item list-group-item-action bg-light {{ $sidebar_active[6] }}">認證標章</a>
+		<a href="{{ url('filters') }}"                class="list-group-item list-group-item-action bg-light {{ $sidebar_active[7] }}">篩選</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

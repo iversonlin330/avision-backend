@@ -46,6 +46,11 @@ body{
   color:#fff;
 }
 
+#sidebar-wrapper .sidebar-active {
+  background-color: #0E3A65!important;
+  color:#fff;
+}
+
 #page-content-wrapper {
   min-width: 100vw;
 }
