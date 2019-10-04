@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Filter;
+use App\Logo;
+use App\Group;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,7 +19,7 @@ class ProductController extends Controller
     {
         //
 		$products = Product::all();
-		return view('products.index',compact('products'));
+		return view('products.index',compact('products','filters'));
     }
 
     /**
@@ -27,7 +30,11 @@ class ProductController extends Controller
     public function create()
     {
         //
-		return view('products.create');
+		$filters = Filter::all();
+		$logo1s = Logo::where('type',1)->get();
+		$logo2s = Logo::where('type',2)->get();
+		$logo3s = Logo::where('type',3)->get();
+		return view('products.create',compact('filters','logo1s','logo2s','logo3s'));
     }
 
     /**
@@ -65,7 +72,12 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-		return view('products.create',compact('product'));
+		$filters = Filter::all();
+		$logo1s = Logo::where('type',1)->get();
+		$logo2s = Logo::where('type',2)->get();
+		$logo3s = Logo::where('type',3)->get();
+		$groups = Group::where('type',$product->type_id)->get();
+		return view('products.create',compact('product','filters','logo1s','logo2s','logo3s','groups'));
     }
 
     /**
@@ -79,7 +91,8 @@ class ProductController extends Controller
     {
         //
 		$data = $request->all();
-		Product::update($data);
+		$data['picture'] = $request->file('picture')->store('products');
+		$product->update($data);
 		return redirect('products');
     }
 

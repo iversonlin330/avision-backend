@@ -20,3 +20,8 @@ Route::resource('downloads','DownloadController');
 Route::resource('softwares','SoftwareController');
 Route::resource('faqs','FaqController');
 Route::resource('accessories','AccessoryController');
+Route::resource('groups','GroupController');
+Route::resource('specs','SpecController');
+Route::resource('logos','LogoController');
+Route::resource('filters','FilterController');
+Route::resource('product_specs','ProductSpecController');

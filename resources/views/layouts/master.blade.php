@@ -23,8 +23,12 @@
       <div class="sidebar-heading"><img src="{{ asset('images/logo.png') }}" alt=""></div>
       <div class="list-group list-group-flush">
         <a href="{{ url('products') }}" class="list-group-item list-group-item-action bg-light">產品</a>
-        <a href="{{ url('specs') }}" class="list-group-item list-group-item-action bg-light">產品規格</a>
-		<a href="{{ url('logos') }}" class="list-group-item list-group-item-action bg-light">Logo</a>
+        <a href="{{ url('groups?type=1') }}" class="list-group-item list-group-item-action bg-light">產品規格(印表機)</a>
+		<a href="{{ url('groups?type=2') }}" class="list-group-item list-group-item-action bg-light">產品規格(掃描器)</a>
+		<a href="{{ url('logos?type=1') }}" class="list-group-item list-group-item-action bg-light">機台規格</a>
+		<a href="{{ url('logos?type=2') }}" class="list-group-item list-group-item-action bg-light">附贈軟體</a>
+		<a href="{{ url('logos?type=3') }}" class="list-group-item list-group-item-action bg-light">認證標章</a>
+		<a href="{{ url('filters') }}" class="list-group-item list-group-item-action bg-light">篩選</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

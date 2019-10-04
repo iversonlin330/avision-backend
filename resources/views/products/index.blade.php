@@ -28,7 +28,7 @@
 			<td><img src="{{ asset('storage/'.$product->picture) }}"></td>
 			<td>
 				<a class="btn btn-primary edit_btn" href="{{ url('products/'.$product->id.'/edit') }}">編輯</a>
-				<form method="POST" action="/products/{{$product->id}}">
+				<form method="POST" action="/products/{{$product->id}}" class="d-inline">
 					{{ method_field('DELETE') }}
 					<button type="submit" class="btn btn-primary delete_btn">刪除</button>
 				 </form>

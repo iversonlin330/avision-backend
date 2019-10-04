@@ -14,6 +14,9 @@
 	</li>
 	@if(isset($product))
 	<li class="nav-item">
+	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-spec" role="tab" aria-controls="pills-profile" aria-selected="false">產品規格</a>
+	</li>
+	<li class="nav-item">
 	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-download" role="tab" aria-controls="pills-profile" aria-selected="false">下載</a>
 	</li>
 	<li class="nav-item">
@@ -30,7 +33,7 @@
 <div class="row">
 <div class="col-12">
 @if(isset($product))
-<form id="product_form" action="{{url('products/'.$product->id)}}" method="POST">
+<form id="product_form" action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
 @method('PUT')
 @else
 <form id="product_form" action="{{ url('products') }}" enctype="multipart/form-data" method="post">
@@ -88,6 +91,9 @@
 	<label for="exampleInputEmail1">機台規格</label>
 	<div>
 	<select class="form-control multiselect" name="spec[]" multiple required>
+		@foreach($logo1s as $logo1)
+			<option value="{{ $logo1->id }}">{{ $logo1->title }}</option>
+		@endforeach
 		<option>機台規格1</option>
 		<option>機台規格2</option>
 	</select>
@@ -97,6 +103,9 @@
 	<label for="exampleInputEmail1">附贈軟體</label>
 	<div>
 	<select class="form-control multiselect" name="software[]" multiple required>
+		@foreach($logo2s as $logo2)
+			<option value="{{ $logo1->id }}">{{ $logo2->title }}</option>
+		@endforeach
 		<option>附贈軟體1</option>
 		<option>附贈軟體2</option>
 	</select>
@@ -106,6 +115,9 @@
 	<label for="exampleInputEmail1">認證標章</label>
 	<div>
 	<select class="form-control multiselect" name="cert[]" multiple required>
+		@foreach($logo3s as $logo3)
+			<option value="{{ $logo3->id }}">{{ $logo3->title }}</option>
+		@endforeach
 		<option>認證標章1</option>
 		<option>認證標章2</option>
 	</select>
@@ -115,8 +127,9 @@
   <div class="form-group">
 	<label for="exampleFormControlSelect2">總覽篩選</label>
 	<select class="form-control" id="exampleFormControlSelect2" name="filter[]" multiple required>
-	  <option>顯示</option>
-	  <option>不顯示</option>
+	  @foreach($filters as $filter)
+	  <option value="{{ $filter->id }}">{{ $filter->title }}</option>
+	  @endforeach
 	</select>
   </div>
 
@@ -134,6 +147,37 @@
 <!--Info-->
 </div>
 @if(isset($product))
+	<div class="tab-pane fade" id="pills-spec" role="tabpanel" aria-labelledby="pills-contact-tab">
+		<form action="{{ url('product_specs') }}" method="POST">
+		<input name="product_id" value="{{ $product->id}}" hidden>
+		@foreach($groups as $group)
+		<div class="row mt-2">
+			<div class="col-12">
+			<div class="card">
+				<div class="card-header">{{ $group->title }}</div>
+				  <div class="card-body">
+					<table class="table">
+						<thead>
+							<th>規格名稱</th>
+							<th>編輯</th>
+						</thead>
+						<tbody>
+							@foreach($group->specs as $spec)
+								<tr>
+									<td>{{ $spec->title }}</td>
+									<td><input type="text" class="form-control" name="spec[{{$spec->id}}]" aria-describedby="emailHelp" placeholder="{{ $spec->title }}" required></td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				  </div>
+			</div>
+			</div>
+		</div>
+		@endforeach
+		<button type="submit" class="btn btn-primary send_button">送出</button>
+		</form>
+	</div>
 	<div class="tab-pane fade" id="pills-download" role="tabpanel" aria-labelledby="pills-profile-tab">
 	<div class="row mt-2">
 		<div class="col-12">
@@ -268,20 +312,6 @@
 							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
 						</tr>
 					@endforeach
-						<!--tr>
-							<td>配件名稱</td>
-							<td>配件說明</td>
-							<td>配件圖片</td>
-							<td>聯絡我們URL</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-						</tr>
-						<tr>
-							<td>配件名稱</td>
-							<td>配件說明</td>
-							<td>配件圖片</td>
-							<td>聯絡我們URL</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-						</tr-->
 					</tbody>
 				</table>
 			  </div>
