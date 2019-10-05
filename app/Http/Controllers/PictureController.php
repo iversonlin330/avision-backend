@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Accessory;
+use App\Picture;
 use Illuminate\Http\Request;
 
-class AccessoryController extends Controller
+class PictureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,29 +35,30 @@ class AccessoryController extends Controller
      */
     public function store(Request $request)
     {
-		
+        //
 		$data = $request->all();
 		if(array_key_exists('order',$data)){
 			foreach($data['order'] as $index => $template_id){
-				Accessory::find($template_id)->update(['order' => $index+1]);
+				Picture::find($template_id)->update(['order' => $index+1]);
 			}
 		}else{
-			$data['file'] = $request->file('file')->store('accessories');
-			$data['order'] = Accessory::all()->max('order') + 1;
-			Accessory::create($data);
+			if($data['type'] == 2){
+				$data['path'] = $request->file('path')->store('pictures');
+			}
+			$data['order'] = Picture::all()->max('order') + 1;
+			Picture::create($data);
 			
 		}
 		return back();
-		
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Accessory  $accessory
+     * @param  \App\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function show(Accessory $accessory)
+    public function show(Picture $picture)
     {
         //
     }
@@ -65,10 +66,10 @@ class AccessoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Accessory  $accessory
+     * @param  \App\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function edit(Accessory $accessory)
+    public function edit(Picture $picture)
     {
         //
     }
@@ -77,28 +78,28 @@ class AccessoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Accessory  $accessory
+     * @param  \App\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Accessory $accessory)
+    public function update(Request $request, Picture $picture)
     {
         //
 		$data = $request->all();
-		$data['file'] = $request->file('file')->store('accessories');
-		$accessory->update($data);
+		$data['file'] = $request->file('file')->store('pictures');
+		$picture->update($data);
 		return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Accessory  $accessory
+     * @param  \App\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Accessory $accessory)
+    public function destroy(Picture $picture)
     {
         //
-		$accessory->delete();
+		$picture->delete();
 		return back();
     }
 }

@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
 			$table->text('cert');
 			$table->text('filter');
 			$table->integer('status');
+			$table->integer('order');
             $table->timestamps();
         });
     }

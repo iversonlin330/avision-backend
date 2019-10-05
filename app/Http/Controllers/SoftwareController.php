@@ -37,8 +37,16 @@ class SoftwareController extends Controller
     {
         //
 		$data = $request->all();
-		$data['file'] = $request->file('file')->store('downloads');
-		Software::create($data);
+		if(array_key_exists('order',$data)){
+			foreach($data['order'] as $index => $template_id){
+				Software::find($template_id)->update(['order' => $index+1]);
+			}
+		}else{
+			$data['file'] = $request->file('file')->store('downloads');
+			$data['order'] = Software::all()->max('order') + 1;
+			Software::create($data);
+			
+		}
 		return back();
     }
 
@@ -62,10 +70,6 @@ class SoftwareController extends Controller
     public function edit(Software $software)
     {
         //
-		$data = $request->all();
-		$data['file'] = $request->file('file')->store('downloads');
-		$software->update($data);
-		return back();
     }
 
     /**
@@ -78,6 +82,10 @@ class SoftwareController extends Controller
     public function update(Request $request, Software $software)
     {
         //
+		$data = $request->all();
+		$data['file'] = $request->file('file')->store('downloads');
+		$software->update($data);
+		return back();
     }
 
     /**

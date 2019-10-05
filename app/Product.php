@@ -16,6 +16,16 @@ class Product extends Model
 		'filter' => 'array',
 	];
 	
+	public function type()
+    {
+        return $this->belongsTo('App\Type');
+    }
+	
+	public function pictures()
+    {
+        return $this->hasMany('App\Picture');
+    }
+	
 	public function downloads()
     {
         return $this->hasMany('App\Download');
@@ -35,4 +45,11 @@ class Product extends Model
     {
         return $this->hasMany('App\Faq');
     }
+	
+	public function product_specs()
+    {
+        return $this->hasMany('App\ProductSpec');
+    }
+	
+	
 }

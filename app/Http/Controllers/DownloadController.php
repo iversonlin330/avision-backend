@@ -35,10 +35,17 @@ class DownloadController extends Controller
      */
     public function store(Request $request)
     {
-        //
 		$data = $request->all();
-		$data['file'] = $request->file('file')->store('downloads');
-		Download::create($data);
+		if(array_key_exists('order',$data)){
+			foreach($data['order'] as $index => $template_id){
+				Download::find($template_id)->update(['order' => $index+1]);
+			}
+		}else{
+			$data['file'] = $request->file('file')->store('downloads');
+			$data['order'] = Download::all()->max('order') + 1;
+			Download::create($data);
+			
+		}
 		return back();
     }
 

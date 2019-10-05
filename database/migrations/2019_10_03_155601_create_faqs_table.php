@@ -19,6 +19,7 @@ class CreateFaqsTable extends Migration
 			$table->text('type');
 			$table->text('title');
 			$table->text('description');
+			$table->integer('order');
             $table->timestamps();
         });
     }

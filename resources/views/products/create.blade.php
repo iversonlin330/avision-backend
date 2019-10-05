@@ -14,6 +14,9 @@
 	</li>
 	@if(isset($product))
 	<li class="nav-item">
+	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-picture" role="tab" aria-controls="pills-profile" aria-selected="false">其他產品圖片</a>
+	</li>
+	<li class="nav-item">
 	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-spec" role="tab" aria-controls="pills-profile" aria-selected="false">產品規格</a>
 	</li>
 	<li class="nav-item">
@@ -49,8 +52,9 @@
   <div class="form-group">
 	<label for="exampleFormControlSelect2">產品類別</label>
 	<select class="form-control" name="type_id" required>
-	  <option value="1">印表機</option>
-	  <option value="2">掃描器</option>
+		@foreach($types as $type)
+			<option value="{{ $type->id }}">{{ $type->title }}</option>
+		@endforeach
 	</select>
   </div>
   <div class="form-group">
@@ -127,6 +131,7 @@
   <div class="form-group">
 	<label for="exampleFormControlSelect2">總覽篩選</label>
 	<select class="form-control" id="exampleFormControlSelect2" name="filter[]" multiple required>
+	  <option value="1">tests</option>
 	  @foreach($filters as $filter)
 	  <option value="{{ $filter->id }}">{{ $filter->title }}</option>
 	  @endforeach
@@ -182,7 +187,9 @@
 	<div class="row mt-2">
 		<div class="col-12">
 			<a class="btn btn-primary add-btn" onclick="download_modal('create')">新增手冊</a>
-			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#spec">新增軟體程式</a>
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#download_sort_modal">手冊排序</a>
+			<a class="btn btn-primary add-btn" onclick="software_modal('create')">新增軟體程式</a>
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#software_sort_modal">軟體程式排序</a>
 		</div>
 	</div>
 	<div class="row mt-2">
@@ -199,7 +206,7 @@
 						<th>編輯</th>
 					</thead>
 					<tbody>
-					@foreach($product->downloads as $download)
+					@foreach($product->downloads->sortBy('order') as $download)
 						<tr data-id="{{ $download->id }}">
 							<td data-val="{{ $download->type }}">{{ $download->type_text }}</td>
 							<td>{{ $download->title }}</td>
@@ -207,7 +214,10 @@
 							<td>{{ $download->lang }}</td>
 							<td>
 								<a class="btn btn-primary edit_btn" href="#" onclick="download_modal(this)">編輯</a>
-								<a class="btn btn-primary delete_btn" href="product-create.html">刪除</a>
+								<form method="POST" action="/downloads/{{$download->id}}" class="d-inline">
+									{{ method_field('DELETE') }}
+									<button type="submit" class="btn btn-primary delete_btn">刪除</button>
+								 </form>
 							</td>
 						</tr>
 					@endforeach
@@ -241,21 +251,27 @@
 						<th>文件類型</th>
 						<th>文件名稱</th>
 						<th>版本</th>
-						<th>檔案大小</th>
 						<th>系統相容性</th>
 						<th>檢查碼(sha1)</th>
+						<th>檔案大小</th>
 						<th>編輯</th>
 					</thead>
 					<tbody>
-					@foreach($product->softwares as $software)
-						<tr>
-							<td>{{ $software->type_text }}</td>
+					@foreach($product->softwares->sortBy('order') as $software)
+						<tr data-id="{{ $software->id }}">
+							<td data-val="{{ $software->type }}">{{ $software->type_text }}</td>
 							<td>{{ $software->title }}</td>
 							<td>{{ $software->version }}</td>
-							<td>{{ $software->file_size }}</td>
 							<td>{{ $software->compatibility }}</td>
 							<td>{{ $software->sha1 }}</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+							<td>{{ $software->file_size }}</td>
+							<td>
+								<a class="btn btn-primary edit_btn" href="#" onclick="software_modal(this)">編輯</a>
+								<form method="POST" action="/softwares/{{$software->id}}" class="d-inline">
+									{{ method_field('DELETE') }}
+									<button type="submit" class="btn btn-primary delete_btn">刪除</button>
+								 </form>
+							</td>
 						</tr>
 					@endforeach
 						<!--tr>
@@ -286,7 +302,8 @@
 	<div class="tab-pane fade" id="pills-acc" role="tabpanel" aria-labelledby="pills-contact-tab">
 	<div class="row mt-2">
 		<div class="col-12">
-			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#add-acc">新增配件</a>
+			<a class="btn btn-primary add-btn" href="#" onclick="accessory_modal('create')">新增配件</a>
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#accessory_sort_modal">配件排序</a>
 		</div>
 	</div>
 	<div class="row mt-2">
@@ -303,13 +320,19 @@
 						<th>編輯</th>
 					</thead>
 					<tbody>
-					@foreach($product->accessories as $accessory)
-						<tr>
+					@foreach($product->accessories->sortBy('order') as $accessory)
+						<tr data-id="{{ $accessory->id }}">
 							<td>{{ $accessory->title }}</td>
 							<td>{{ $accessory->description }}</td>
-							<td>{{ $accessory->version }}</td>
-							<td>{{ $accessory->file }}</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+							<td><img src="{{ asset('storage/'.$accessory->file) }}"></td>
+							<td>{{ $accessory->url }}</td>
+							<td>
+								<a class="btn btn-primary edit_btn" href="#" onclick="accessory_modal(this)">編輯</a>
+								<form method="POST" action="/accessories/{{$accessory->id}}" class="d-inline">
+									{{ method_field('DELETE') }}
+									<button type="submit" class="btn btn-primary delete_btn">刪除</button>
+								 </form>
+							</td>
 						</tr>
 					@endforeach
 					</tbody>
@@ -322,7 +345,8 @@
 	<div class="tab-pane fade" id="pills-qa" role="tabpanel" aria-labelledby="pills-contact-tab">
 	<div class="row mt-2">
 		<div class="col-12">
-			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#add-qa">新增常見問答</a>
+			<a class="btn btn-primary add-btn" href="#" onclick="faq_modal('create')">新增常見問答</a>
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#faq_sort_modal">常見問答排序</a>
 		</div>
 	</div>
 	<div class="row mt-2">
@@ -338,12 +362,18 @@
 						<th>編輯</th>
 					</thead>
 					<tbody>
-					@foreach($product->faqs as $faq)
-						<tr>
-							<td>{{ $faq->type_text }}</td>
+					@foreach($product->faqs->sortBy('order') as $faq)
+						<tr data-id="{{ $faq->id }}">
+							<td data-val="{{ $faq->id }}">{{ $faq->type_text }}</td>
 							<td>{{ $faq->title }}</td>
 							<td>{{ $faq->description }}</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
+							<td>
+								<a class="btn btn-primary edit_btn" href="#" onclick="faq_modal(this)">編輯</a>
+								<form method="POST" action="/faqs/{{$faq->id}}" class="d-inline">
+									{{ method_field('DELETE') }}
+									<button type="submit" class="btn btn-primary delete_btn">刪除</button>
+								 </form>
+							</td>
 						</tr>
 					@endforeach
 						<!--tr>
@@ -358,6 +388,47 @@
 							<td>內容</td>
 							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
 						</tr-->
+					</tbody>
+				</table>
+			  </div>
+		</div>
+		</div>
+	</div>
+	</div>
+	<div class="tab-pane fade" id="pills-picture" role="tabpanel" aria-labelledby="pills-contact-tab">
+	<div class="row mt-2">
+		<div class="col-12">
+			<a class="btn btn-primary add-btn" href="#" onclick="picture_modal('create')">新增其他圖片</a>
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#picture_sort_modal">其他圖片排序</a>
+		</div>
+	</div>
+	<div class="row mt-2">
+		<div class="col-12">
+		<div class="card">
+			<div class="card-header">其他圖片</div>
+			  <div class="card-body">
+				<table class="table">
+					<thead>
+						<th>類別</th>
+						<th>說明</th>
+						<th>檔案</th>
+						<th>編輯</th>
+					</thead>
+					<tbody>
+					@foreach($product->pictures->sortBy('order') as $picture)
+						<tr data-id="{{ $picture->id }}">
+							<td data-val="{{ $picture->type }}">{{ $picture->type_text }}</td>
+							<td>{{ $picture->description }}</td>
+							<td>{{ $picture->path }}</td>
+							<td>
+								<a class="btn btn-primary edit_btn" href="#" onclick="faq_modal(this)">編輯</a>
+								<form method="POST" action="/pictures/{{$picture->id}}" class="d-inline">
+									{{ method_field('DELETE') }}
+									<button type="submit" class="btn btn-primary delete_btn">刪除</button>
+								 </form>
+							</td>
+						</tr>
+					@endforeach
 					</tbody>
 				</table>
 			  </div>
@@ -413,7 +484,7 @@
 </div>
 <!--modal-->
 <!--modal-->
-<div id="spec" class="modal" tabindex="-1" role="dialog">
+<div id="software" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
 	<div class="modal-content">
 	  <div class="modal-header">
@@ -423,6 +494,7 @@
 		</button>
 	  </div>
 	  <form action="{{ url('softwares') }}" enctype="multipart/form-data" method="post">
+	  @method('PUT')
 	  <div class="modal-body">
 	  <input name="product_id" value="{{ $product->id}}" hidden>
 		  <div class="form-group">
@@ -463,7 +535,7 @@
 </div>
 <!--modal-->
 <!--modal-->
-<div id="add-acc" class="modal" tabindex="-1" role="dialog">
+<div id="accessory" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
 	<div class="modal-content">
 	  <div class="modal-header">
@@ -473,6 +545,7 @@
 		</button>
 	  </div>
 	  <form action="{{ url('accessories') }}" enctype="multipart/form-data" method="post">
+	  @method('PUT')
 	  <div class="modal-body">
 		<input name="product_id" value="{{ $product->id}}" hidden>
 		  <div class="form-group">
@@ -503,7 +576,7 @@
 </div>
 <!--modal-->
 <!--modal-->
-<div id="add-qa" class="modal" tabindex="-1" role="dialog">
+<div id="faq" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
 	<div class="modal-content">
 	  <div class="modal-header">
@@ -513,6 +586,7 @@
 		</button>
 	  </div>
 	  <form action="{{ url('faqs') }}" enctype="multipart/form-data" method="post">
+	  @method('PUT')
 	  <div class="modal-body">
 	  <input name="product_id" value="{{ $product->id}}" hidden>
 		
@@ -543,6 +617,190 @@
   </div>
 </div>
 <!--modal-->
+<!--modal-->
+<div id="picture" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title">新增其他產品圖片</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <form action="{{ url('pictures') }}" enctype="multipart/form-data" method="post">
+	  @method('PUT')
+	  <div class="modal-body">
+		<input name="product_id" value="{{ $product->id}}" hidden>
+		  <div class="form-group">
+			<label for="exampleInputEmail1">類別</label>
+			<select class="form-control" name="type">
+				<option value="1">連結</option>
+				<option value="2">檔案</option>
+			</select>
+		  </div>
+		  <div class="form-group">
+			<label for="exampleInputEmail1">說明</label>
+			<input type="text" class="form-control" name="description" aria-describedby="emailHelp" placeholder="說明" required>
+		  </div>
+		  <div class="form-group">
+			<label for="exampleInputEmail1">檔案</label>
+			<input type="text" class="form-control" name="path" aria-describedby="emailHelp" placeholder="檔案" required>
+		  </div>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
+	  </div>
+	  </form>
+	</div>
+  </div>
+</div>
+<!--modal-->
+<!--modal-->
+<div id="picture_sort_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title">其他圖片排序</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <form action="{{ url('pictures') }}" enctype="multipart/form-data" method="post">
+	  <div class="modal-body">
+		  <ul class="sortable">
+				@foreach($product->pictures->sortBy('order') as $picture)
+					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $picture->description }}
+						<input name="order[]" value="{{ $picture->id }}" hidden>
+					</li>
+				@endforeach
+			<ul>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
+	  </div>
+	  </form>
+	</div>
+  </div>
+</div>
+<!--modal-->
+<!--modal-->
+<div id="download_sort_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title">手冊排序</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <form action="{{ url('downloads') }}" enctype="multipart/form-data" method="post">
+	  <div class="modal-body">
+		  <ul class="sortable">
+				@foreach($product->downloads->sortBy('order') as $download)
+					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $download->title }}
+						<input name="order[]" value="{{ $download->id }}" hidden>
+					</li>
+				@endforeach
+			<ul>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
+	  </div>
+	  </form>
+	</div>
+  </div>
+</div>
+<!--modal-->
+<!--modal-->
+<div id="software_sort_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title">軟體程式排序</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <form action="{{ url('softwares') }}" enctype="multipart/form-data" method="post">
+	  <div class="modal-body">
+		  <ul class="sortable">
+				@foreach($product->softwares->sortBy('order') as $software)
+					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $software->title }}
+						<input name="order[]" value="{{ $software->id }}" hidden>
+					</li>
+				@endforeach
+			<ul>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
+	  </div>
+	  </form>
+	</div>
+  </div>
+</div>
+<!--modal-->
+<!--modal-->
+<div id="accessory_sort_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title">配件排序</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <form action="{{ url('accessories') }}" enctype="multipart/form-data" method="post">
+	  <div class="modal-body">
+		  <ul class="sortable">
+				@foreach($product->accessories->sortBy('order') as $accessory)
+					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $accessory->title }}
+						<input name="order[]" value="{{ $accessory->id }}" hidden>
+					</li>
+				@endforeach
+			<ul>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
+	  </div>
+	  </form>
+	</div>
+  </div>
+</div>
+<!--modal-->
+<!--modal-->
+<div id="faq_sort_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title">常見問答排序</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <form action="{{ url('faqs') }}" enctype="multipart/form-data" method="post">
+	  <div class="modal-body">
+		  <ul class="sortable">
+				@foreach($product->faqs->sortBy('order') as $faq)
+					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $faq->title }}
+						<input name="order[]" value="{{ $faq->id }}" hidden>
+					</li>
+				@endforeach
+			<ul>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
+		<button type="submit" class="btn btn-primary add-btn">儲存</button>
+	  </div>
+	  </form>
+	</div>
+  </div>
+</div>
+<!--modal-->
 @endif
 @endsection
 
@@ -550,8 +808,11 @@
 @parent
 <script>
 @if(isset($product))
+	$(".sortable").sortable();
 	var product = {!! json_encode($product) !!};
-	console.log(product.title);
+	var product_specs = {!! json_encode($product_specs) !!};
+
+	//console.log(product.title);
 	$("#product_form [name='title']").val(product.title);
 	$("#product_form [name='model']").val(product.model);
 	$("#product_form [name='type_id']").val(product.type_id);
@@ -578,11 +839,11 @@
 	$("[name='password']").val(user.password);
 	$("#teacher_password_again").val(user.password);
 	$("[name='number_of_class']").val(teacher.number_of_class);
-	
-	for(x in teacher.subject){
-		$("[name^='subject']").filter('[value='+teacher.subject[x]+']').prop('checked', true);
-	}
 	*/
+	for(x in product_specs){
+		$("[name='spec["+x+"]']").val(product_specs[x]);
+	}
+	
 	
 	function download_modal(obj){
 		if(obj == 'create'){
@@ -597,6 +858,69 @@
 		}
 		$("#group").modal('show');
 	}
+	
+	function software_modal(obj){
+		if(obj == 'create'){
+			$("#software [name='_method']").val('POST');
+			$("#software form").attr('action',"{{ url('softwares') }}");
+		}else{
+			$("#software [name='_method']").val('PUT');
+			$("#software [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
+			$("#software [name='title']").val($(obj).closest('tr').find('td:eq(1)').text());
+			$("#software [name='version']").val($(obj).closest('tr').find('td:eq(2)').text());
+			$("#software [name='compatibility']").val($(obj).closest('tr').find('td:eq(3)').text());
+			$("#software [name='sha1']").val($(obj).closest('tr').find('td:eq(4)').text());
+			$("#software form").attr('action',"{{ url('softwares') }}/"+$(obj).closest('tr').data('id'));
+		}
+		$("#software").modal('show');
+	}
+	
+	function accessory_modal(obj){
+		if(obj == 'create'){
+			$("#accessory [name='_method']").val('POST');
+			$("#accessory form").attr('action',"{{ url('accessories') }}");
+		}else{
+			$("#accessory [name='_method']").val('PUT');
+			//$("#accessory [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
+			$("#accessory [name='title']").val($(obj).closest('tr').find('td:eq(0)').text());
+			$("#accessory [name='description']").val($(obj).closest('tr').find('td:eq(1)').text());
+			$("#accessory [name='url']").val($(obj).closest('tr').find('td:eq(3)').text());
+			//$("#accessory [name='sha1']").val($(obj).closest('tr').find('td:eq(4)').text());
+			$("#accessory form").attr('action',"{{ url('accessories') }}/"+$(obj).closest('tr').data('id'));
+		}
+		$("#accessory").modal('show');
+	}
+	
+	function faq_modal(obj){
+		if(obj == 'create'){
+			$("#faq [name='_method']").val('POST');
+			$("#faq form").attr('action',"{{ url('faqs') }}");
+		}else{
+			$("#faq [name='_method']").val('PUT');
+			$("#faq [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
+			$("#faq [name='title']").val($(obj).closest('tr').find('td:eq(1)').text());
+			$("#faq [name='description']").val($(obj).closest('tr').find('td:eq(2)').text());
+			//$("#faq [name='url']").val($(obj).closest('tr').find('td:eq(3)').text());
+			$("#faq form").attr('action',"{{ url('faqs') }}/"+$(obj).closest('tr').data('id'));
+		}
+		$("#faq").modal('show');
+	}
+	
+	function picture_modal(obj){
+		if(obj == 'create'){
+			$("#picture [name='_method']").val('POST');
+			$("#picture form").attr('action',"{{ url('pictures') }}");
+		}else{
+			$("#picture [name='_method']").val('PUT');
+			$("#picture [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
+			$("#picture [name='title']").val($(obj).closest('tr').find('td:eq(1)').text());
+			$("#picture [name='description']").val($(obj).closest('tr').find('td:eq(2)').text());
+			//$("#faq [name='url']").val($(obj).closest('tr').find('td:eq(3)').text());
+			$("#picture form").attr('action',"{{ url('pictures') }}/"+$(obj).closest('tr').data('id'));
+		}
+		$("#picture").modal('show');
+	}
+	
 @endif
 </script>
 @endsection

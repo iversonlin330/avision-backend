@@ -35,9 +35,15 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        //
 		$data = $request->all();
-		Faq::create($data);
+		if(array_key_exists('order',$data)){
+			foreach($data['order'] as $index => $template_id){
+				Faq::find($template_id)->update(['order' => $index+1]);
+			}
+		}else{
+			$data['order'] = Faq::all()->max('order') + 1;
+			Faq::create($data);
+		}
 		return back();
     }
 

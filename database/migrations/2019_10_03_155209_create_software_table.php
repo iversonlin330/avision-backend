@@ -22,6 +22,7 @@ class CreateSoftwareTable extends Migration
 			$table->text('compatibility');
 			$table->text('sha1');
 			$table->text('file');
+			$table->integer('order');
             $table->timestamps();
         });
     }

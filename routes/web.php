@@ -25,3 +25,4 @@ Route::resource('specs','SpecController');
 Route::resource('logos','LogoController');
 Route::resource('filters','FilterController');
 Route::resource('product_specs','ProductSpecController');
+Route::resource('pictures','PictureController');
