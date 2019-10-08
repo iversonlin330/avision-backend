@@ -26,3 +26,9 @@ Route::resource('logos','LogoController');
 Route::resource('filters','FilterController');
 Route::resource('product_specs','ProductSpecController');
 Route::resource('pictures','PictureController');
+
+Route::group(['prefix' => 'frontends'], function () {
+    Route::get('products', function ()    {
+        return view('frontends.products');
+    });
+});
