@@ -24,7 +24,7 @@ class ProductController extends Controller
 		$type = $data['type'];
 		$type_ids = Type::where('type',$type)->get()->pluck('id')->toArray();
 		$products = Product::whereIn('type_id',$type_ids)->orderBy('order')->get();
-		return view('products.index',compact('products','filters','type'));
+		return view('products.index',compact('products','type'));
     }
 
     /**

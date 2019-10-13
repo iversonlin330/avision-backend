@@ -643,8 +643,8 @@
 			<input type="text" class="form-control" name="description" aria-describedby="emailHelp" placeholder="說明" required>
 		  </div>
 		  <div class="form-group">
-			<label for="exampleInputEmail1">檔案</label>
-			<input type="text" class="form-control" name="path" aria-describedby="emailHelp" placeholder="檔案" required>
+			<label for="exampleInputEmail1">連結</label>
+			<input type="text" class="form-control" name="path" aria-describedby="emailHelp" placeholder="連結" required>
 		  </div>
 	  </div>
 	  <div class="modal-footer">
@@ -920,6 +920,17 @@
 		}
 		$("#picture").modal('show');
 	}
+	
+	$("#picture [name='type']").change(function(){
+		let type_val = $(this).val(); 
+		if(type_val == 1){
+			$("#picture [name='path']").attr('type','text');
+			$("#picture [name='path']").parent().find('label').text('連結');
+		}else{
+			$("#picture [name='path']").attr('type','file');
+			$("#picture [name='path']").parent().find('label').text('檔案');
+		}
+	})
 	
 @endif
 </script>

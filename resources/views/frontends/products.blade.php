@@ -593,61 +593,61 @@
 
 				<div class="left-side-title">產品類型</div>
 				<div class="form-check ml-3">
-					<input class="form-check-input checkbox-20" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-20" type="checkbox" value="">
 					<label class="form-check-label left-side-item" for="defaultCheck1">
 						掃描器
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-15" type="checkbox" value="1" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						文件掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-15" type="checkbox" value="2" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						平台掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-15" type="checkbox" value="3" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						智慧可攜式掃描
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-15" type="checkbox" value="4" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						文件直通車系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-15" type="checkbox" value="5" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						多功能掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-15" type="checkbox" value="6" v-model="checkedTypes">
 					<label class="form-check-label mb-5" for="defaultCheck1">
 						生產級掃描儀
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input checkbox-20" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-20" type="checkbox" value="">
 					<label class="form-check-label left-side-item" for="defaultCheck1">
 						雷射印表機
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-15" type="checkbox" value="7" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						印表機
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="" id="defaultCheck1">
+					<input class="form-check-input checkbox-15" type="checkbox" value="8" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						多功能事務系列
 					</label>
@@ -711,7 +711,7 @@
 										</label>
 									</div>
 								</h5>
-								<img class="product_pic" src="images/all_product_01.png">
+								<img class="product_pic" src="images/all_product_01.png" v-bind:src="product.picture">
 								<div class="product_title">
 								@{{ product.title }}
 								</div>
@@ -971,11 +971,12 @@
 			el: '#app',
 			data: {
 				products:[],
+				checkedTypes: [],
 			},
 			mounted: function () {
 				var self = this;
 				$.ajax({
-					url: 'http://localhost:6003/api/products',
+				url: "{{url('api/products')}}",
 					method: 'GET',
 					success: function (data) {
 						console.log(data.data);
