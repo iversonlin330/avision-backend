@@ -28,7 +28,17 @@ Route::resource('product_specs','ProductSpecController');
 Route::resource('pictures','PictureController');
 
 Route::group(['prefix' => 'frontends'], function () {
-    Route::get('products', function ()    {
+    /*
+	Route::get('products', function ()    {
         return view('frontends.products');
     });
+	Route::get('product-detail', function ()    {
+        return view('frontends.product-detail');
+    });
+	Route::get('compare', function ()    {
+        return view('frontends.compares');
+    });
+	*/
+	Route::get('products','FrontendController@getProducts');
+	Route::get('product-detail/{id}','FrontendController@getProductDetail');
 });

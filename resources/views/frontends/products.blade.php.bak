@@ -354,6 +354,226 @@
 </style>
 
 <body>
+	<!--div class="left-side">
+		<div class="search">
+		<div class="input-group">
+		  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+		  <div class="input-group-append">
+			<span class="input-group-text">O</span>
+		  </div>
+		</div>
+		</div>
+		<div class="left-side-title">產品類型</div>
+		<div class="form-check first">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			掃描器
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			文件掃描系列
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			平台掃描系列
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			智慧可攜式掃描
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			文件直通車系列
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			多功能掃描系列
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			生產級掃描儀
+		  </label>
+		</div>
+		<div class="form-check first" style="margin-top: 50px;">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			雷射印表機
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			印表機
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			多功能事務系列
+		  </label>
+		</div>
+		<hr>
+		<div class="left-side-title">產品功能</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			A3
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			A4
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			USB3.0
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			A4
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			A3
+		  </label>
+		</div>
+		<div class="form-check ml-3 second">
+		  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		  <label class="form-check-label" for="defaultCheck1">
+			USB3.0
+		  </label>
+		</div>
+	</div>
+	<div class="right-side">
+		<div class="product">
+			<div class="product_header">
+				<div class="form-check text-right">
+				  <input class="form-check-input add-compare" type="checkbox" value="1" id="product_1">
+				  <label class="form-check-label" for="defaultCheck1">
+					加入比較
+				  </label>
+				</div>
+			</div>
+			<div class="product_img">
+				<img src="images/all_product_01.png">
+			</div>
+			<div class="product_title">
+				AD130
+			</div>
+			<div class="product_description">
+				<ul>
+					<li>列點特色1</li>
+					<li>列點特色2</li>
+					<li>列點特色3</li>
+				</ul>
+			</div>
+			<div class="product_btn">
+				<a class="btn ">查看產品詳情</a>
+			</div>
+		</div>
+		<div class="product">
+			<div class="product_header">
+				<div class="form-check text-right">
+				  <input class="form-check-input add-compare" type="checkbox" value="2" id="product_2">
+				  <label class="form-check-label" for="defaultCheck1">
+					加入比較
+				  </label>
+				</div>
+			</div>
+			<div class="product_img">
+				<img src="images/all_product_02.png">
+			</div>
+			<div class="product_title">
+				AD130
+			</div>
+			<div class="product_description">
+				<ul>
+					<li>列點特色1</li>
+					<li>列點特色2</li>
+					<li>列點特色3</li>
+				</ul>
+			</div>
+			<div class="product_btn">
+				<a class="btn btn-primary">查看產品詳情</a>
+			</div>
+		</div><div class="product">
+			<div class="product_header">
+				<div class="form-check text-right">
+				  <input class="form-check-input add-compare" type="checkbox" value="3" id="product_3">
+				  <label class="form-check-label" for="defaultCheck1">
+					加入比較
+				  </label>
+				</div>
+			</div>
+			<div class="product_img">
+				<img src="images/all_product_03.png">
+			</div>
+			<div class="product_title">
+				AD130
+			</div>
+			<div class="product_description">
+				<ul>
+					<li>列點特色1</li>
+					<li>列點特色2</li>
+					<li>列點特色3</li>
+				</ul>
+			</div>
+			<div class="product_btn">
+				<a class="btn btn-primary">查看產品詳情</a>
+			</div>
+		</div><div class="product">
+			<div class="product_header">
+				<div class="form-check text-right">
+				  <input class="form-check-input add-compare" type="checkbox" value="4" id="product_4">
+				  <label class="form-check-label" for="defaultCheck1">
+					加入比較
+				  </label>
+				</div>
+			</div>
+			<div class="product_img">
+				<img src="images/all_product_04.png">
+			</div>
+			<div class="product_title">
+				AD130
+			</div>
+			<div class="product_description">
+				<ul>
+					<li>列點特色1</li>
+					<li>列點特色2</li>
+					<li>列點特色3</li>
+				</ul>
+			</div>
+			<div class="product_btn">
+				<a class="btn btn-primary">查看產品詳情</a>
+			</div>
+		</div>
+	</div>
+	<div class="compare">
+		<div class="compare_close" style="float:right">X</div>
+		<div class="compare_title" style="float:left;text-align: left;">產品比較<br>右側產品皆已加入比較，至多可璇則三項或立即比較來查看比較結果。</div>
+		<div class="compare_list" style="float:left">
+		</div>
+		<div class="compare_btn" style="float:left"><a class="btn btn-outline-secondary" href="compare.html">立即比較</a></div>
+	</div-->
 	<div class="container-fluid" id="app">
 		<div class="row">
 			<div class="col-md-12 d-md-none search_text" onclick="sidebar('show')">進階搜尋></div>
@@ -476,45 +696,131 @@
 			</div>
 			<div class="col-md-9 col-sm-12 right-side ">
 				<div class="row">
-				
-					@foreach($products as $product)
 					<div class="col-md-3 col-sm-6 col-6" v-for="product in products">
 						<div class="card">
 							<div class="product-tag">
-								@if($product->flag == 2)
-									<img src="{{ asset('/images/icon_product_new.png') }}" alt="">
-								@elseif($product->flag == 3)
-									<img src="{{ asset('/images/icon_product_hot.png') }}" alt="">
-								@endif
+								<img src="images/icon_product_new.png" alt="">
 							</div>
 							<div class="card-body">
 								<h5 class="card-title">
 									<div class="form-check text-right">
-										<input class="form-check-input add-compare" type="checkbox" value="{{ $product->id }}"
-											id="product_{{ $product->id }}">
+										<input class="form-check-input add-compare" type="checkbox" value="1"
+											id="product_1" v-bind:id="'product_'+product.id">
 										<label class="form-check-label" for="defaultCheck1">
 											加入比較
 										</label>
 									</div>
 								</h5>
-								<img class="product_pic" src="{{ asset('storage/'.$product->picture) }}">
+								<img class="product_pic" src="images/all_product_01.png" v-bind:src="product.picture">
 								<div class="product_title">
-								{{ $product->title }}
+								@{{ product.title }}
 								</div>
 								<div class="product_description">
 									<ul>
-										<li>{{ $product->characteristic_1 }}</li>
-										<li>{{ $product->characteristic_2 }}</li>
-										<li>{{ $product->characteristic_3 }}</li>
+										<li>@{{ product.characteristic_1 }}</li>
+										<li>@{{ product.characteristic_2 }}</li>
+										<li>@{{ product.characteristic_3 }}</li>
 									</ul>
 								</div>
 								<div class="product_btn">
-									<a class="btn" href="{{ url('frontends/product-detail/'.$product->id) }}">查看產品詳情</a>
+									<a class="btn" href="product-detail.html" v-bind:href="'product-detail?id='+product.id">查看產品詳情</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					@endforeach
+					<!--div class="col-md-3 col-sm-6 col-6">
+						<div class="card">
+							<div class="product-tag">
+								<img src="images/icon_product_hot.png" alt="">
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">
+									<div class="form-check text-right">
+										<input class="form-check-input add-compare" type="checkbox" value="2"
+											id="product_2">
+										<label class="form-check-label" for="defaultCheck1">
+											加入比較
+										</label>
+									</div>
+								</h5>
+								<img class="product_pic" src="images/all_product_02.png">
+								<div class="product_title">
+									AD130
+								</div>
+								<div class="product_description">
+									<ul>
+										<li>列點特色1列點特色</li>
+										<li>列點特色2</li>
+										<li>列點特色3</li>
+									</ul>
+								</div>
+								<div class="product_btn">
+									<a class="btn " href="#">查看產品詳情</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-6">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">
+									<div class="form-check text-right">
+										<input class="form-check-input add-compare" type="checkbox" value="3"
+											id="product_3">
+										<label class="form-check-label" for="defaultCheck1">
+											加入比較
+										</label>
+									</div>
+								</h5>
+								<img class="product_pic" src="images/all_product_03.png">
+								<div class="product_title">
+									AD130
+								</div>
+								<div class="product_description">
+									<ul>
+										<li>列點特色1列點特色</li>
+										<li>列點特色2</li>
+										<li>列點特色3</li>
+									</ul>
+								</div>
+								<div class="product_btn">
+									<a class="btn " href="#">查看產品詳情</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-6">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">
+									<div class="form-check text-right">
+										<input class="form-check-input add-compare" type="checkbox" value="4"
+											id="product_4">
+										<label class="form-check-label" for="defaultCheck1">
+											加入比較
+										</label>
+									</div>
+								</h5>
+								<img class="product_pic" src="images/all_product_04.png">
+								<div class="product_title">
+									AD130
+								</div>
+								<div class="product_description">
+									<ul>
+										<li>列點特色1列點特色</li>
+										<li>列點特色2</li>
+										<li>列點特色3</li>
+									</ul>
+								</div>
+								<div class="product_btn">
+									<a class="btn " href="#">查看產品詳情</a>
+								</div>
+							</div>
+						</div>
+					</div-->
+				</div>
+				<div class="more_btn">
+					<a class="btn" href="3-1-1-1_product-detail.html">瀏覽更多</a>
 				</div>
 			</div>
 		</div>
@@ -540,6 +846,11 @@
 			</div>
 			<div class="compare_close" style="position: absolute; top:0; right:1%;"><img src="{{asset('/images/cross-icons.png')}}" alt=""></div>
 		</div>
+		<!--div class="compare_close" style="float:right">X</div>
+		<div class="compare_title" style="float:left;text-align: left;">產品比較<br>右側產品皆已加入比較，至多可選擇三項或立即比較來查看比較結果。</div>
+		<div class="compare_list" style="float:left">
+		</div>
+		<div class="compare_btn" style="float:left"><a class="btn btn-outline-secondary" href="compare.html">立即比較</a></div-->
 	</div>
 
 	<!-- Optional JavaScript -->
@@ -565,11 +876,8 @@
 				if(arr.length == 0)
 					return;
 				for (x in arr) {
-					//$('[value="'+arr[x]+'"]').prop('checked',true);
-					$('#product_'+arr[x]).prop('checked',true);
-					var picture_src = $('#product_'+arr[x]).closest('.card-body').find('.product_pic').attr('src');
-					var picture_title = $('#product_'+arr[x]).closest('.card-body').find('.product_title').text();
-					$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+arr[x]+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
+					$('[value="'+arr[x]+'"]').prop('checked',true);
+					$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+arr[x]+")'><img src='images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='images/all_product_0" + arr[x] + ".png'></div><div>行動CoCo棒</div></div>");
 				}
 				$(".compare").show();
 			}
@@ -635,6 +943,54 @@
 				$("#sidebar").addClass('d-none');
 			}
 		}
+
+		/*
+		function getCookie(cname) {
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length,c.length);
+				}
+			}
+			return "";
+		}
+
+		function setCookie(cname, cvalue, exdays) {
+			var d = new Date();
+			d.setTime(d.getTime() + (exdays*24*60*60*1000));
+			var expires = "expires="+ d.toUTCString();
+			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+		}
+		*/
+		var app = new Vue({
+			el: '#app',
+			data: {
+				products:[],
+				checkedTypes: [],
+			},
+			mounted: function () {
+				var self = this;
+				$.ajax({
+				url: "{{url('api/products')}}",
+					method: 'GET',
+					success: function (data) {
+						console.log(data.data);
+						self.products = data.data;
+						//self.products = JSON.parse(data.data);
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						console.log(XMLHttpRequest.status);
+						console.log(XMLHttpRequest.readyState);
+						console.log(textStatus);
+					}
+				});
+			}
+		});
 	</script>
 </body>
 

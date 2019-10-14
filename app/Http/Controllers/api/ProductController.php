@@ -23,9 +23,13 @@ class ProductController extends Controller
         //
 		//return response()->json('OK');
 		$products = Product::orderBy('order')->get();
+		//$groups = Group::where('type',$type)->orderBy('order')->get();
+		
 		foreach($products as $k=>$v){
 			$products[$k]['picture'] = asset('storage/'.$products[$k]['picture']);
+			$products[$k]['specs'] = $v->product_specs->pluck('value','spec_id')->toArray();
 		}
+		//dd($products->toArray());
 		return response()->json(['success' => true, 'data' => $products]);
     }
 
