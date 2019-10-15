@@ -470,6 +470,9 @@
 				<div class="row main-left-img-lis">
 						<div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="900000">
 							<div class="carousel-inner row w-100 mx-auto" role="listbox">
+								<div class="carousel-item col-3 col-md-3 col-lg-3 active" onclick="change_pic(this)">
+									<img class="img-fluid mx-auto d-block" src="{{ asset('storage/'.$product->picture) }}" alt="slide 1">
+								</div>
 								@foreach($product->pictures->sortBy('order') as $picture)
 									<div class="carousel-item col-3 col-md-3 col-lg-3 active" onclick="change_pic(this)">
 										<img class="img-fluid mx-auto d-block" src="{{ asset('storage/'.$picture->path) }}" alt="slide 1">
@@ -623,6 +626,7 @@
 									</tr>
 								</thead>
 								<tbody>
+									
 									<tr>
 										<td>AN240</td>
 										<td>VB21</td>
@@ -656,88 +660,53 @@
 				</div>
 				<div class="tab-pane fade" id="T4" role="tabpanel" aria-labelledby="T4-tab">
 					<div class="row">
-						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="card">
-										<div class="card-body">
-											<div class="row text-center">
-												<div class="col-md-12 pb-2">
-													<img class="mb-3" src="images/accessories_01.png">
-													<div class="T4-content">
-														<div class="col-md-12">
-															超音波重疊進紙
-														</div>
-														<div class="col-md-12 T4-text">
-															每份文件內含5個文件護套，建議只用壽命:100次
-														</div>
-														<div class="col-md-12 contact_btn mt-0">
-															<a class="btn btn-block ">聯絡我們</a>
-														</div>
-													</div>
-												</div>
+					@foreach($product->accessories->sortBy('order') as $accessory)
+					<div class="col-md-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="row text-center">
+									<div class="col-md-12 pb-2">
+										<img class="mb-3" src="{{ asset('storage/'.$accessory->file) }}">
+										<div class="T4-content">
+											<div class="col-md-12">{{ $accessory->title }}</div>
+											<div class="col-md-12 T4-text">{{ $accessory->description }}</div>
+											<div class="col-md-12 contact_btn mt-0">
+												<a class="btn btn-block " href="{{ $accessory->url }}">聯絡我們</a>
+											</div>
+										</div>
+									</div>
 
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="card">
-										<div class="card-body">
-											<div class="row text-center">
-												<div class="col-md-12 pb-2">
-													<img class="mb-3" src="images/accessories_02.png">
-													<div class="T4-content">
-														<div class="col-md-12">
-															超音波重疊進紙
-														</div>
-														<div class="col-md-12 T4-text">
-															每份文件內含5個文件護套，建議只用壽命:100次
-														</div>
-														<div class="col-md-12 contact_btn mt-0">
-															<a class="btn btn-block ">聯絡我們</a>
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="card">
-										<div class="card-body">
-											<div class="row text-center">
-												<div class="col-md-12 pb-2">
-													<img class="mb-3" src="images/accessories_03.png">
-													<div class="T4-content">
-														<div class="col-md-12">
-															超音波重疊進紙
-														</div>
-														<div class="col-md-12 T4-text">
-															每份文件內含5個文件護套，建議只用壽命:100次
-														</div>
-														<div class="col-md-12 contact_btn mt-0">
-															<a class="btn btn-block ">聯絡我們</a>
-														</div>
-													</div>
-												</div>
-								
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
+					</div>
+					@endforeach	
 					</div>
 				</div>
 				<div class="tab-pane fade" id="T5" role="tabpanel" aria-labelledby="T5-tab">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="faq-table">
-								<blockquote>軟體常見問題</blockquote>
+								<blockquote>硬體常見問題</blockquote>
 								<div class="accordion mb-4" id="QAsoftware">
+									@foreach($product->faqs->where('type',1)->sortBy('order') as $faq)
 									<div class="card">
+										<div class="card-header table-header" id="headingOne">
+											<div class="table-title"><span>{{ $faq->title }}</span></div>
+											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse1_1" aria-expanded="true"
+												aria-controls="collapseOne">
+												<img class="up" src="/images/icon_up.png">
+												<img class="down" src="/images/icon_down.png">
+											</div>
+										</div>
+										<div id="collapse1_1" class="collapse show" aria-labelledby="headingOne">
+											<div class="card-body" style="background-color: #FAFAFA;">
+												{{ $faq->description }}
+											</div>
+										</div>
+									</div>
+									@endforeach
+									<!--div class="card">
 										<div class="card-header table-header" id="headingOne">
 											<div class="table-title"><span>是否市面上的其他Micro USB線也可使用？</span></div>
 											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse1_1" aria-expanded="true"
@@ -766,13 +735,30 @@
 												安裝後如何確認掃描器已成功連接至電腦
 											</div>
 										</div>
-									</div>
+									</div-->
 								</div>
 							</div>
 							<div class="faq-table">
 								<blockquote>軟體常見問題</blockquote>
 								<div class="accordion mb-4" id="QAsoftware">
+									@foreach($product->faqs->where('type',1)->sortBy('order') as $faq)
 									<div class="card">
+										<div class="card-header table-header" id="headingOne">
+											<div class="table-title"><span>{{ $faq->title }}</span></div>
+											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse1_1" aria-expanded="true"
+												aria-controls="collapseOne">
+												<img class="up" src="/images/icon_up.png">
+												<img class="down" src="/images/icon_down.png">
+											</div>
+										</div>
+										<div id="collapse1_1" class="collapse show" aria-labelledby="headingOne">
+											<div class="card-body" style="background-color: #FAFAFA;">
+												{{ $faq->description }}
+											</div>
+										</div>
+									</div>
+									@endforeach
+									<!--div class="card">
 										<div class="card-header table-header" id="headingOne">
 											<div class="table-title"><span>安裝後如何確認掃描器已成功連接至電腦</span></div>
 											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse3_1" aria-expanded="true"
@@ -801,7 +787,7 @@
 												安裝後如何確認掃描器已成功連接至電腦
 											</div>
 										</div>
-									</div>
+									</div-->
 								</div>
 							</div>
 							

@@ -115,7 +115,9 @@ class ProductController extends Controller
 		$data = $request->all();
 		$data['picture'] = $request->file('picture')->store('products');
 		$product->update($data);
-		return redirect('products');
+		$type = Type::find($data['type_id']);
+		return redirect('products?type='.$type->type);
+		//return redirect('products');
     }
 
     /**

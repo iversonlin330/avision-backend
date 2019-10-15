@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
 			$table->integer('type_id');
 			$table->text('picture');
 			$table->integer('flag');
+			$table->text('characteristic');
 			$table->text('characteristic_1');
 			$table->text('characteristic_2');
 			$table->text('characteristic_3');

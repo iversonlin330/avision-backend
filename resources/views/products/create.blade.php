@@ -85,7 +85,11 @@
   <hr class="nature_hr">
   <div class="form-group">
 	<label for="exampleInputEmail1">產品簡介</label>
-	<textarea type="email" class="form-control" name="description" aria-describedby="emailHelp" placeholder="產品簡介" required></textarea>
+	<textarea class="form-control" name="description" placeholder="產品簡介" required></textarea>
+  </div>
+  <div class="form-group">
+	<label for="exampleInputEmail1">產品特色</label>
+	<textarea name="characteristic" placeholder="產品特色"></textarea>
   </div>
   
   
@@ -807,6 +811,11 @@
 @section('script')
 @parent
 <script>
+ClassicEditor
+        .create( document.querySelector( "#product_form  [name='characteristic']") )
+        .catch( error => {
+            console.error( error );
+        } );
 @if(isset($product))
 	$(".sortable").sortable();
 	var product = {!! json_encode($product) !!};
@@ -818,6 +827,7 @@
 	$("#product_form [name='type_id']").val(product.type_id);
 	//$("[name='picture']").val(product.picture);
 	$("#product_form  [name='flag']").val(product.flag);
+	$("#product_form  [name='characteristic']").val(product.characteristic);
 	$("#product_form  [name='characteristic_1']").val(product.characteristic_1);
 	$("#product_form  [name='characteristic_2']").val(product.characteristic_2);
 	$("#product_form  [name='characteristic_3']").val(product.characteristic_3);

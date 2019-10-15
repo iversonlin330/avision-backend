@@ -25,8 +25,9 @@ class FrontendController extends Controller
 		}else{
 			$products = Product::all();
 		}
+		$filters = Filter::all();
 		
-		return view('frontends.products',compact('products'));
+		return view('frontends.products',compact('products','filters'));
     }
 	
 	public function getProductDetail($id)

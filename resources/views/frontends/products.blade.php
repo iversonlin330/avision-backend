@@ -373,103 +373,71 @@
 
 				<div class="left-side-title">產品類型</div>
 				<div class="form-check ml-3">
-					<input class="form-check-input checkbox-20" type="checkbox" value="">
-					<label class="form-check-label left-side-item" for="defaultCheck1">
-						掃描器
-					</label>
+					<input class="form-check-input checkbox-20 filter" type="checkbox" value="scanner">
+					<label class="form-check-label left-side-item" for="defaultCheck1">掃描器</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="1" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="1" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						文件掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="2" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="2" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						平台掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="3" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="3" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						智慧可攜式掃描
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="4" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="4" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						文件直通車系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="5" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="5" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						多功能掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="6" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="6" v-model="checkedTypes">
 					<label class="form-check-label mb-5" for="defaultCheck1">
 						生產級掃描儀
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input checkbox-20" type="checkbox" value="">
+					<input class="form-check-input checkbox-20 filter" type="checkbox" value="laser">
 					<label class="form-check-label left-side-item" for="defaultCheck1">
 						雷射印表機
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="7" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="7" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						印表機
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15" type="checkbox" value="8" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="8" v-model="checkedTypes">
 					<label class="form-check-label" for="defaultCheck1">
 						多功能事務系列
 					</label>
 				</div>
 				<hr>
 				<div class="left-side-title">產品功能</div>
+				@foreach($filters as $filter)
 				<div class="form-check ml-5">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-						A3
-					</label>
+					<input class="form-check-input" type="checkbox" value="{{ $filter->id }}">
+					<label class="form-check-label" for="defaultCheck1">{{ $filter->title }}</label>
 				</div>
-				<div class="form-check ml-5">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-						A4
-					</label>
-				</div>
-				<div class="form-check ml-5">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-						USB3.0
-					</label>
-				</div>
-				<div class="form-check ml-5">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-						A4
-					</label>
-				</div>
-				<div class="form-check ml-5">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-						A3
-					</label>
-				</div>
-				<div class="form-check ml-5">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-						USB3.0
-					</label>
-				</div>
+				@endforeach
 				<div class="col-md-12 d-md-none text-center">
 					<div class="btn btn-primary" style="font-size: 14px; background-color:#356796; padding: 8px 40px; margin-top:30px;" onclick="sidebar('hide')">送出查詢</div>
 				</div>
@@ -478,7 +446,7 @@
 				<div class="row">
 				
 					@foreach($products as $product)
-					<div class="col-md-3 col-sm-6 col-6" v-for="product in products">
+					<div class="col-md-3 col-sm-6 col-6 product-card" data-type="{{ $product->type_id }}">
 						<div class="card">
 							<div class="product-tag">
 								@if($product->flag == 2)
@@ -553,6 +521,10 @@
 		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 	<script>
+		var json_str = localStorage.getItem("product-compare");
+		if(json_str == null){
+			localStorage.setItem("product-compare", JSON.stringify([]));
+		}
 		$(".compare").hide();
 		refresh_compare();
 		
@@ -579,9 +551,6 @@
 			var id = String(id);
 			var json_str = localStorage.getItem("product-compare");
 			var arr = JSON.parse(json_str);
-			console.log(id);
-			console.log(arr);
-			console.log(arr.indexOf(id));
 			if (arr.indexOf(id) > -1) {
 				arr.splice(arr.indexOf(id), 1);
 				localStorage.setItem("product-compare", JSON.stringify(arr));
@@ -609,8 +578,6 @@
 				var arr = [];
 			}
 
-			
-
 			//var json_str = JSON.stringify(arr);
 			localStorage.setItem("product-compare", JSON.stringify(arr));
 			refresh_compare();
@@ -635,6 +602,37 @@
 				$("#sidebar").addClass('d-none');
 			}
 		}
+		
+		$(".filter").change(function(){
+			let type = $(this).val();
+			let is_checked = $(this).prop('checked');
+			if(type == 'scanner'){
+				$(".filter[value=1]").prop('checked',is_checked);
+				$(".filter[value=2]").prop('checked',is_checked);
+				$(".filter[value=3]").prop('checked',is_checked);
+				$(".filter[value=4]").prop('checked',is_checked);
+				$(".filter[value=5]").prop('checked',is_checked);
+				$(".filter[value=6]").prop('checked',is_checked);
+			}else if(type == 'laser'){
+				$(".filter[value=7]").prop('checked',is_checked);
+				$(".filter[value=8]").prop('checked',is_checked);
+			}
+			var values = $(".filter:checked").map(function(index,domElement) {
+				return $(domElement).val();
+			}).get();
+			
+			if(values.length > 0){
+				$(".product-card").hide();
+				for(x in values){
+					$(".product-card[data-type="+values[x]+"]").show();
+				}
+				console.log(values[x]);
+			}else{
+				$(".product-card").show();
+			}
+			
+			
+		})
 	</script>
 </body>
 
