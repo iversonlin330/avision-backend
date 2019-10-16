@@ -363,9 +363,9 @@
 				</button>
 				<div class="search">
 					<div class="input-group">
-						<input type="text" class="form-control"
+						<input id="search_input" type="text" class="form-control"
 							aria-label="Dollar amount (with dot and two decimal places)" placeholder="搜尋⋯">
-						<div class="input-group-append">
+						<div class="input-group-append" onclick="filter_cal()">
 							<span class="input-group-text" style=""><img src="{{asset('/images/icon-search.png')}}" alt=""></span>
 						</div>
 					</div>
@@ -373,59 +373,59 @@
 
 				<div class="left-side-title">產品類型</div>
 				<div class="form-check ml-3">
-					<input class="form-check-input checkbox-20 filter" type="checkbox" value="scanner">
+					<input class="form-check-input checkbox-20 filter" type="checkbox" value="scanner" data-type="type">
 					<label class="form-check-label left-side-item" for="defaultCheck1">掃描器</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15 filter" type="checkbox" value="1" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="1" data-type="type">
 					<label class="form-check-label" for="defaultCheck1">
 						文件掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15 filter" type="checkbox" value="2" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="2" data-type="type">
 					<label class="form-check-label" for="defaultCheck1">
 						平台掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15 filter" type="checkbox" value="3" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="3" data-type="type">
 					<label class="form-check-label" for="defaultCheck1">
 						智慧可攜式掃描
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15 filter" type="checkbox" value="4" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="4" data-type="type">
 					<label class="form-check-label" for="defaultCheck1">
 						文件直通車系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15 filter" type="checkbox" value="5" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="5" data-type="type">
 					<label class="form-check-label" for="defaultCheck1">
 						多功能掃描系列
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15 filter" type="checkbox" value="6" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="6" data-type="type">
 					<label class="form-check-label mb-5" for="defaultCheck1">
 						生產級掃描儀
 					</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input checkbox-20 filter" type="checkbox" value="laser">
+					<input class="form-check-input checkbox-20 filter" type="checkbox" value="laser" data-type="type">
 					<label class="form-check-label left-side-item" for="defaultCheck1">
 						雷射印表機
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15 filter" type="checkbox" value="7" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="7" data-type="type">
 					<label class="form-check-label" for="defaultCheck1">
 						印表機
 					</label>
 				</div>
 				<div class="form-check ml-5">
-					<input class="form-check-input checkbox-15 filter" type="checkbox" value="8" v-model="checkedTypes">
+					<input class="form-check-input checkbox-15 filter" type="checkbox" value="8" data-type="type">
 					<label class="form-check-label" for="defaultCheck1">
 						多功能事務系列
 					</label>
@@ -434,7 +434,7 @@
 				<div class="left-side-title">產品功能</div>
 				@foreach($filters as $filter)
 				<div class="form-check ml-5">
-					<input class="form-check-input" type="checkbox" value="{{ $filter->id }}">
+					<input class="form-check-input filter" type="checkbox" data-type="filter" value="{{ $filter->id }}">
 					<label class="form-check-label" for="defaultCheck1">{{ $filter->title }}</label>
 				</div>
 				@endforeach
@@ -446,7 +446,7 @@
 				<div class="row">
 				
 					@foreach($products as $product)
-					<div class="col-md-3 col-sm-6 col-6 product-card" data-type="{{ $product->type_id }}">
+					<div class="col-md-3 col-sm-6 col-6 product-card" data-title="{{ $product->title }}" data-type="{{ $product->type_id }}" data-filter="{{ json_encode($product->filter) }}">
 						<div class="card">
 							<div class="product-tag">
 								@if($product->flag == 2)
@@ -604,20 +604,46 @@
 		}
 		
 		$(".filter").change(function(){
-			let type = $(this).val();
-			let is_checked = $(this).prop('checked');
-			if(type == 'scanner'){
-				$(".filter[value=1]").prop('checked',is_checked);
-				$(".filter[value=2]").prop('checked',is_checked);
-				$(".filter[value=3]").prop('checked',is_checked);
-				$(".filter[value=4]").prop('checked',is_checked);
-				$(".filter[value=5]").prop('checked',is_checked);
-				$(".filter[value=6]").prop('checked',is_checked);
-			}else if(type == 'laser'){
-				$(".filter[value=7]").prop('checked',is_checked);
-				$(".filter[value=8]").prop('checked',is_checked);
+			let data_type = $(this).data('type');
+			if(data_type == 'type'){
+				let type = $(this).val();
+				let is_checked = $(this).prop('checked');
+				if(type == 'scanner'){
+					$(".filter[value=1]").prop('checked',is_checked);
+					$(".filter[value=2]").prop('checked',is_checked);
+					$(".filter[value=3]").prop('checked',is_checked);
+					$(".filter[value=4]").prop('checked',is_checked);
+					$(".filter[value=5]").prop('checked',is_checked);
+					$(".filter[value=6]").prop('checked',is_checked);
+				}else if(type == 'laser'){
+					$(".filter[value=7]").prop('checked',is_checked);
+					$(".filter[value=8]").prop('checked',is_checked);
+				}
+				
+				/*
+				var values = $(".filter:checked").map(function(index,domElement) {
+					return $(domElement).val();
+				}).get();
+				
+				if(values.length > 0){
+					$(".product-card").hide();
+					for(x in values){
+						$(".product-card[data-type="+values[x]+"]").show();
+					}
+					console.log(values[x]);
+				}else{
+					$(".product-card").show();
+				}
+				*/
+			}else if(data_type == 'filter'){
+				
 			}
-			var values = $(".filter:checked").map(function(index,domElement) {
+			filter_cal();
+		});
+		
+		function filter_cal(){
+			//Type
+			var values = $(".filter:checked[data-type='type']").map(function(index,domElement) {
 				return $(domElement).val();
 			}).get();
 			
@@ -626,13 +652,40 @@
 				for(x in values){
 					$(".product-card[data-type="+values[x]+"]").show();
 				}
-				console.log(values[x]);
 			}else{
 				$(".product-card").show();
 			}
 			
+			//Filter
+			var filters = $(".filter:checked[data-type='filter']").map(function(index,domElement) {
+				return $(domElement).val();
+			}).get();
 			
-		})
+			if(filters.length > 0){
+				$(".product-card:visible").each(function(){
+					$(this).hide();
+					let product_filter = $(this).data('filter');
+					for(x in product_filter){
+						if(filters.indexOf(product_filter[x]) > -1){
+							$(this).show();
+						}
+					}
+				});
+			}
+			
+			//Search
+			let search_val = $("#search_input").val();
+			if(search_val){
+				$(".product-card:visible").each(function(){
+					$(this).hide();
+					if($(this).is("[data-title*='"+search_val+"']")){
+						$(this).show();
+					}
+				});
+			}
+			
+		}
+		
 	</script>
 </body>
 

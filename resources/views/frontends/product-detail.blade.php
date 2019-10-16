@@ -447,7 +447,7 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-5 bread">
-				<span class="">產品 > 掃描器 > 生產及掃瞄儀 > {{ $product->title }}</span>
+				<span class="">產品 > {{ Config('map.product_type')[$product->type->type] }} > {{ $product->type->title }} > {{ $product->title }}</span>
 				<div class="col-md-12 d-md-none search_text" onclick="sidebar('show')"></div>
 			</div>
 		</div>
@@ -609,54 +609,74 @@
 					</div>
 				</div>
 				<div class="tab-pane fade" id="T3" role="tabpanel" aria-labelledby="T3-tab">
-					<div class="row">
-						<div class="col-md-1"></div>
-						<div class="col-md-12 mb-3">
-							<blockquote>驅動程式</blockquote>
+					@foreach(Config('map.download_type') as $key=>$val)
+						<div class="row mb-4">
+							<div class="col-md-1"></div>
+							<div class="col-md-12 mb-3">
+								<blockquote>{{$val}}</blockquote>
+							</div>
+							<div class="col-md-12">
+								<table class="table download-table table-borderless">
+									<thead>
+										<tr style="border-bottom:solid 1px #9B9B9B;">
+											<th>名稱</th>
+											<th>版本</th>
+											<th>文件大小</th>
+											<th>系統相容</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach($product->downloads->where('type',$key)->sortBy('order') as $download)
+											<tr>
+												<td>{{ $download->title }}</td>
+												<td>VB21</td>
+												<td>{{ $download->file_size }}</td>
+												<td>{{ $download->lang }}</td>
+												<td><a class="btn btn-primary btn-download">下載</a></td>
+											</tr>
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+							<div class="col-md-1"></div>
 						</div>
-						<div class="col-md-12">
-							<table class="table download-table table-borderless">
-								<thead>
-									<tr style="border-bottom:solid 1px #9B9B9B;">
-										<th>名稱</th>
-										<th>版本</th>
-										<th>文件大小</th>
-										<th>系統相容</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									
-									<tr>
-										<td>AN240</td>
-										<td>VB21</td>
-										<td>26MB</td>
-										<td>WinXP/Vista/Win7</td>
-										<td><a class="btn btn-primary btn-download">下載</a></td>
-									</tr>
-									<tr>
-										<td>AN240</td>
-										<td>VB21</td>
-										<td>26MB</td>
-										<td>WinXP/Vista/Win7</td>
-										<td><a class="btn btn-primary btn-download">下載</a></td>
-									</tr>
-									<tr>
-										<td>AN240</td>
-										<td>VB21</td>
-										<td>26MB</td>
-										<td>WinXP/Vista/Win7</td>
-										<td><a class="btn btn-primary btn-download">下載</a></td>
-									</tr>
-								</tbody>
-							</table>
+					@endforeach
+					@foreach(Config('map.software_type') as $key=>$val)
+						<div class="row mb-4">
+							<div class="col-md-1"></div>
+							<div class="col-md-12 mb-3">
+								<blockquote>{{$val}}</blockquote>
+							</div>
+							<div class="col-md-12">
+								<table class="table download-table table-borderless">
+									<thead>
+										<tr style="border-bottom:solid 1px #9B9B9B;">
+											<th>名稱</th>
+											<th>版本</th>
+											<th>文件大小</th>
+											<th>系統相容性</th>
+											<th>檢查碼(sha1)</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach($product->softwares->where('type',$key)->sortBy('order') as $software)
+											<tr>
+												<td>{{ $download->title }}</td>
+												<td>{{ $software->version }}</td>
+												<td>{{ $software->file_size }}</td>
+												<td>{{ $software->compatibility }}</td>
+												<td>{{ $download->sha1 }}</td>
+												<td><a class="btn btn-primary btn-download">下載</a></td>
+											</tr>
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+							<div class="col-md-1"></div>
 						</div>
-						<div class="col-md-1"></div>
-					</div>
-					<div class="row">
-					</div>
-					<div class="row">
-					</div>
+					@endforeach
 				</div>
 				<div class="tab-pane fade" id="T4" role="tabpanel" aria-labelledby="T4-tab">
 					<div class="row">
@@ -686,10 +706,11 @@
 				<div class="tab-pane fade" id="T5" role="tabpanel" aria-labelledby="T5-tab">
 					<div class="row">
 						<div class="col-md-12">
+							@foreach(Config('map.faq_type') as $key=>$val)
 							<div class="faq-table">
-								<blockquote>硬體常見問題</blockquote>
+								<blockquote>{{$val}}</blockquote>
 								<div class="accordion mb-4" id="QAsoftware">
-									@foreach($product->faqs->where('type',1)->sortBy('order') as $faq)
+									@foreach($product->faqs->where('type',$key)->sortBy('order') as $faq)
 									<div class="card">
 										<div class="card-header table-header" id="headingOne">
 											<div class="table-title"><span>{{ $faq->title }}</span></div>
@@ -706,92 +727,9 @@
 										</div>
 									</div>
 									@endforeach
-									<!--div class="card">
-										<div class="card-header table-header" id="headingOne">
-											<div class="table-title"><span>是否市面上的其他Micro USB線也可使用？</span></div>
-											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse1_1" aria-expanded="true"
-												aria-controls="collapseOne">
-												<img class="up" src="images/icon_up.png">
-												<img class="down" src="images/icon_down.png">
-											</div>
-										</div>
-										<div id="collapse1_1" class="collapse show" aria-labelledby="headingOne">
-											<div class="card-body" style="background-color: #FAFAFA;">
-												是的，但須留意該Micro USB線具備資料傳輸的功能。
-											</div>
-										</div>
-									</div>
-									<div class="card">
-										<div class="card-header table-header" id="headingOne">
-											<span class="table-title">安裝後如何確認掃描器已成功連接至電腦</span>
-											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse2_1" aria-expanded="true"
-												aria-controls="collapseOne">
-												<img class="up" src="images/icon_up.png">
-												<img class="down" src="images/icon_down.png">
-											</div>
-										</div>
-										<div id="collapse2_1" class="collapse show" aria-labelledby="headingOne">
-											<div class="card-body" style="background-color: #FAFAFA;">
-												安裝後如何確認掃描器已成功連接至電腦
-											</div>
-										</div>
-									</div-->
 								</div>
 							</div>
-							<div class="faq-table">
-								<blockquote>軟體常見問題</blockquote>
-								<div class="accordion mb-4" id="QAsoftware">
-									@foreach($product->faqs->where('type',1)->sortBy('order') as $faq)
-									<div class="card">
-										<div class="card-header table-header" id="headingOne">
-											<div class="table-title"><span>{{ $faq->title }}</span></div>
-											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse1_1" aria-expanded="true"
-												aria-controls="collapseOne">
-												<img class="up" src="/images/icon_up.png">
-												<img class="down" src="/images/icon_down.png">
-											</div>
-										</div>
-										<div id="collapse1_1" class="collapse show" aria-labelledby="headingOne">
-											<div class="card-body" style="background-color: #FAFAFA;">
-												{{ $faq->description }}
-											</div>
-										</div>
-									</div>
-									@endforeach
-									<!--div class="card">
-										<div class="card-header table-header" id="headingOne">
-											<div class="table-title"><span>安裝後如何確認掃描器已成功連接至電腦</span></div>
-											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse3_1" aria-expanded="true"
-												aria-controls="collapseOne">
-												<img class="up" src="images/icon_up.png">
-												<img class="down" src="images/icon_down.png">
-											</div>
-										</div>
-										<div id="collapse3_1" class="collapse show" aria-labelledby="headingOne">
-											<div class="card-body" style="background-color: #FAFAFA;">
-												是的，但須留意該Micro USB線具備資料傳輸的功能。
-											</div>
-										</div>
-									</div>
-									<div class="card">
-										<div class="card-header table-header" id="headingOne">
-											<span class="table-title">安裝後如何確認掃描器已成功連接至電腦</span>
-											<div class="float-right d-inline" data-toggle="collapse" data-target="#collapse4_1" aria-expanded="true"
-												aria-controls="collapseOne">
-												<img class="up" src="images/icon_up.png">
-												<img class="down" src="images/icon_down.png">
-											</div>
-										</div>
-										<div id="collapse4_1" class="collapse show" aria-labelledby="headingOne">
-											<div class="card-body" style="background-color: #FAFAFA;">
-												安裝後如何確認掃描器已成功連接至電腦
-											</div>
-										</div>
-									</div-->
-								</div>
-							</div>
-							
-							
+							@endforeach
 						</div>
 					</div>
 				</div>

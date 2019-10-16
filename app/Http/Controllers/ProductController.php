@@ -113,7 +113,9 @@ class ProductController extends Controller
     {
         //
 		$data = $request->all();
-		$data['picture'] = $request->file('picture')->store('products');
+		if(array_key_exists('picture',$data)){
+			$data['picture'] = $request->file('picture')->store('products');
+		}
 		$product->update($data);
 		$type = Type::find($data['type_id']);
 		return redirect('products?type='.$type->type);

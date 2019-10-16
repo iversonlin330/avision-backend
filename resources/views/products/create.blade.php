@@ -59,7 +59,7 @@
   </div>
   <div class="form-group">
 	<label for="exampleInputEmail1">產品精選圖片</label>
-	<input type="file" class="form-control" name="picture" aria-describedby="emailHelp" placeholder="產品精選圖片" required>
+	<input type="file" class="form-control" name="picture" aria-describedby="emailHelp" placeholder="產品精選圖片" {{ isset($product)? '' : 'required' }}>
   </div>
   <div class="form-group">
 	<label for="exampleFormControlSelect2">Flag</label>
