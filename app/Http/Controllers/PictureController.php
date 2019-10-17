@@ -49,7 +49,7 @@ class PictureController extends Controller
 			Picture::create($data);
 			
 		}
-		return back();
+		return back()->with('tab', 'T2');
     }
 
     /**
@@ -87,7 +87,7 @@ class PictureController extends Controller
 		$data = $request->all();
 		$data['file'] = $request->file('file')->store('pictures');
 		$picture->update($data);
-		return back();
+		return back()->with('tab', 'T2');
     }
 
     /**
@@ -100,6 +100,6 @@ class PictureController extends Controller
     {
         //
 		$picture->delete();
-		return back();
+		return back()->with('tab', 'T2');
     }
 }

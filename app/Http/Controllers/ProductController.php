@@ -99,7 +99,7 @@ class ProductController extends Controller
 		$groups = Group::where('type',$type)->orderBy('order')->get();
 		$product_specs = $product->product_specs->pluck('value','spec_id')->toArray();
 		//dd($product_specs);
-		return view('products.create',compact('product','filters','logo1s','logo2s','logo3s','groups','product_specs','types'));
+		return view('products.create',compact('product','filters','logo1s','logo2s','logo3s','groups','product_specs','types','tab'));
     }
 
     /**

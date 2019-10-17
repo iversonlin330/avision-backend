@@ -46,7 +46,7 @@ class DownloadController extends Controller
 			Download::create($data);
 			
 		}
-		return back();
+		return back()->with('tab', 'T4');
     }
 
     /**
@@ -84,7 +84,7 @@ class DownloadController extends Controller
 		$data = $request->all();
 		$data['file'] = $request->file('file')->store('downloads');
 		$download->update($data);
-		return back();
+		return back()->with('tab', 'T4');
     }
 
     /**
@@ -97,6 +97,6 @@ class DownloadController extends Controller
     {
         //
 		$download->delete();
-		return back();
+		return back()->with('tab', 'T4');
     }
 }

@@ -54,7 +54,7 @@
 				<thead>
 					<th>規格名稱</th>
 					<th>群組</th>
-					<th>規格內容</th>
+					<!--th>規格內容</th-->
 					<th>編輯</th>
 				</thead>
 				<tbody>
@@ -63,7 +63,7 @@
 						<tr data-id="{{ $spec->id }}">
 							<td>{{ $spec->title }}</td>
 							<td data-id="{{ $group->id }}">{{ $group->title }}</td>
-							<td>{{ $spec->description }}</td>
+							<!--td>{{ $spec->description }}</td-->
 							<td>
 								<a class="btn btn-primary edit_btn" href="#" onclick="spec_modal(this)">編輯</a>
 								<form method="POST" action="/specs/{{$spec->id}}" class="d-inline">
@@ -153,10 +153,10 @@
 			<label for="exampleInputEmail1">規格名稱</label>
 			<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="規格名稱" required>
 		  </div>
-		  <div class="form-group">
+		  <!--div class="form-group">
 			<label for="exampleInputEmail1">規格內容</label>
 			<input type="text" class="form-control" name="description" aria-describedby="emailHelp" placeholder="規格內容" required>
-		  </div>
+		  </div-->
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>

@@ -44,7 +44,7 @@ class FaqController extends Controller
 			$data['order'] = Faq::all()->max('order') + 1;
 			Faq::create($data);
 		}
-		return back();
+		return back()->with('tab', 'T6');
     }
 
     /**
@@ -81,7 +81,7 @@ class FaqController extends Controller
         //
 		$data = $request->all();
 		$faq->update($data);
-		return back();
+		return back()->with('tab', 'T6');
     }
 
     /**
@@ -94,6 +94,6 @@ class FaqController extends Controller
     {
         //
 		$faq->delete();
-		return back();
+		return back()->with('tab', 'T6');
     }
 }

@@ -10,23 +10,23 @@
 @section('content')
 <ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
 	<li class="nav-item">
-	<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-home" aria-selected="true">產品資訊</a>
+	<a class="nav-link active" id="T1" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-home" aria-selected="true">產品資訊</a>
 	</li>
 	@if(isset($product))
 	<li class="nav-item">
-	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-picture" role="tab" aria-controls="pills-profile" aria-selected="false">其他產品圖片</a>
+	<a class="nav-link" id="T2" data-toggle="pill" href="#pills-picture" role="tab" aria-controls="pills-profile" aria-selected="false">其他產品圖片</a>
 	</li>
 	<li class="nav-item">
-	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-spec" role="tab" aria-controls="pills-profile" aria-selected="false">產品規格</a>
+	<a class="nav-link" id="T3" data-toggle="pill" href="#pills-spec" role="tab" aria-controls="pills-profile" aria-selected="false">產品規格</a>
 	</li>
 	<li class="nav-item">
-	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-download" role="tab" aria-controls="pills-profile" aria-selected="false">下載</a>
+	<a class="nav-link" id="T4" data-toggle="pill" href="#pills-download" role="tab" aria-controls="pills-profile" aria-selected="false">下載</a>
 	</li>
 	<li class="nav-item">
-	<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-contact" aria-selected="false">配件</a>
+	<a class="nav-link" id="T5" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-contact" aria-selected="false">配件</a>
 	</li>
 	<li class="nav-item">
-	<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-qa" role="tab" aria-controls="pills-contact" aria-selected="false">常見問答</a>
+	<a class="nav-link" id="T6" data-toggle="pill" href="#pills-qa" role="tab" aria-controls="pills-contact" aria-selected="false">常見問答</a>
 	</li>
 	@endif
 </ul>
@@ -42,13 +42,13 @@
 <form id="product_form" action="{{ url('products') }}" enctype="multipart/form-data" method="post">
 @endif
   <div class="form-group">
-	<label for="exampleInputEmail1">產品名稱</label>
+	<label for="exampleInputEmail1">產品型號</label>
 	<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="產品名稱" required>
   </div>
-  <div class="form-group">
+  <!--div class="form-group">
 	<label for="exampleInputEmail1">產品型號</label>
 	<input type="text" class="form-control" name="model" aria-describedby="emailHelp" placeholder="產品型號" required>
-  </div>
+  </div-->
   <div class="form-group">
 	<label for="exampleFormControlSelect2">產品類別</label>
 	<select class="form-control" name="type_id" required>
@@ -83,6 +83,10 @@
 	<input type="text" class="form-control" name="characteristic_3" aria-describedby="emailHelp" placeholder="列點特色三" maxlength="10" required>
   </div>
   <hr class="nature_hr">
+  <div class="form-group">
+	<label for="exampleInputEmail1">產品型號</label>
+	<input type="text" class="form-control" name="slogan" aria-describedby="emailHelp" placeholder="產品slogan" required>
+  </div>
   <div class="form-group">
 	<label for="exampleInputEmail1">產品簡介</label>
 	<textarea class="form-control" name="description" placeholder="產品簡介" required></textarea>
@@ -475,7 +479,7 @@
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">檔案</label>
-			<input type="file" class="form-control" name="file">
+			<input type="file" class="form-control" name="file" required>
 		  </div>
 	  </div>
 	  <div class="modal-footer">
@@ -604,11 +608,11 @@
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">題目</label>
-			<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="題目">
+			<input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="題目" required>
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputEmail1">內容</label>
-			<textarea class="form-control editor" name="description" aria-describedby="emailHelp" placeholder="內容"></textarea>
+			<textarea class="form-control editor" name="description" aria-describedby="emailHelp" placeholder="內容" required></textarea>
 		  </div>
 		  
 	  </div>
@@ -817,6 +821,10 @@ ClassicEditor
             console.error( error );
         } );
 @if(isset($product))
+	@if(session('tab'))
+		$("#{{session('tab')}}").click();
+	@endif
+	
 	$(".sortable").sortable();
 	var product = {!! json_encode($product) !!};
 	var product_specs = {!! json_encode($product_specs) !!};

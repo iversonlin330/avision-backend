@@ -45,7 +45,7 @@ class ProductSpecController extends Controller
 				'value' => $val,
 			]);
 		}
-		return back();
+		return back()->with('tab', 'T3');
     }
 
     /**

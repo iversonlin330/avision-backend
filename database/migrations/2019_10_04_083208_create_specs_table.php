@@ -18,7 +18,7 @@ class CreateSpecsTable extends Migration
 			$table->integer('group_id');
 			$table->text('title');
 			$table->integer('order');
-			$table->text('description');
+			//$table->text('description');
             $table->timestamps();
         });
     }

@@ -47,7 +47,7 @@ class AccessoryController extends Controller
 			Accessory::create($data);
 			
 		}
-		return back();
+		return back()->with('tab', 'T5');
 		
     }
 
@@ -86,7 +86,7 @@ class AccessoryController extends Controller
 		$data = $request->all();
 		$data['file'] = $request->file('file')->store('accessories');
 		$accessory->update($data);
-		return back();
+		return back()->with('tab', 'T5');
     }
 
     /**
@@ -99,6 +99,6 @@ class AccessoryController extends Controller
     {
         //
 		$accessory->delete();
-		return back();
+		return back()->with('tab', 'T5');
     }
 }
