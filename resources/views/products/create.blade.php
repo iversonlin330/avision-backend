@@ -429,7 +429,7 @@
 							<td>{{ $picture->description }}</td>
 							<td>{{ $picture->path }}</td>
 							<td>
-								<a class="btn btn-primary edit_btn" href="#" onclick="faq_modal(this)">編輯</a>
+								<a class="btn btn-primary edit_btn" href="#" onclick="picture_modal(this)">編輯</a>
 								<form method="POST" action="/pictures/{{$picture->id}}" class="d-inline">
 									{{ method_field('DELETE') }}
 									<button type="submit" class="btn btn-primary delete_btn">刪除</button>
@@ -867,12 +867,14 @@ ClassicEditor
 		if(obj == 'create'){
 			$("#group [name='_method']").val('POST');
 			$("#group form").attr('action',"{{ url('downloads') }}");
+			$("#group .modal-title").text('新增下載');
 		}else{
 			$("#group [name='_method']").val('PUT');
 			$("#group [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
 			$("#group [name='title']").val($(obj).closest('tr').find('td:eq(1)').text());
 			$("#group [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 			$("#group form").attr('action',"{{ url('downloads') }}/"+$(obj).closest('tr').data('id'));
+			$("#group .modal-title").text('編輯下載');
 		}
 		$("#group").modal('show');
 	}
@@ -897,6 +899,7 @@ ClassicEditor
 		if(obj == 'create'){
 			$("#accessory [name='_method']").val('POST');
 			$("#accessory form").attr('action',"{{ url('accessories') }}");
+			$("#accessory .modal-title").text('新增配件');
 		}else{
 			$("#accessory [name='_method']").val('PUT');
 			//$("#accessory [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -905,6 +908,7 @@ ClassicEditor
 			$("#accessory [name='url']").val($(obj).closest('tr').find('td:eq(3)').text());
 			//$("#accessory [name='sha1']").val($(obj).closest('tr').find('td:eq(4)').text());
 			$("#accessory form").attr('action',"{{ url('accessories') }}/"+$(obj).closest('tr').data('id'));
+			$("#accessory .modal-title").text('修改配件');
 		}
 		$("#accessory").modal('show');
 	}

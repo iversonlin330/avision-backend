@@ -101,6 +101,7 @@ function modal(obj){
 	if(obj == 'create'){
 		$("#modal [name='_method']").val('POST');
 		$("#modal form").attr('action',"{{ url('logos') }}");
+		$("#modal .modal-title").text('新增Logo');
 	}else{
 		$("#modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -108,6 +109,7 @@ function modal(obj){
 		$("#modal [name='url']").val($(obj).closest('tr').find('td:eq(2)').text());
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#modal form").attr('action',"{{ url('logos') }}/"+$(obj).closest('tr').data('id'));
+		$("#modal .modal-title").text('修改Logo');
 	}
 	$("#modal").modal('show');
 }
