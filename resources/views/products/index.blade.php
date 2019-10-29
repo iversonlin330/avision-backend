@@ -20,6 +20,7 @@
 		<thead>
 			<th>產品名稱</th>
 			<th>圖片</th>
+			<th>Flag</th>
 			<th>編輯</th>
 		</thead>
 		<tbody>
@@ -27,6 +28,7 @@
 		<tr>
 			<td>{{ $product->title }}</td>
 			<td><img src="{{ asset('storage/'.$product->picture) }}"></td>
+			<td>{{ Config('map.product_flag')[$product->flag] }}</td>
 			<td>
 				<a class="btn btn-primary edit_btn" href="{{ url('products/'.$product->id.'/edit') }}">編輯</a>
 				<form method="POST" action="/products/{{$product->id}}" class="d-inline">

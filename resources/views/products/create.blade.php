@@ -63,11 +63,14 @@
   </div>
   <div class="form-group">
 	<label for="exampleFormControlSelect2">Flag</label>
-	<select class="form-control" name="flag" required>
+	<label class="radio-inline"><input type="radio" name="flag" value='1'>無</label>
+	<label class="radio-inline"><input type="radio" name="flag" value='2'>新產品</label>
+	<label class="radio-inline"><input type="radio" name="flag" value='3'>發燒產品</label>
+	<!--select class="form-control" name="flag" required>
 	  <option value="1">無</option>
 	  <option value="2">新產品</option>
 	  <option value="3">發燒產品</option>
-	</select>
+	</select-->
   </div>
    <div class="form-group">
 	<div class="inside_title">列點特色</div>
@@ -427,7 +430,11 @@
 						<tr data-id="{{ $picture->id }}">
 							<td data-val="{{ $picture->type }}">{{ $picture->type_text }}</td>
 							<td>{{ $picture->description }}</td>
-							<td>{{ $picture->path }}</td>
+							@if($picture->type == 2)
+								<td><img src="{{ asset('storage/'.$picture->path) }}"></td>
+							@else
+								<td>{{ $picture->path }}</td>
+							@endif
 							<td>
 								<a class="btn btn-primary edit_btn" href="#" onclick="picture_modal(this)">編輯</a>
 								<form method="POST" action="/pictures/{{$picture->id}}" class="d-inline">
@@ -883,6 +890,7 @@ ClassicEditor
 		if(obj == 'create'){
 			$("#software [name='_method']").val('POST');
 			$("#software form").attr('action',"{{ url('softwares') }}");
+			$("#software .modal-title").text('新增下載-驅動程式');
 		}else{
 			$("#software [name='_method']").val('PUT');
 			$("#software [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -891,6 +899,7 @@ ClassicEditor
 			$("#software [name='compatibility']").val($(obj).closest('tr').find('td:eq(3)').text());
 			$("#software [name='sha1']").val($(obj).closest('tr').find('td:eq(4)').text());
 			$("#software form").attr('action',"{{ url('softwares') }}/"+$(obj).closest('tr').data('id'));
+			$("#software .modal-title").text('修改下載-驅動程式');
 		}
 		$("#software").modal('show');
 	}
@@ -917,6 +926,7 @@ ClassicEditor
 		if(obj == 'create'){
 			$("#faq [name='_method']").val('POST');
 			$("#faq form").attr('action',"{{ url('faqs') }}");
+			$("#faq .modal-title").text('新增常見問答');
 		}else{
 			$("#faq [name='_method']").val('PUT');
 			$("#faq [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -924,6 +934,7 @@ ClassicEditor
 			$("#faq [name='description']").val($(obj).closest('tr').find('td:eq(2)').text());
 			//$("#faq [name='url']").val($(obj).closest('tr').find('td:eq(3)').text());
 			$("#faq form").attr('action',"{{ url('faqs') }}/"+$(obj).closest('tr').data('id'));
+			$("#faq .modal-title").text('編輯常見問答');
 		}
 		$("#faq").modal('show');
 	}
@@ -932,6 +943,7 @@ ClassicEditor
 		if(obj == 'create'){
 			$("#picture [name='_method']").val('POST');
 			$("#picture form").attr('action',"{{ url('pictures') }}");
+			$("#picture .modal-title").text('新增其他圖片');
 		}else{
 			$("#picture [name='_method']").val('PUT');
 			$("#picture [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -939,6 +951,7 @@ ClassicEditor
 			$("#picture [name='description']").val($(obj).closest('tr').find('td:eq(2)').text());
 			//$("#faq [name='url']").val($(obj).closest('tr').find('td:eq(3)').text());
 			$("#picture form").attr('action',"{{ url('pictures') }}/"+$(obj).closest('tr').data('id'));
+			$("#picture .modal-title").text('修改其他圖片');
 		}
 		$("#picture").modal('show');
 	}
