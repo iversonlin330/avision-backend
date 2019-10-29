@@ -79,6 +79,12 @@ class LogoController extends Controller
     public function update(Request $request, Logo $logo)
     {
         //
+		$data = $request->all();
+		if(array_key_exists('file',$data)){
+			$data['file'] = $request->file('file')->store('logos');
+		}
+		$logo->update($data);
+		return back();
     }
 
     /**
