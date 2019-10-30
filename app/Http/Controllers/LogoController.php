@@ -96,5 +96,7 @@ class LogoController extends Controller
     public function destroy(Logo $logo)
     {
         //
+		$logo->delete();
+		return back();
     }
 }

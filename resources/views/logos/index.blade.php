@@ -30,7 +30,7 @@
 			<td>{{ $logo->url }}</td>
 			<td>
 				<a class="btn btn-primary edit_btn" href="#" onclick="modal(this)">編輯</a>
-				<form method="POST" action="/filters/{{$logo->id}}" class="d-inline">
+				<form method="POST" action="/logos/{{$logo->id}}" class="d-inline">
 					{{ method_field('DELETE') }}
 					<button type="submit" class="btn btn-primary delete_btn">刪除</button>
 				 </form>

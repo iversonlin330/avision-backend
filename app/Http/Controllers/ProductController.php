@@ -22,8 +22,8 @@ class ProductController extends Controller
         //
 		$data = $request->all();
 		$type = $data['type'];
-		$type_ids = Type::where('type',$type)->get()->pluck('id')->toArray();
-		$products = Product::whereIn('type_id',$type_ids)->orderBy('order')->get();
+		//$type_ids = Type::where('type',$type)->get()->pluck('id')->toArray();
+		$products = Product::where('type_id',$type)->orderBy('order')->get();
 		return view('products.index',compact('products','type'));
     }
 
@@ -36,14 +36,15 @@ class ProductController extends Controller
     {
         //
 		$data = $request->all();
-		$type = $data['type'];
-		$types = Type::where('type',$type)->get();
+		$is_type = $data['type'];
+		//$types = Type::where('type',$type)->get();
+		$types = Type::all();
 		$filters = Filter::all();
 		$logo1s = Logo::where('type',1)->get();
 		$logo2s = Logo::where('type',2)->get();
 		$logo3s = Logo::where('type',3)->get();
 		
-		return view('products.create',compact('filters','logo1s','logo2s','logo3s','types'));
+		return view('products.create',compact('filters','logo1s','logo2s','logo3s','types','is_type'));
     }
 
     /**
@@ -95,7 +96,8 @@ class ProductController extends Controller
 		$logo2s = Logo::where('type',2)->get();
 		$logo3s = Logo::where('type',3)->get();
 		$type = $product->type->type;
-		$types = Type::where('type',$type)->get();
+		//$types = Type::where('type',$type)->get();
+		$types = Type::all();
 		$groups = Group::where('type',$type)->orderBy('order')->get();
 		$product_specs = $product->product_specs->pluck('value','spec_id')->toArray();
 		//dd($product_specs);

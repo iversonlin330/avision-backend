@@ -50,19 +50,24 @@
 	<input type="text" class="form-control" name="model" aria-describedby="emailHelp" placeholder="產品型號" required>
   </div-->
   <div class="form-group">
-	<label for="exampleFormControlSelect2">產品類別</label>
+	<label for="exampleFormControlSelect2">產品類別</label><br>
+	@foreach($types as $type)
+	<label class="radio-inline"><input type="radio" name="type_id" value="{{ $type->id }}">{{ $type->title }}</label>
+	@endforeach
+	@if(0)
 	<select class="form-control" name="type_id" required>
 		@foreach($types as $type)
 			<option value="{{ $type->id }}">{{ $type->title }}</option>
 		@endforeach
 	</select>
+	@endif
   </div>
   <div class="form-group">
 	<label for="exampleInputEmail1">產品精選圖片</label>
 	<input type="file" class="form-control" name="picture" aria-describedby="emailHelp" placeholder="產品精選圖片" {{ isset($product)? '' : 'required' }}>
   </div>
   <div class="form-group">
-	<label for="exampleFormControlSelect2">Flag</label>
+	<label for="exampleFormControlSelect2">Flag</label><br>
 	<label class="radio-inline"><input type="radio" name="flag" value='1'>無</label>
 	<label class="radio-inline"><input type="radio" name="flag" value='2'>新產品</label>
 	<label class="radio-inline"><input type="radio" name="flag" value='3'>發燒產品</label>
@@ -104,7 +109,14 @@
   
   <div class="form-group">
 	<label for="exampleInputEmail1">機台規格</label>
-	<div>
+	<div class="row">
+	@foreach($logo1s as $logo1)
+	<div class="col-3" style="text-align: center;">
+		<img src="{{ asset('storage/'.$logo1->file) }}" style="width:100%;">
+		<input type="checkbox" name="spec[]" value="{{ $logo1->id }}">{{ $logo1->title }}</input>
+	</div>
+	@endforeach
+	@if(0)
 	<select class="form-control multiselect" name="spec[]" multiple required>
 		@foreach($logo1s as $logo1)
 			<option value="{{ $logo1->id }}">{{ $logo1->title }}</option>
@@ -112,11 +124,19 @@
 		<option>機台規格1</option>
 		<option>機台規格2</option>
 	</select>
+	@endif
 	</div>
   </div>
   <div class="form-group">
 	<label for="exampleInputEmail1">附贈軟體</label>
-	<div>
+	<div class="row">
+	@foreach($logo2s as $logo2)
+	<div class="col-3" style="text-align: center;">
+		<img src="{{ asset('storage/'.$logo2->file) }}" style="width:100%;">
+		<input type="checkbox" name="software[]" value="{{ $logo2->id }}">{{ $logo2->title }}</input>
+	</div>
+	@endforeach
+	@if(0)
 	<select class="form-control multiselect" name="software[]" multiple required>
 		@foreach($logo2s as $logo2)
 			<option value="{{ $logo1->id }}">{{ $logo2->title }}</option>
@@ -124,11 +144,19 @@
 		<option>附贈軟體1</option>
 		<option>附贈軟體2</option>
 	</select>
+	@endif
 	</div>
   </div>
   <div class="form-group">
 	<label for="exampleInputEmail1">認證標章</label>
-	<div>
+	<div class="row">
+	@foreach($logo3s as $logo3)
+	<div class="col-3" style="text-align: center;">
+		<img src="{{ asset('storage/'.$logo3->file) }}" style="width:100%;">
+		<input type="checkbox" name="cert[]" value="{{ $logo3->id }}">{{ $logo3->title }}</input>
+	</div>
+	@endforeach
+	@if(0)
 	<select class="form-control multiselect" name="cert[]" multiple required>
 		@foreach($logo3s as $logo3)
 			<option value="{{ $logo3->id }}">{{ $logo3->title }}</option>
@@ -136,17 +164,23 @@
 		<option>認證標章1</option>
 		<option>認證標章2</option>
 	</select>
+	@endif
 	</div>
   </div>
   <hr class="nature_hr">
   <div class="form-group">
-	<label for="exampleFormControlSelect2">總覽篩選</label>
+	<label for="exampleFormControlSelect2">總覽篩選</label><br>
+	@foreach($filters as $filter)
+	<label class="checkbox-inline"><input type="checkbox" name="filter[]" value="{{ $filter->id }}">{{ $filter->title }}</label>
+	@endforeach
+	@if(0)
 	<select class="form-control" id="exampleFormControlSelect2" name="filter[]" multiple required>
 	  <option value="1">tests</option>
 	  @foreach($filters as $filter)
 	  <option value="{{ $filter->id }}">{{ $filter->title }}</option>
 	  @endforeach
 	</select>
+	@endif
   </div>
 
   <div class="form-group">
@@ -827,6 +861,10 @@ ClassicEditor
         .catch( error => {
             console.error( error );
         } );
+@if(isset($is_type))
+	var is_type = {!! json_encode($is_type) !!};	
+	$("#product_form [name='type_id'][value='"+is_type+"']").prop("checked",true);
+@endif
 @if(isset($product))
 	@if(session('tab'))
 		$("#{{session('tab')}}").click();
@@ -838,10 +876,12 @@ ClassicEditor
 
 	//console.log(product.title);
 	$("#product_form [name='title']").val(product.title);
-	$("#product_form [name='model']").val(product.model);
-	$("#product_form [name='type_id']").val(product.type_id);
+	$("#product_form [name='slogan']").val(product.slogan);
+	//$("#product_form [name='type_id']").val(product.type_id);
+	$("#product_form [name='type_id'][value='"+product.type_id+"']").prop("checked",true);
 	//$("[name='picture']").val(product.picture);
-	$("#product_form  [name='flag']").val(product.flag);
+	//$("#product_form  [name='flag']").val(product.flag);
+	$("#product_form [name='flag'][value='"+product.flag+"']").prop("checked",true);
 	$("#product_form  [name='characteristic']").val(product.characteristic);
 	$("#product_form  [name='characteristic_1']").val(product.characteristic_1);
 	$("#product_form  [name='characteristic_2']").val(product.characteristic_2);
