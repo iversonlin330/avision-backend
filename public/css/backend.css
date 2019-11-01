@@ -1,10 +1,15 @@
 body{
-	font-family: Microsoft JhengHei;
-	letter-spacing:2px;
-	color:#0E3A65;
-	font-size:16px;
-	line-height:1.8em;
+  font-family: Microsoft JhengHei,Noto Sans,sans-serif;
+  letter-spacing:2px;
+  color:#0E3A65;
+  font-size:16px;
+  line-height:1.8em;
   }
+
+button:focus {
+  outline:none;
+}
+
 
 .container-fluid {
   padding:30px 30px 50px 30px;
@@ -18,13 +23,7 @@ body{
   -o-transition: margin .25s ease-out;
   transition: margin .25s ease-out;
   background-color: #DADFE5!important;
-  border: 1px #B9C5D4; 
-  font-weight: 500;
-}
-
-#sidebar-wrapper .sidebar-heading {
-  /*padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;*/
+  font-weight: bold;
 }
 
 #sidebar-wrapper .sidebar-heading img{
@@ -32,13 +31,26 @@ body{
   margin:30px;
 }
 
+#sidebar-wrapper .menu_title {
+  color:#356796;
+  font-weight: bolder;
+  padding-left:1.25rem;
+}
+
 #sidebar-wrapper .list-group {
   width: 15rem;
+}
+
+#sidebar-wrapper .menu-group {
+  border-top:1px solid #B9C5D4;
+  padding: 1rem 0 0.5rem 0;
 }
 
 #sidebar-wrapper .list-group-item {
   background-color: #DADFE5!important;
   color:#0E3A65;
+  padding: .4rem 1.8rem;
+  border:none;
 }
 
 #sidebar-wrapper .list-group-item:hover {
@@ -46,10 +58,35 @@ body{
   color:#fff;
 }
 
+#sidebar-wrapper .dropdown-btn {
+  letter-spacing: 2px;
+  border:none;
+}
+
+#sidebar-wrapper .dropdown-btn i {
+  margin-left: 5px;
+}
+
+#sidebar-wrapper .dropdown-btn a{
+  text-decoration-line: none;
+  color:#ffffff;
+}
+
+#sidebar-wrapper .dropdown-item {
+  padding: .2rem 2rem;
+}
+
+#sidebar-wrapper .dropdown-item:active {
+  background-color: #ffffff!important;
+  color: #212529;
+}
+
 #sidebar-wrapper .sidebar-active {
   background-color: #0E3A65!important;
   color:#fff;
 }
+
+
 
 #page-content-wrapper {
   min-width: 100vw;
@@ -76,14 +113,14 @@ body{
   color: #0E3A65!important;
 }
 
-/*分隔線*/
+/*����𠉛��*/
 .nature_hr {
   border: solid 1px #B9C5D4;
   margin-top:30px;
   margin-bottom: 30px;
 }
 
-/*內容標題*/
+/*�批捆璅䠷��*/
 .inside_title {
   font-size: 18px; 
   font-weight: 500;
@@ -93,12 +130,12 @@ body{
 }
 
 
-/*複選方框*/
+/*銴��豢䲮獢�*/
 .multiselect-container>li>a>label {
   padding: 5px 15px!important;
 }
 
-/*按鈕*/
+/*��厰��*/
 .send_button {
    background-color: #356796!important; 
    border-radius: 5px; 
@@ -153,6 +190,16 @@ body{
   background-color: #3f3f3f!important; 
 }
 
+
+/*編輯框、預設文字效果 */
+.form-control:focus {
+  border-color: #0E3A65!important;
+  box-shadow: 0 0 0 0.2rem rgba(14,58,101,.25)!important;
+}
+
+.form-control::placeholder {
+  color:#b0b0b0!important;
+}
 
 
 @media (min-width: 768px) {
