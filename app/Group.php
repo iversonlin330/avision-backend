@@ -11,7 +11,7 @@ class Group extends Model
 	
 	public function specs()
     {
-        return $this->hasMany('App\Spec');
+        return $this->hasMany('App\Spec')->orderBy('order');
     }
 	
 }

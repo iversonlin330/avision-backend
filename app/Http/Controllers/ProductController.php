@@ -80,7 +80,7 @@ class ProductController extends Controller
 			$data['order'] = Product::all()->max('order') + 1;
 			Product::create($data);
 			$type = Type::find($data['type_id']);
-			return redirect('products?type='.$type->type);
+			return redirect('products?type='.$data['type_id']);
 		}
     }
 

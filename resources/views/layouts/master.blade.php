@@ -112,8 +112,8 @@
 	    </div>
 	    <div class="menu-group">
 	    	<h5 class="menu_title">規格維護</h5>
-			<a href="{{ url('groups?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[1] }}">印表機</a>
-	    	<a href="{{ url('groups?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[8] }}">掃描器</a>
+			<a href="{{ url('groups?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">印表機</a>
+	    	<a href="{{ url('groups?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[2] }}">掃描器</a>
 	    </div>
 
 	    <div class="menu-group">
