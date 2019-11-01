@@ -168,6 +168,12 @@
             }
         });
     }
+	$("table form").submit(function(){
+		if(confirm('確認刪除？')){
+		}else{
+			return false;
+		}
+	});
   </script>
 	@show
   </body>

@@ -113,5 +113,11 @@ function modal(obj){
 	}
 	$("#modal").modal('show');
 }
+$("table form").submit(function(){
+	if(confirm('確認刪除？')){
+	}else{
+		return false;
+	}
+});
 </script>
 @endsection

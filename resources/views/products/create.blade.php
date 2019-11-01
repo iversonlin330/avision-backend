@@ -68,7 +68,7 @@
   </div>
   <div class="form-group">
 	<label for="exampleFormControlSelect2">Flag</label><br>
-	<label class="radio-inline"><input type="radio" name="flag" value='1'>無</label>
+	<label class="radio-inline"><input type="radio" name="flag" value='1' required>無</label>
 	<label class="radio-inline"><input type="radio" name="flag" value='2'>新產品</label>
 	<label class="radio-inline"><input type="radio" name="flag" value='3'>發燒產品</label>
 	<!--select class="form-control" name="flag" required>
@@ -92,7 +92,7 @@
   </div>
   <hr class="nature_hr">
   <div class="form-group">
-	<label for="exampleInputEmail1">產品型號</label>
+	<label for="exampleInputEmail1">產品slogan</label>
 	<input type="text" class="form-control" name="slogan" aria-describedby="emailHelp" placeholder="產品slogan" required>
   </div>
   <div class="form-group">

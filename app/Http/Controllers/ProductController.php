@@ -63,6 +63,19 @@ class ProductController extends Controller
 			}
 			return back();
 		}else{
+			if(!array_key_exists('spec',$data)){
+				$data['spec'] = [];
+			}
+			if(!array_key_exists('software',$data)){
+				$data['software'] = [];
+			}
+			if(!array_key_exists('cert',$data)){
+				$data['cert'] = [];
+			}
+			if(!array_key_exists('filter',$data)){
+				$data['filter'] = [];
+			}
+			
 			$data['picture'] = $request->file('picture')->store('products');
 			$data['order'] = Product::all()->max('order') + 1;
 			Product::create($data);
