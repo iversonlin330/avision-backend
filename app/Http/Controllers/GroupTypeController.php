@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Software;
+use App\Type;
+use App\GroupType;
 use Illuminate\Http\Request;
 
-class SoftwareController extends Controller
+class GroupTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-		$data = $request->all();
-		$type = $data['type'];
-		$softwares = Software::where('type',$data['type'])->get();
-		$type_text = \Config::get('map.software_type')[$data['type']];
-		return view("softwares.index",compact('softwares','type_text','type'));
+		$group_types = GroupType::orderBy('order')->get();
+		return view('group_types.index',compact('group_types'));
     }
 
     /**
@@ -44,12 +42,13 @@ class SoftwareController extends Controller
 		$data = $request->all();
 		if(array_key_exists('order',$data)){
 			foreach($data['order'] as $index => $template_id){
-				Software::find($template_id)->update(['order' => $index+1]);
+				GroupType::find($template_id)->update(['order' => $index+1]);
 			}
 		}else{
-			$data['file'] = $request->file('file')->store('downloads');
-			$data['order'] = Software::all()->max('order') + 1;
-			Software::create($data);
+			$data['banner'] = $request->file('banner')->store('group_types');
+			$data['picture'] = $request->file('picture')->store('group_types');
+			$data['order'] = GroupType::all()->max('order') + 1;
+			GroupType::create($data);
 			
 		}
 		return back();
@@ -58,10 +57,10 @@ class SoftwareController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Software  $software
+     * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function show(Software $software)
+    public function show(Type $type)
     {
         //
     }
@@ -69,10 +68,10 @@ class SoftwareController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Software  $software
+     * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Software $software)
+    public function edit(Type $type)
     {
         //
     }
@@ -81,28 +80,22 @@ class SoftwareController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Software  $software
+     * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Software $software)
+    public function update(Request $request, Type $type)
     {
         //
-		$data = $request->all();
-		$data['file'] = $request->file('file')->store('downloads');
-		$software->update($data);
-		return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Software  $software
+     * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Software $software)
+    public function destroy(Type $type)
     {
         //
-		$software->delete();
-		return back();
     }
 }

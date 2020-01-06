@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('types','TypeController');
+Route::resource('group_types','GroupTypeController');
 Route::resource('products','ProductController');
 Route::resource('downloads','DownloadController');
 Route::resource('softwares','SoftwareController');

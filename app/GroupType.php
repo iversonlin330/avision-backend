@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class GroupType extends Model
 {
     //
 	protected $guarded = ['id'];
 	
-	public function products()
+	public function types()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\type','type');
     }
 }

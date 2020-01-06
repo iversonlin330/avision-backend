@@ -72,6 +72,9 @@
 		case url('filters'):
 			$sidebar_active[7] = 'sidebar-active';
 			break;
+		case url('group_types'):
+			$sidebar_active[8] = 'sidebar-active';
+			break;
 		}
 	?>
     <!-- Sidebar -->
@@ -95,7 +98,19 @@
       <div class="list-group list-group-flush">
       	<div class="menu-group">
 	      	<h5 class="menu_title">產品維護</h5>
-	      	<button class="dropdown-btn list-group-item list-group-item-action bg-light">印表機<i class="fa fa-caret-down"></i></button>
+			<a href="{{ url('group_types') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[8] }}">產品類別維護</a>
+	      	@php
+				$group_types = \App\GroupType::orderBy('order')->get();
+			@endphp
+			@foreach($group_types as $group_type)
+				<button class="dropdown-btn list-group-item list-group-item-action bg-light">{{ $group_type->title }}<i class="fa fa-caret-down"></i></button>
+				<div class="dropdown-container">
+				@foreach($group_type->types as $type)
+				<a class="dropdown-item {{ $sidebar_active[17] }}" href="{{ url('products?type='.$type->id) }}">{{ $type->title }}</a>
+				@endforeach
+				</div>
+			@endforeach
+			<!--button class="dropdown-btn list-group-item list-group-item-action bg-light">印表機<i class="fa fa-caret-down"></i></button>
 	        <div class="dropdown-container">
 		        <a class="dropdown-item {{ $sidebar_active[17] }}" href="{{ url('products?type=7') }}">印表機</a>
 			    <a class="dropdown-item {{ $sidebar_active[18] }}" href="{{ url('products?type=8') }}">多功能事務機</a>
@@ -108,12 +123,15 @@
 			    <a class="dropdown-item {{ $sidebar_active[14] }}" href="{{ url('products?type=4') }}">文件直通車</a>
 			    <a class="dropdown-item {{ $sidebar_active[15] }}" href="{{ url('products?type=5') }}">多功能掃描</a>
 			    <a class="dropdown-item {{ $sidebar_active[16] }}" href="{{ url('products?type=6') }}">生產級掃描</a>
-	        </div>
+	        </div-->
 	    </div>
 	    <div class="menu-group">
 	    	<h5 class="menu_title">規格維護</h5>
-			<a href="{{ url('groups?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">印表機</a>
-	    	<a href="{{ url('groups?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[2] }}">掃描器</a>
+			@foreach($group_types as $group_type)
+			<a href="{{ url('groups?type='.$group_type->id) }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">{{ $group_type->title }}</a>
+			@endforeach
+			<!--a href="{{ url('groups?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">印表機</a>
+	    	<a href="{{ url('groups?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[2] }}">掃描器</a-->
 	    </div>
 
 	    <div class="menu-group">
@@ -122,10 +140,22 @@
 			<a href="{{ url('logos?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">附贈軟體</a>
 			<a href="{{ url('logos?type=3') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[6] }}">認證標章</a>
 	    </div>
-
+		
+		<div class="menu-group">
+	    	<h5 class="menu_title">常見問答維護</h5>
+			<a href="{{ url('faqs?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">硬體相關</a>
+			<a href="{{ url('faqs?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">軟體相關</a>
+			<a href="{{ url('faqs?type=3') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[6] }}">操作指南</a>
+	    </div>
+		
 	    <div class="menu-group">
 	    	<h5 class="menu_title">篩選條件維護</h5>
 			<a href="{{ url('filters') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[7] }}">產品側欄篩選</a>
+	    </div>
+		<div class="menu-group">
+	    	<h5 class="menu_title">下載/軟體維護</h5>
+			<a href="{{ url('softwares?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">驅動程式</a>
+			<a href="{{ url('softwares?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">應用軟體</a>
 	    </div>
       </div>
     </div>

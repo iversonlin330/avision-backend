@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccessoriesTable extends Migration
+class CreateTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateAccessoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('accessories', function (Blueprint $table) {
+        Schema::create('types', function (Blueprint $table) {
             $table->bigIncrements('id');
-			//$table->integer('product_id');
-			$table->unsignedBigInteger('group_type_id');
+			$table->unsignedBigInteger('type');
 			$table->text('title');
+			$table->text('picture');
 			$table->text('description');
-			$table->text('file');
-			$table->text('url');
 			$table->integer('order');
             $table->timestamps();
+			//$table->foreign('type')->references('id')->on('group_types');
         });
     }
 
@@ -33,6 +32,6 @@ class CreateAccessoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accessories');
+        Schema::dropIfExists('types');
     }
 }

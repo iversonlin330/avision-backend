@@ -29,6 +29,8 @@ class CreateProductsTable extends Migration
 			$table->text('software');
 			$table->text('cert');
 			$table->text('filter');
+			$table->text('accessory');
+			$table->text('faq');
 			$table->integer('status');
 			$table->integer('order');
             $table->timestamps();

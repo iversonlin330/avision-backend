@@ -111,7 +111,7 @@
 	<label for="exampleInputEmail1">機台規格</label>
 	<div class="row">
 	@foreach($logo1s as $logo1)
-	<div class="col-3" style="text-align: center;">
+	<div class="col-2" style="text-align: center;">
 		<img src="{{ asset('storage/'.$logo1->file) }}" style="width:100%;">
 		<input type="checkbox" name="spec[]" value="{{ $logo1->id }}">{{ $logo1->title }}</input>
 	</div>
@@ -131,7 +131,7 @@
 	<label for="exampleInputEmail1">附贈軟體</label>
 	<div class="row">
 	@foreach($logo2s as $logo2)
-	<div class="col-3" style="text-align: center;">
+	<div class="col-2" style="text-align: center;">
 		<img src="{{ asset('storage/'.$logo2->file) }}" style="width:100%;">
 		<input type="checkbox" name="software[]" value="{{ $logo2->id }}">{{ $logo2->title }}</input>
 	</div>
@@ -151,7 +151,7 @@
 	<label for="exampleInputEmail1">認證標章</label>
 	<div class="row">
 	@foreach($logo3s as $logo3)
-	<div class="col-3" style="text-align: center;">
+	<div class="col-2" style="text-align: center;">
 		<img src="{{ asset('storage/'.$logo3->file) }}" style="width:100%;">
 		<input type="checkbox" name="cert[]" value="{{ $logo3->id }}">{{ $logo3->title }}</input>
 	</div>
@@ -190,7 +190,13 @@
 	  <option value="0">不顯示</option>
 	</select>
   </div>
-  <button type="submit" class="btn btn-primary send_button">送出</button>
+  
+  <div class="submit_fixed">
+	<button type="submit" class="btn btn-primary send_button">送出</button>
+  </div>
+  
+  <!--button type="submit" class="btn btn-primary send_button">送出</button-->
+  
 </form>
 </div>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Type;
+use App\GroupType;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -15,6 +16,8 @@ class TypeController extends Controller
     public function index()
     {
         //
+		$group_types = GroupType::all();
+		return view('types.index',compact('group_types'));
     }
 
     /**
@@ -36,6 +39,19 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         //
+		$data = $request->all();
+		if(array_key_exists('order',$data)){
+			foreach($data['order'] as $index => $template_id){
+				Type::find($template_id)->update(['order' => $index+1]);
+			}
+		}else{
+			//$data['banner'] = $request->file('banner')->store('group_types');
+			//$data['picture'] = $request->file('picture')->store('group_types');
+			$data['order'] = Type::all()->max('order') + 1;
+			Type::create($data);
+			
+		}
+		return back();
     }
 
     /**
