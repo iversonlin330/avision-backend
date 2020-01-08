@@ -43,7 +43,7 @@ class ProductController extends Controller
 		$logo1s = Logo::where('type',1)->get();
 		$logo2s = Logo::where('type',2)->get();
 		$logo3s = Logo::where('type',3)->get();
-		
+
 		return view('products.create',compact('filters','logo1s','logo2s','logo3s','types','is_type'));
     }
 
@@ -75,7 +75,13 @@ class ProductController extends Controller
 			if(!array_key_exists('filter',$data)){
 				$data['filter'] = [];
 			}
-			
+            if(!array_key_exists('accessory',$data)){
+                $data['accessory'] = [];
+            }
+            if(!array_key_exists('faq',$data)){
+                $data['faq'] = [];
+            }
+
 			$data['picture'] = $request->file('picture')->store('products');
 			$data['order'] = Product::all()->max('order') + 1;
 			Product::create($data);

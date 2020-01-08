@@ -103,10 +103,10 @@
 	<label for="exampleInputEmail1">產品特色</label>
 	<textarea name="characteristic" placeholder="產品特色"></textarea>
   </div>
-  
-  
-  
-  
+
+
+
+
   <div class="form-group">
 	<label for="exampleInputEmail1">機台規格</label>
 	<div class="row">
@@ -153,7 +153,7 @@
 	@foreach($logo3s as $logo3)
 	<div class="col-2" style="text-align: center;">
 		<img src="{{ asset('storage/'.$logo3->file) }}" style="width:100%;">
-		<input type="checkbox" name="cert[]" value="{{ $logo3->id }}">{{ $logo3->title }}</input>
+		<input type="checkbox" name="cert[]" value="{{ $logo3->id }}">{{ $logo3->title }}
 	</div>
 	@endforeach
 	@if(0)
@@ -190,13 +190,13 @@
 	  <option value="0">不顯示</option>
 	</select>
   </div>
-  
+
   <div class="submit_fixed">
 	<button type="submit" class="btn btn-primary send_button">送出</button>
   </div>
-  
+
   <!--button type="submit" class="btn btn-primary send_button">送出</button-->
-  
+
 </form>
 </div>
 </div>
@@ -239,8 +239,8 @@
 		<div class="col-12">
 			<a class="btn btn-primary add-btn" onclick="download_modal('create')">新增手冊</a>
 			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#download_sort_modal">手冊排序</a>
-			<a class="btn btn-primary add-btn" onclick="software_modal('create')">新增軟體程式</a>
-			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#software_sort_modal">軟體程式排序</a>
+			<!--a class="btn btn-primary add-btn" onclick="software_modal('create')">新增軟體程式</a>
+			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#software_sort_modal">軟體程式排序</a-->
 		</div>
 	</div>
 	<div class="row mt-2">
@@ -272,29 +272,30 @@
 							</td>
 						</tr>
 					@endforeach
-						<!--tr>
-							<td>用戶手冊</td>
-							<td>用戶手冊一</td>
-							<td>30MB</td>
-							<td>zh-tw</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-						</tr>
-						<tr>
-							<td>型錄</td>
-							<td>型錄一</td>
-							<td>30MB</td>
-							<td>zh-tw</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-						</tr-->
 					</tbody>
 				</table>
 			  </div>
 		</div>
 		</div>
 	</div>
+        <hr class="nature_hr">
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">總覽篩選</label><br>
+            @foreach($filters as $filter)
+                <label class="checkbox-inline"><input type="checkbox" name="filter[]" value="{{ $filter->id }}">{{ $filter->title }}</label>
+            @endforeach
+            @if(0)
+                <select class="form-control" id="exampleFormControlSelect2" name="filter[]" multiple required>
+                    <option value="1">tests</option>
+                    @foreach($filters as $filter)
+                        <option value="{{ $filter->id }}">{{ $filter->title }}</option>
+                    @endforeach
+                </select>
+            @endif
+        </div>
 	<div class="row mt-2">
 		<div class="col-12">
-		<div class="card">
+		<!--div class="card">
 			<div class="card-header">軟體程式</div>
 			  <div class="card-body">
 				<table class="table">
@@ -308,6 +309,7 @@
 						<th>編輯</th>
 					</thead>
 					<tbody>
+					@if(0)
 					@foreach($product->softwares->sortBy('order') as $software)
 						<tr data-id="{{ $software->id }}">
 							<td data-val="{{ $software->type }}">{{ $software->type_text }}</td>
@@ -325,25 +327,8 @@
 							</td>
 						</tr>
 					@endforeach
-						<!--tr>
-							<td>驅動程式</td>
-							<td>驅動程式一</td>
-							<td>版本一</td>
-							<td>30MB</td>
-							<td>系統相容性一</td>
-							<td>檢查碼一</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-						</tr>
-						<tr>
-							<td>驅動程式</td>
-							<td>驅動程式一</td>
-							<td>版本一</td>
-							<td>30MB</td>
-							<td>系統相容性一</td>
-							<td>檢查碼一</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-						</tr-->
-					</tbody>
+                    @endif
+                    </tbody>
 				</table>
 			  </div>
 		</div>
@@ -371,6 +356,7 @@
 						<th>編輯</th>
 					</thead>
 					<tbody>
+					@if(0)
 					@foreach($product->accessories->sortBy('order') as $accessory)
 						<tr data-id="{{ $accessory->id }}">
 							<td>{{ $accessory->title }}</td>
@@ -386,6 +372,7 @@
 							</td>
 						</tr>
 					@endforeach
+                    @endif
 					</tbody>
 				</table>
 			  </div>
@@ -413,6 +400,7 @@
 						<th>編輯</th>
 					</thead>
 					<tbody>
+					@if(0)
 					@foreach($product->faqs->sortBy('order') as $faq)
 						<tr data-id="{{ $faq->id }}">
 							<td data-val="{{ $faq->id }}">{{ $faq->type_text }}</td>
@@ -427,18 +415,7 @@
 							</td>
 						</tr>
 					@endforeach
-						<!--tr>
-							<td>硬體常見問題</td>
-							<td>硬體常見問題一</td>
-							<td>內容</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-						</tr>
-						<tr>
-							<td>硬體常見問題</td>
-							<td>硬體常見問題一</td>
-							<td>內容</td>
-							<td><a class="btn btn-primary edit_btn" href="product-create.html">編輯</a><a class="btn btn-primary delete_btn" href="product-create.html">刪除</a></td>
-						</tr-->
+                    @endif
 					</tbody>
 				</table>
 			  </div>
@@ -619,7 +596,7 @@
 			<label for="exampleInputEmail1">連絡我們</label>
 			<input type="text" class="form-control" name="url" aria-describedby="emailHelp" placeholder="url" required>
 		  </div>
-		  
+
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -644,7 +621,7 @@
 	  @method('PUT')
 	  <div class="modal-body">
 	  <input name="product_id" value="{{ $product->id}}" hidden>
-		
+
 		  <div class="form-group">
 			<label for="exampleInputEmail1">分類</label>
 			<select class="form-control" name="type">
@@ -661,7 +638,7 @@
 			<label for="exampleInputEmail1">內容</label>
 			<textarea class="form-control editor" name="description" aria-describedby="emailHelp" placeholder="內容" required></textarea>
 		  </div>
-		  
+
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -729,7 +706,7 @@
 						<input name="order[]" value="{{ $picture->id }}" hidden>
 					</li>
 				@endforeach
-			<ul>
+			</ul>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -758,7 +735,7 @@
 						<input name="order[]" value="{{ $download->id }}" hidden>
 					</li>
 				@endforeach
-			<ul>
+			</ul>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -787,7 +764,7 @@
 						<input name="order[]" value="{{ $software->id }}" hidden>
 					</li>
 				@endforeach
-			<ul>
+			</ul>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -816,7 +793,7 @@
 						<input name="order[]" value="{{ $accessory->id }}" hidden>
 					</li>
 				@endforeach
-			<ul>
+			</ul>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -845,7 +822,7 @@
 						<input name="order[]" value="{{ $faq->id }}" hidden>
 					</li>
 				@endforeach
-			<ul>
+			</ul>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -868,14 +845,14 @@ ClassicEditor
             console.error( error );
         } );
 @if(isset($is_type))
-	var is_type = {!! json_encode($is_type) !!};	
+	var is_type = {!! json_encode($is_type) !!};
 	$("#product_form [name='type_id'][value='"+is_type+"']").prop("checked",true);
 @endif
 @if(isset($product))
 	@if(session('tab'))
 		$("#{{session('tab')}}").click();
 	@endif
-	
+
 	$(".sortable").sortable();
 	var product = {!! json_encode($product) !!};
 	var product_specs = {!! json_encode($product_specs) !!};
@@ -899,7 +876,7 @@ ClassicEditor
 	$("#product_form  [name='filter[]']").val(product.filter);
 	$("#product_form  [name='status']").val(product.status);
 	//$("[name='picture']").val(product.picture);
-	
+
 	/*
 	$("[name='gender']").filter('[value='+user.gender+']').prop('checked', true);
 	$("[name='city_id']").val(teacher.city_id);
@@ -914,8 +891,8 @@ ClassicEditor
 	for(x in product_specs){
 		$("[name='spec["+x+"]']").val(product_specs[x]);
 	}
-	
-	
+
+
 	function download_modal(obj){
 		if(obj == 'create'){
 			$("#group [name='_method']").val('POST');
@@ -931,7 +908,7 @@ ClassicEditor
 		}
 		$("#group").modal('show');
 	}
-	
+
 	function software_modal(obj){
 		if(obj == 'create'){
 			$("#software [name='_method']").val('POST');
@@ -949,7 +926,7 @@ ClassicEditor
 		}
 		$("#software").modal('show');
 	}
-	
+
 	function accessory_modal(obj){
 		if(obj == 'create'){
 			$("#accessory [name='_method']").val('POST');
@@ -967,7 +944,7 @@ ClassicEditor
 		}
 		$("#accessory").modal('show');
 	}
-	
+
 	function faq_modal(obj){
 		if(obj == 'create'){
 			$("#faq [name='_method']").val('POST');
@@ -984,7 +961,7 @@ ClassicEditor
 		}
 		$("#faq").modal('show');
 	}
-	
+
 	function picture_modal(obj){
 		if(obj == 'create'){
 			$("#picture [name='_method']").val('POST');
@@ -1001,9 +978,9 @@ ClassicEditor
 		}
 		$("#picture").modal('show');
 	}
-	
+
 	$("#picture [name='type']").change(function(){
-		let type_val = $(this).val(); 
+		let type_val = $(this).val();
 		if(type_val == 1){
 			$("#picture [name='path']").attr('type','text');
 			$("#picture [name='path']").parent().find('label').text('連結');
@@ -1012,7 +989,7 @@ ClassicEditor
 			$("#picture [name='path']").parent().find('label').text('檔案');
 		}
 	})
-	
+
 @endif
 </script>
 @endsection
