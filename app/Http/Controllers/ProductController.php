@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Accessory;
+use App\Faq;
 use App\Product;
 use App\Filter;
 use App\Logo;
 use App\Group;
 use App\ProductSpec;
+use App\Software;
 use App\Type;
 use Illuminate\Http\Request;
 
@@ -120,7 +123,11 @@ class ProductController extends Controller
 		$groups = Group::where('type',$type)->orderBy('order')->get();
 		$product_specs = $product->product_specs->pluck('value','spec_id')->toArray();
 		//dd($product_specs);
-		return view('products.create',compact('product','filters','logo1s','logo2s','logo3s','groups','product_specs','types'));
+        $softwares = Software::all();
+        $accessories = Accessory::where('group_type_id', $type)->get();
+        $faqs = Faq::all();
+		return view('products.create',compact('product','filters','logo1s','logo2s','logo3s',
+            'groups','product_specs','types','softwares','accessories','faqs'));
     }
 
     /**
@@ -138,7 +145,8 @@ class ProductController extends Controller
 			$data['picture'] = $request->file('picture')->store('products');
 		}
 		$product->update($data);
-		$type = Type::find($data['type_id']);
+        //$product->fill($data)->save();
+        $type = Type::find($product->type_id);
 		return redirect('products?type='.$type->type);
 		//return redirect('products');
     }

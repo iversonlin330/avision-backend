@@ -278,24 +278,28 @@
 		</div>
 		</div>
 	</div>
-        <hr class="nature_hr">
+    <hr class="nature_hr">
+    <label for="exampleFormControlSelect2">下載</label><br>
+    <form id="product_form" action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
+        @method('PUT')
         <div class="form-group">
-            <label for="exampleFormControlSelect2">總覽篩選</label><br>
-            @foreach($filters as $filter)
-                <label class="checkbox-inline"><input type="checkbox" name="filter[]" value="{{ $filter->id }}">{{ $filter->title }}</label>
+            <label for="exampleFormControlSelect2">驅動程式</label><br>
+            @foreach($softwares->where('type',1) as $software)
+                <label class="checkbox-inline"><input type="checkbox" name="software[]" value="{{ $software->id }}">{{ $software->title }}</label>
             @endforeach
-            @if(0)
-                <select class="form-control" id="exampleFormControlSelect2" name="filter[]" multiple required>
-                    <option value="1">tests</option>
-                    @foreach($filters as $filter)
-                        <option value="{{ $filter->id }}">{{ $filter->title }}</option>
-                    @endforeach
-                </select>
-            @endif
         </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">應用軟體</label><br>
+            @foreach($softwares->where('type',2) as $software)
+                <label class="checkbox-inline"><input type="checkbox" name="software[]" value="{{ $software->id }}">{{ $software->title }}</label>
+            @endforeach
+        </div>
+        <button type="submit" class="btn btn-primary send_button">送出</button>
+    </form>
+        @if(0)
 	<div class="row mt-2">
 		<div class="col-12">
-		<!--div class="card">
+		<div class="card">
 			<div class="card-header">軟體程式</div>
 			  <div class="card-body">
 				<table class="table">
@@ -334,9 +338,26 @@
 		</div>
 		</div>
 	</div>
+            @endif
 	</div>
 	<div class="tab-pane fade" id="pills-acc" role="tabpanel" aria-labelledby="pills-contact-tab">
-	<div class="row mt-2">
+        <form id="product_form" action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
+            @method('PUT')
+            <div class="form-group">
+                <label for="exampleInputEmail1"></label>
+                <div class="row">
+                    @foreach($accessories as $accessory)
+                        <div class="col-2" style="text-align: center;">
+                            <img src="{{ asset('storage/'.$accessory->file) }}" style="width:100%;">
+                            <input type="checkbox" name="accessory[]" value="{{ $accessory->id }}">{{ $accessory->title }}
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary send_button">送出</button>
+        </form>
+	@if(0)
+    <div class="row mt-2">
 		<div class="col-12">
 			<a class="btn btn-primary add-btn" href="#" onclick="accessory_modal('create')">新增配件</a>
 			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#accessory_sort_modal">配件排序</a>
@@ -379,9 +400,23 @@
 		</div>
 		</div>
 	</div>
+        @endif
 	</div>
 	<div class="tab-pane fade" id="pills-qa" role="tabpanel" aria-labelledby="pills-contact-tab">
-	<div class="row mt-2">
+        <form id="product_form" action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
+            @method('PUT')
+            @foreach(Config::get("map.faq_type") as $faq_type_id => $faq_type_title)
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">{{ $faq_type_title }}</label><br>
+                    @foreach($faqs->where('type',$faq_type_id) as $faq)
+                        <label class="checkbox-inline"><input type="checkbox" name="faq[]" value="{{ $faq->id }}">{{ $faq->title }}</label>
+                    @endforeach
+                </div>
+            @endforeach
+            <button type="submit" class="btn btn-primary send_button">送出</button>
+        </form>
+    @if(0)
+    <div class="row mt-2">
 		<div class="col-12">
 			<a class="btn btn-primary add-btn" href="#" onclick="faq_modal('create')">新增常見問答</a>
 			<a class="btn btn-primary add-btn" data-toggle="modal" data-target="#faq_sort_modal">常見問答排序</a>
@@ -422,6 +457,7 @@
 		</div>
 		</div>
 	</div>
+    @endif
 	</div>
 	<div class="tab-pane fade" id="pills-picture" role="tabpanel" aria-labelledby="pills-contact-tab">
 	<div class="row mt-2">
@@ -759,11 +795,13 @@
 	  <form action="{{ url('softwares') }}" enctype="multipart/form-data" method="post">
 	  <div class="modal-body">
 		  <ul class="sortable">
+              @if(0)
 				@foreach($product->softwares->sortBy('order') as $software)
 					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $software->title }}
 						<input name="order[]" value="{{ $software->id }}" hidden>
 					</li>
 				@endforeach
+              @endif
 			</ul>
 	  </div>
 	  <div class="modal-footer">
@@ -788,11 +826,13 @@
 	  <form action="{{ url('accessories') }}" enctype="multipart/form-data" method="post">
 	  <div class="modal-body">
 		  <ul class="sortable">
+              @if(0)
 				@foreach($product->accessories->sortBy('order') as $accessory)
 					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $accessory->title }}
 						<input name="order[]" value="{{ $accessory->id }}" hidden>
 					</li>
 				@endforeach
+              @endif
 			</ul>
 	  </div>
 	  <div class="modal-footer">
@@ -817,11 +857,13 @@
 	  <form action="{{ url('faqs') }}" enctype="multipart/form-data" method="post">
 	  <div class="modal-body">
 		  <ul class="sortable">
+              @if(0)
 				@foreach($product->faqs->sortBy('order') as $faq)
 					<li class="btn btn-primary add-btn mt-2" style="display: block;float: none;">{{ $faq->title }}
 						<input name="order[]" value="{{ $faq->id }}" hidden>
 					</li>
 				@endforeach
+              @endif
 			</ul>
 	  </div>
 	  <div class="modal-footer">
@@ -876,6 +918,7 @@ ClassicEditor
 	$("#product_form  [name='filter[]']").val(product.filter);
 	$("#product_form  [name='status']").val(product.status);
 	//$("[name='picture']").val(product.picture);
+    $("#product_form  [name='software[]']").val(product.software);
 
 	/*
 	$("[name='gender']").filter('[value='+user.gender+']').prop('checked', true);

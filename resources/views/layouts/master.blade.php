@@ -14,7 +14,7 @@
     <title>產品</title>
   </head>
   <style>
-  
+
   </style>
   <body>
 	<div class="d-flex" id="wrapper">
@@ -140,22 +140,26 @@
 			<a href="{{ url('logos?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">附贈軟體</a>
 			<a href="{{ url('logos?type=3') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[6] }}">認證標章</a>
 	    </div>
-		
+        <div class="menu-group">
+            <h5 class="menu_title">下載/軟體維護</h5>
+            <a href="{{ url('softwares?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">驅動程式</a>
+            <a href="{{ url('softwares?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">應用軟體</a>
+        </div>
+          <div class="menu-group">
+              <h5 class="menu_title">配件維護</h5>
+              @foreach($group_types as $group_type)
+                  <a href="{{ url('accessories?type='.$group_type->id) }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">{{ $group_type->title }}</a>
+              @endforeach
+          </div>
 		<div class="menu-group">
 	    	<h5 class="menu_title">常見問答維護</h5>
 			<a href="{{ url('faqs?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">硬體相關</a>
 			<a href="{{ url('faqs?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">軟體相關</a>
 			<a href="{{ url('faqs?type=3') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[6] }}">操作指南</a>
 	    </div>
-		
 	    <div class="menu-group">
 	    	<h5 class="menu_title">篩選條件維護</h5>
 			<a href="{{ url('filters') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[7] }}">產品側欄篩選</a>
-	    </div>
-		<div class="menu-group">
-	    	<h5 class="menu_title">下載/軟體維護</h5>
-			<a href="{{ url('softwares?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">驅動程式</a>
-			<a href="{{ url('softwares?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">應用軟體</a>
 	    </div>
       </div>
     </div>
