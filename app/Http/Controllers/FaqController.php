@@ -12,9 +12,14 @@ class FaqController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $data = $request->all();
+        $type = $data['type'];
+        $faqs = Faq::where("type",$data["type"])->get();
+        $type_text = \Config::get("map.faq_type")[$data['type']];
+        return view("faqs.index",compact("faqs","type","type_text"));
     }
 
     /**
