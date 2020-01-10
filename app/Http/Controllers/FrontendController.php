@@ -21,15 +21,15 @@ class FrontendController extends Controller
     {
         //
 		if($request->all()){
-			
+
 		}else{
 			$products = Product::all();
 		}
 		$filters = Filter::all();
-		
+
 		return view('frontends.products',compact('products','filters'));
     }
-	
+
 	public function getProductDetail($id)
     {
         //
@@ -41,8 +41,21 @@ class FrontendController extends Controller
 		$types = Type::where('type',$type)->get();
 		$groups = Group::where('type',$type)->orderBy('order')->get();
 		$product_specs = $product->product_specs->pluck('value','spec_id')->toArray();
-		
+
 		return view('frontends.product-detail',compact('product','groups','product_specs'));
     }
-	
+
+    public function getCompare(Request $request){
+        $data = $request->all();
+        $product_ids = $data['product_id'];
+        $products = Product::whereIn("id",$product_ids)->get();
+
+        $type = $products->first()->type->type;
+
+        $groups = Group::where('type',$type)->orderBy('order')->get();
+        //$product_specs = $product->product_specs->pluck('value','spec_id')->toArray();
+
+        return view("frontends.compare",compact("products","groups"));
+    }
+
 }

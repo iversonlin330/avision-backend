@@ -9,7 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/css/style.css">
 	<title>Avision-compare</title>
 </head>
 <style>
@@ -35,17 +35,17 @@
 		padding-right: 30px;
 		background-color: #FAFAFA;
 	}
-	
+
 	.checkbox-20{
 		width: 20px;
 		height: 20px;
 	}
-	
+
 	.checkbox-15{
 		width: 15px;
 		height: 15px;
 	}
-	    
+
 
 	#sidebar {
 		background-color: #FAFAFA;
@@ -232,7 +232,7 @@
 	.more_btn a:active {
 		background-color: #3F3F3F;
 	}
-	
+
 	.compare_show_btn{
 		background-color: #dbdbdd;
 		text-align: center;
@@ -245,7 +245,7 @@
 		width: 100%;
 		text-align: center;
 	}
-	
+
 	.compare {
 		position: fixed;
 		left: 0;
@@ -253,16 +253,16 @@
 		width: 100%;
 		background-color:#fafafa;
 		text-align: center;
-		padding: 30px 130px; 
+		padding: 30px 130px;
 		box-shadow:0px 0px 10px rgba(0,0,0,0.2);
 		//padding-left:165px;
 	}
-	
+
 	.compare_list{
 		padding-left: 20px;
 	}
 
-	
+
 
 	.compare_close {
 		margin-right: 15px;
@@ -298,7 +298,7 @@
 	.compare_btn {
 		width: 160px;
 		text-align: center;
-		
+
 	}
 
 	.flexbox{
@@ -336,7 +336,7 @@
 
 	@media (max-width: 768px) {
 		#sidebar{
-		padding: 60px 50px;			
+		padding: 60px 50px;
 		}
 		.left-side-title{
 			font-size: 20px;
@@ -444,7 +444,7 @@
 			</div>
 			<div class="col-md-9 col-sm-12 right-side ">
 				<div class="row">
-				
+
 					@foreach($products as $product)
 					<div class="col-md-3 col-sm-6 col-6 product-card" data-title="{{ $product->title }}" data-type="{{ $product->type_id }}" data-filter="{{ json_encode($product->filter) }}">
 						<div class="card">
@@ -527,7 +527,7 @@
 		}
 		$(".compare").hide();
 		refresh_compare();
-		
+
 		function refresh_compare(){
 			var json_str = localStorage.getItem("product-compare");
 			if (JSON.parse(json_str)) {
@@ -546,7 +546,7 @@
 				$(".compare").show();
 			}
 		}
-		
+
 		function remove_compare(id){
 			var id = String(id);
 			var json_str = localStorage.getItem("product-compare");
@@ -557,7 +557,7 @@
 			}
 			refresh_compare();
 		}
-		
+
 
 		$(".add-compare").click(function () {
 			$(".compare").show();
@@ -582,13 +582,13 @@
 			localStorage.setItem("product-compare", JSON.stringify(arr));
 			refresh_compare();
 		});
-		
+
 		$(".compare_close").click(function () {
 			$(".compare").hide();
 			$(".compare_show_btn").show();
 			//localStorage.setItem("product-compare", JSON.stringify([]));
 		});
-		
+
 		$(".compare_show_btn").click(function () {
 			$(".compare").show();
 			$(".compare_show_btn").hide();
@@ -602,7 +602,7 @@
 				$("#sidebar").addClass('d-none');
 			}
 		}
-		
+
 		$(".filter").change(function(){
 			let data_type = $(this).data('type');
 			if(data_type == 'type'){
@@ -619,12 +619,12 @@
 					$(".filter[value=7]").prop('checked',is_checked);
 					$(".filter[value=8]").prop('checked',is_checked);
 				}
-				
+
 				/*
 				var values = $(".filter:checked").map(function(index,domElement) {
 					return $(domElement).val();
 				}).get();
-				
+
 				if(values.length > 0){
 					$(".product-card").hide();
 					for(x in values){
@@ -636,17 +636,17 @@
 				}
 				*/
 			}else if(data_type == 'filter'){
-				
+
 			}
 			filter_cal();
 		});
-		
+
 		function filter_cal(){
 			//Type
 			var values = $(".filter:checked[data-type='type']").map(function(index,domElement) {
 				return $(domElement).val();
 			}).get();
-			
+
 			if(values.length > 0){
 				$(".product-card").hide();
 				for(x in values){
@@ -655,12 +655,12 @@
 			}else{
 				$(".product-card").show();
 			}
-			
+
 			//Filter
 			var filters = $(".filter:checked[data-type='filter']").map(function(index,domElement) {
 				return $(domElement).val();
 			}).get();
-			
+
 			if(filters.length > 0){
 				$(".product-card:visible").each(function(){
 					$(this).hide();
@@ -672,7 +672,7 @@
 					}
 				});
 			}
-			
+
 			//Search
 			let search_val = $("#search_input").val();
 			if(search_val){
@@ -683,9 +683,9 @@
 					}
 				});
 			}
-			
+
 		}
-		
+
 	</script>
 </body>
 

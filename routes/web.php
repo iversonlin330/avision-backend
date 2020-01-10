@@ -43,4 +43,5 @@ Route::group(['prefix' => 'frontends'], function () {
 	*/
 	Route::get('products','FrontendController@getProducts');
 	Route::get('product-detail/{id}','FrontendController@getProductDetail');
+    Route::get('compare','FrontendController@getCompare');
 });

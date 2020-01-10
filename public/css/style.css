@@ -1,0 +1,490 @@
+/* * {
+    border: 1px gray solid;
+} */
+
+body {
+    font-family: '微軟正黑體', Noto Sans, sans-serif;
+    letter-spacing: 2px;
+    color: #3F3F3F;
+    font-size: 14px;
+    line-height: 1.8em;
+}
+
+hr {
+    border-top: 1px solid #989898;
+    margin: 20px 0 20px 0;
+}
+
+.top_banner {
+    width: 100%;
+    min-height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 80px;
+    margin-bottom: 70px;
+}
+
+.top_banner img {
+    display: block;
+    margin: 0 auto;
+}
+
+.page_title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.page_des {
+    font-size: 16px;
+    text-align: center;
+}
+
+.bread {
+    color: #9B9B9B;
+    margin-bottom: 60px;
+}
+
+.section_product {
+    margin-bottom: 100px;
+}
+
+.product_box {
+    margin: 0 auto;
+    min-height: 319px;
+    box-shadow: 0px 0px 10px rgba(63, 63, 63, 0.3);
+    position: relative;
+    margin-bottom: 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.product_hover {
+    position: absolute;
+    //top: 0;
+    left: 0;
+	bottom: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250, 250, 250, 0.9);
+    padding: 35px;
+}
+
+.product_hover p {
+    line-height: 1.6;
+    color: #555656;
+    height: 180px;
+    overflow: hidden;
+}
+
+.product_name {
+    background-color: rgba(250, 250, 250, 0.9);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    padding: 13px;
+    align-content: flex-end;
+    width: 100%;
+}
+
+.product_name p {
+    margin-bottom: 0;
+}
+
+.more_btn {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.more_btn a {
+    background-color: #fff;
+    border: 1px solid #3F3F3F;
+    color: #3F3F3F;
+    padding: 9px 50px;
+    font-size: 14px;
+}
+
+.more_btn a:hover {
+    background-color: #3F3F3F;
+    border: 1px solid;
+    color: #fff;
+    padding: 9px 50px;
+}
+
+/* 產品比較 */
+
+.section_product_compare {
+    padding-top: 80px;
+    margin-bottom: 80px;
+}
+
+.compare_box {
+    background-color: #fafafa;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #ebebeb;
+}
+
+.compare_box img {
+    width: 85px;
+    margin-right: 20px;
+}
+
+.compare_box p {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 500;
+    max-height: 85px;
+    overflow: hidden;
+}
+
+#product_sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+}
+
+#product_sticky.stick {
+    min-width: 100%;
+    padding: 0!important;
+    box-shadow: 0px 0px 8px rgba(63, 63, 63, 0.3);
+}
+
+.stick.compare_box {
+    width: 100px;
+}
+
+.table-title {
+    //color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 400;
+    float: left;
+}
+
+.table-header {
+    background-color: #2F4D6A;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.table-header.active {
+    background-color: white;
+    color: #2F4D6A;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+[data-toggle="collapse"] img {
+    max-height: 10px;
+}
+
+[aria-expanded="true"] .table-header {
+    background-color: white;
+}
+
+.card {
+    border: none;
+    border-radius: 0!important;
+}
+
+.card-header:first-child {
+    border-radius: 0!important;
+}
+
+.card-body {
+    padding: 5px 10px 10px 10px!important;
+}
+
+.tbody td, .card-body td {
+    color: #3F3F3F;
+    font-size: 14px;
+    padding: 8px;
+}
+
+.card-body td:nth-child(1) {
+    min-width: 25%;
+}
+
+.card-body td:nth-child(2) {
+    min-width: 75%;
+}
+
+.table {
+    margin-bottom: 0 !important;
+}
+
+.card-body tbody tr {
+    border-bottom: solid 1px #EBEBEB !important;
+}
+
+.compare_table td {
+    width: 33.333333%;
+    padding: 10px;
+}
+
+.compare_table p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+/* RWD */
+
+@media (max-width: 576px) {
+    .top_banner {
+        margin-bottom: 20px;
+        max-height: 400px;
+        overflow: hidden;
+    }
+    .top_banner img {
+        width: 300px;
+    }
+    .bread {
+        margin-bottom: 20px;
+    }
+    .page_title {
+        font-size: 26px;
+    }
+    .gray_line {
+        width: 90%;
+        margin: 20px auto 0 auto;
+    }
+    .page_des {
+        padding: 25px;
+    }
+    .product_box {
+        margin: 0 15px;
+        margin-bottom: 20px;
+    }
+    .compare_box {
+        padding: 15px;
+    }
+    .compare_box p {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+    .compare_none {
+        display: none;
+    }
+}
+
+/* second project*/
+
+/* 驅動程式下載 */
+
+.mb-20 {
+    margin-bottom: 30px;
+}
+
+.mb-100 {
+    margin-bottom: 100px;
+}
+
+.search_result {
+    margin-bottom: 100px;
+}
+
+.top_banner_type2 {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 100px;
+    margin-bottom: 70px;
+}
+
+.filter_box {
+    background-color: #fff;
+    padding: 30px;
+    min-height: 310px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    position: relative;
+}
+
+.filter_box select, .filter_box input {
+    height: 40px;
+    border: 1px solid #3f3f3f;
+    color: #3f3f3f;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.filter_title {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.blue_btn {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 35px;
+}
+
+.blue_btn a {
+    min-width: 150px;
+    height: 40px;
+    background-color: #356796;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 8px 15px;
+}
+
+.blue_btn a:hover {
+    color: #FFFFFF;
+    background-color: #224e77;
+}
+
+.blue_line_title {
+    padding-left: 15px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    border-left: 4px solid #356796;
+}
+
+.search_box {
+    background-color: #fff;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+}
+
+.search_product_name {
+    background-color: #fff;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* 常見問答集 */
+
+.search_input {
+    height: 40px;
+}
+
+/* RWD */
+
+@media (max-width: 576px) {
+    .top_banner_type2 {
+        height: auto;
+        padding: 40px 10px;
+        margin-bottom: 30px;
+    }
+    .search_result .col-6 {
+        padding: 3px!important;
+    }
+    .search_box {
+        margin-bottom: 0px;
+    }
+}
+
+/*產品註冊*/
+
+.register-section {
+    margin-bottom: 50px;
+}
+
+.register_form {
+    font-size: 16px;
+}
+
+.register_form label {
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.register_form input, .register_form select {
+    font-size: 15px;
+    background-color: #FFFFFF;
+    border: 1px solid #979797;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-right: 15px;
+}
+
+.register_form select {
+    font-size: 15px;
+    color: #9B9B9B;
+    letter-spacing: 2px;
+}
+
+::placeholder {
+    color: #9B9B9B;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.verify_text {
+    font-size: 16px;
+}
+
+.verify_text a {
+    font-size: 14px;
+    color: #356796;
+    text-decoration: underline;
+}
+
+.verify_btn {
+    margin-top: 100px;
+}
+
+@media (max-width: 576px) {
+    .register-section {
+        margin-bottom: 20px;
+    }
+    .verify_btn {
+        margin-top: 30px;
+    }
+}
+
+/* 保固查詢 */
+
+.warranty_result {
+    padding: 0 15px;
+}
+
+.white_box {
+    background-color: #fff;
+    padding: 40px 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.white_box label {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.warranty_title {
+    background-color: #FAFAFA;
+    padding: 8px 30px;
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.warranty_content {
+    background-color: #FFF;
+    padding: 8px 30px;
+    border-bottom: 1px solid #EBEBEB;
+}
+
+@media (max-width: 576px) {
+    .warranty_title, .warranty_content {
+        height: 100%;
+        padding: 8px;
+    }
+    .warranty_content {
+        padding-left: 15px;
+    }
+    .warranty_result {
+        padding: 0 30px;
+    }
+    .blue_line_title {
+        margin-bottom: 20px;
+    }
+}
