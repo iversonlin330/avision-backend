@@ -25,8 +25,8 @@
 				<thead>
 					<th>第一層名稱</th>
 					<th>描述文字</th>
-					<th>Banner</th>
-					<th>產品圖片</th>
+					<!--th>Banner</th>
+					<th>產品圖片</th-->
 					<th>編輯</th>
 				</thead>
 				<tbody>
@@ -34,8 +34,8 @@
 				<tr data-id="{{ $group_type->id }}">
 					<td>{{ $group_type->title }}</td>
 					<td>{{ $group_type->description }}</td>
-					<td><img src="{{ asset('storage/'.$group_type->banner) }}"></td>
-					<td><img src="{{ asset('storage/'.$group_type->picture) }}"></td>
+					<!--td><img src="{{ asset('storage/'.$group_type->banner) }}"></td>
+					<td><img src="{{ asset('storage/'.$group_type->picture) }}"></td-->
 					<td>
 						<a class="btn btn-primary edit_btn" href="#" onclick="group_modal(this)">編輯</a>
 						<form method="POST" action="/group_types/{{$group_type->id}}" class="d-inline">
@@ -66,7 +66,7 @@
 				<tbody>
 				@foreach($group_types as $group_type)
 					@foreach($group_type->types as $type)
-						<tr data-id="{{ $type->id }}">
+						<tr data-id="{{ $type->id }}" data-description="{{ $type->description }}">
 							<td>{{ $type->title }}</td>
 							<td data-id="{{ $group_type->id }}">{{ $group_type->title }}</td>
 							<td>
@@ -209,7 +209,7 @@
 						<input name="order[]" value="{{ $group_type->id }}" hidden>
 					</li>
 				@endforeach
-			<ul>
+			</ul>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -240,7 +240,7 @@
 					</li>
 				@endforeach
 			@endforeach
-			<ul>
+			</ul>
 	  </div>
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-secondary cancel_btn" data-dismiss="modal">取消</button>
@@ -265,6 +265,7 @@ function group_modal(obj){
 		$("#group_modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
 		$("#group_modal [name='title']").val($(obj).closest('tr').find('td:eq(0)').text());
+        $("#group_modal [name='description']").val($(obj).closest('tr').find('td:eq(1)').text());
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#group_modal form").attr('action',"{{ url('group_types') }}/"+$(obj).closest('tr').data('id'));
 	}
@@ -280,8 +281,8 @@ function spec_modal(obj){
 		$("#spec_modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
 		$("#spec_modal [name='title']").val($(obj).closest('tr').find('td:eq(0)').text());
-		$("#spec_modal [name='group_id']").val($(obj).closest('tr').find('td:eq(1)').data('id'));
-		$("#spec_modal [name='description']").val($(obj).closest('tr').find('td:eq(2)').text());
+		$("#spec_modal [name='type']").val($(obj).closest('tr').find('td:eq(1)').data('id'));
+		$("#spec_modal [name='description']").val($(obj).closest('tr').data('description'));
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#spec_modal form").attr('action',"{{ url('types') }}/"+$(obj).closest('tr').data('id'));
 	}

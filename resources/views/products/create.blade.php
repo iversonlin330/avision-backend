@@ -918,7 +918,8 @@ ClassicEditor
 	$("#product_form  [name='filter[]']").val(product.filter);
 	$("#product_form  [name='status']").val(product.status);
 	//$("[name='picture']").val(product.picture);
-    $("#product_form  [name='software[]']").val(product.software);
+    $("#product_form  [name='faq[]']").val(product.faq);
+    $("#product_form  [name='accessory[]']").val(product.accessory);
 
 	/*
 	$("[name='gender']").filter('[value='+user.gender+']').prop('checked', true);

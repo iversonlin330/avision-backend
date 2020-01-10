@@ -49,7 +49,7 @@ class TypeController extends Controller
 			//$data['picture'] = $request->file('picture')->store('group_types');
 			$data['order'] = Type::all()->max('order') + 1;
 			Type::create($data);
-			
+
 		}
 		return back();
     }
@@ -86,6 +86,9 @@ class TypeController extends Controller
     public function update(Request $request, Type $type)
     {
         //
+        $data = $request->all();
+        $type->update($data);
+        return back();
     }
 
     /**

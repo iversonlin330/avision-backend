@@ -86,7 +86,8 @@ class FaqController extends Controller
         //
 		$data = $request->all();
 		$faq->update($data);
-		return back()->with('tab', 'T6');
+		return back();
+		//return back()->with('tab', 'T6');
     }
 
     /**

@@ -12,9 +12,14 @@ class AccessoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $data = $request->all();
+        $group_type_id = $data['group_type_id'];
+        $accessories = Accessory::where("group_type_id",$group_type_id)->get();
+        $type_text = "配件";
+        return view("accessories.index",compact("accessories","type_text","group_type_id"));
     }
 
     /**
@@ -35,7 +40,7 @@ class AccessoryController extends Controller
      */
     public function store(Request $request)
     {
-		
+
 		$data = $request->all();
 		if(array_key_exists('order',$data)){
 			foreach($data['order'] as $index => $template_id){
@@ -45,10 +50,10 @@ class AccessoryController extends Controller
 			$data['file'] = $request->file('file')->store('accessories');
 			$data['order'] = Accessory::all()->max('order') + 1;
 			Accessory::create($data);
-			
+
 		}
 		return back()->with('tab', 'T5');
-		
+
     }
 
     /**
@@ -86,7 +91,8 @@ class AccessoryController extends Controller
 		$data = $request->all();
 		$data['file'] = $request->file('file')->store('accessories');
 		$accessory->update($data);
-		return back()->with('tab', 'T5');
+		return back();
+		//return back()->with('tab', 'T5');
     }
 
     /**

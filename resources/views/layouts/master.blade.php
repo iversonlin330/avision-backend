@@ -148,7 +148,7 @@
           <div class="menu-group">
               <h5 class="menu_title">配件維護</h5>
               @foreach($group_types as $group_type)
-                  <a href="{{ url('accessories?type='.$group_type->id) }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">{{ $group_type->title }}</a>
+                  <a href="{{ url('accessories?group_type_id='.$group_type->id) }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">{{ $group_type->title }}</a>
               @endforeach
           </div>
 		<div class="menu-group">
