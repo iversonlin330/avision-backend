@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
 			$table->text('filter');
 			$table->text('accessory');
 			$table->text('faq');
+            $table->text('bonus');
 			$table->integer('status');
 			$table->integer('order');
             $table->timestamps();

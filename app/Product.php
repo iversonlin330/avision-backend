@@ -15,7 +15,8 @@ class Product extends Model
 		'cert' => 'array',
 		'filter' => 'array',
         'accessory' => 'array',
-        'faq' => 'array'
+        'faq' => 'array',
+        'bonus' => 'array'
 	];
 
 	public function type()

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Accessory;
+use App\Download;
+use App\Faq;
 use App\GroupType;
 use App\Product;
 use App\Filter;
 use App\Logo;
 use App\Group;
 use App\ProductSpec;
+use App\Software;
 use App\Type;
 use Illuminate\Http\Request;
 
@@ -44,7 +48,11 @@ class FrontendController extends Controller
 		$groups = Group::where('type',$type)->orderBy('order')->get();
 		$product_specs = $product->product_specs->pluck('value','spec_id')->toArray();
 
-		return view('frontends.product-detail',compact('product','groups','product_specs'));
+        $softwares = Software::whereIn("id", $product->software)->get();
+        $faqs = Faq::whereIn("id", $product->faq)->get();
+        $accessories = Accessory::whereIn("id", $product->accessory)->get();
+
+		return view('frontends.product-detail',compact('product','groups','product_specs', 'softwares', 'faqs', 'accessories'));
     }
 
     public function getCompare(Request $request){

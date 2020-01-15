@@ -139,7 +139,7 @@
 		color: #FFFFFF;
 		font-size: 16px;
 		font-weight: 500;
-	
+
 	}
 
 	.table-header.active {
@@ -308,7 +308,7 @@
 			width: 85%;
 		}
 	}
-	
+
 
 /*
     code by Iatek LLC 2018 - CC 2.0 License - Attribution required
@@ -439,7 +439,7 @@
 
 
 
-	
+
 </style>
 
 <body>
@@ -463,7 +463,7 @@
 							</label>
 						</div>
 					</div>
-					
+
 					<div id="main_pic" class="col-md-12"><img src="{{ asset('storage/'.$product->picture) }}"></div>
 				</div>
 				@if($product->pictures->count() > 0)
@@ -510,11 +510,8 @@
 					@endif
 			</div>
 			<div class="col-md-5">
-				<div class="pt-4 pb-1 font-weight-bold product-des">快速、性能優越的饋紙式網路掃描器</div>
-				<div class="mb-3">虹光AN240
-					是一個外型輕巧、不佔空間，同時也是一個專門為文件及塑膠硬卡設計的高速雙面饋紙式網路掃描器，單面掃描速度可達每分鐘40頁，雙面掃描速度可達每分鐘80個影像，同時文件寬度最大可支援242公厘(9.5
-					英吋)。虹光AN240具有網路能力，透過8英吋的觸控式螢幕，可以讓你將掃描的影像儲存到電子郵件、網路資料夾(透過CIFS 或FTP 協定)、雲端 (Google Drive, Evernote,
-					Dropbox)、以及USB隨身碟。</div>
+				<div class="pt-4 pb-1 font-weight-bold product-des">{{ $product->slogan }}</div>
+				<div class="mb-3">{{ $product->description }}</div>
 				<div class="pb-1 font-weight-bold">機台規格：</div>
 				<div class="pb-1 cert mb-3">
 					<img src="images/icon_duplex.png">
@@ -577,7 +574,7 @@
 							<!--start-->
 							<div class="accordion" id="accordionExample">
 								@foreach($groups as $group)
-									
+
 									<div class="card">
 									<div class="card-header table-header" id="headingOne">
 										<span class="table-title">{{ $group->title }}</span>
@@ -661,13 +658,13 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($product->softwares->where('type',$key)->sortBy('order') as $software)
+										@foreach($softwares->where('type',$key)->sortBy('order') as $software)
 											<tr>
-												<td>{{ $download->title }}</td>
+												<td>{{ $software->title }}</td>
 												<td>{{ $software->version }}</td>
 												<td>{{ $software->file_size }}</td>
 												<td>{{ $software->compatibility }}</td>
-												<td>{{ $download->sha1 }}</td>
+												<td>{{ $software->sha1 }}</td>
 												<td><a class="btn btn-primary btn-download">下載</a></td>
 											</tr>
 										@endforeach
@@ -680,7 +677,7 @@
 				</div>
 				<div class="tab-pane fade" id="T4" role="tabpanel" aria-labelledby="T4-tab">
 					<div class="row">
-					@foreach($product->accessories->sortBy('order') as $accessory)
+					@foreach($accessories->sortBy('order') as $accessory)
 					<div class="col-md-4">
 						<div class="card">
 							<div class="card-body">
@@ -700,7 +697,7 @@
 							</div>
 						</div>
 					</div>
-					@endforeach	
+					@endforeach
 					</div>
 				</div>
 				<div class="tab-pane fade" id="T5" role="tabpanel" aria-labelledby="T5-tab">
@@ -710,7 +707,7 @@
 							<div class="faq-table">
 								<blockquote>{{$val}}</blockquote>
 								<div class="accordion mb-4" id="QAsoftware">
-									@foreach($product->faqs->where('type',$key)->sortBy('order') as $faq)
+									@foreach($faqs->where('type',$key)->sortBy('order') as $faq)
 									<div class="card">
 										<div class="card-header table-header" id="headingOne">
 											<div class="table-title"><span>{{ $faq->title }}</span></div>
@@ -836,15 +833,15 @@
 			var img_url = $(obj).find('img').attr('src');
 			$("#main_pic img").attr('src',img_url);
 		}
-		
-		
+
+
 		$('#carouselExample').on('slide.bs.carousel', function (e) {
 
 			/*
 
 			CC 2.0 License Iatek LLC 2018
 			Attribution required
-			
+
 			*/
 
 
@@ -852,7 +849,7 @@
 			var idx = $e.index();
 			var itemsPerSlide = 4;
 			var totalItems = $('.carousel-item').length;
-			
+
 			if (idx >= totalItems-(itemsPerSlide-1)) {
 				var it = itemsPerSlide - (totalItems - idx);
 				for (var i=0; i<it; i++) {
@@ -866,8 +863,8 @@
 				}
 			}
 		});
-		
-		
+
+
 		/*
 		$('#recipeCarousel').carousel({
 		  interval: 10000
@@ -879,7 +876,7 @@
 			next = $(this).siblings(':first');
 			}
 			next.children(':first-child').clone().appendTo($(this));
-			
+
 			if (next.next().length>0) {
 			next.next().children(':first-child').clone().appendTo($(this));
 			}
@@ -889,7 +886,7 @@
 		});
 
 		*/
-		
+
 		/*
 		function getCookie(cname) {
 			var name = cname + "=";

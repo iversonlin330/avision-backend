@@ -137,7 +137,7 @@
 	</div>
 	@endforeach
 	@if(0)
-	<select class="form-control multiselect" name="software[]" multiple required>
+	<select class="form-control multiselect" name="bonus[]" multiple required>
 		@foreach($logo2s as $logo2)
 			<option value="{{ $logo1->id }}">{{ $logo2->title }}</option>
 		@endforeach
@@ -920,7 +920,7 @@ ClassicEditor
 	//$("[name='picture']").val(product.picture);
     $("#product_form  [name='faq[]']").val(product.faq);
     $("#product_form  [name='accessory[]']").val(product.accessory);
-
+    $("#product_form  [name='bonus[]']").val(product.bonus);
 	/*
 	$("[name='gender']").filter('[value='+user.gender+']').prop('checked', true);
 	$("[name='city_id']").val(teacher.city_id);

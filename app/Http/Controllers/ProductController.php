@@ -84,6 +84,9 @@ class ProductController extends Controller
             if(!array_key_exists('faq',$data)){
                 $data['faq'] = [];
             }
+            if(!array_key_exists('bonus',$data)){
+                $data['bonus'] = [];
+            }
 
 			$data['picture'] = $request->file('picture')->store('products');
 			$data['order'] = Product::all()->max('order') + 1;
