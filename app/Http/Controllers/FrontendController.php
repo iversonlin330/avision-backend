@@ -32,17 +32,25 @@ class FrontendController extends Controller
 			$products = Product::all();
 		}
 		$filters = Filter::all();
+		
+		$group_types = GroupType::all();
+		$types = Type::all();
 
-		return view('frontends.products',compact('products','filters'));
+		$type_map = [];
+		foreach( $types as $type ){
+			$type_map[$type->type][] = $type->id;
+		}
+		
+		return view('frontends.products',compact('products','filters','group_types','type_map'));
     }
 
 	public function getProductDetail($id)
     {
         //
 		$product = Product::find($id);
-		$logo1s = Logo::where('type',1)->get();
-		$logo2s = Logo::where('type',2)->get();
-		$logo3s = Logo::where('type',3)->get();
+		$logo1s = Logo::where('type',1)->whereIn('id',$product->spec)->get();
+		$logo2s = Logo::where('type',2)->whereIn('id',$product->software)->get();
+		$logo3s = Logo::where('type',3)->whereIn('id',$product->cert)->get();
 		$type = $product->type->type;
 		$types = Type::where('type',$type)->get();
 		$groups = Group::where('type',$type)->orderBy('order')->get();
@@ -52,7 +60,7 @@ class FrontendController extends Controller
         $faqs = Faq::whereIn("id", $product->faq)->get();
         $accessories = Accessory::whereIn("id", $product->accessory)->get();
 
-		return view('frontends.product-detail',compact('product','groups','product_specs', 'softwares', 'faqs', 'accessories'));
+		return view('frontends.product-detail',compact('product','groups','product_specs', 'softwares', 'faqs', 'accessories','logo1s','logo2s','logo3s'));
     }
 
     public function getCompare(Request $request){

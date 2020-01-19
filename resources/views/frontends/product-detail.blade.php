@@ -514,19 +514,28 @@
 				<div class="mb-3">{{ $product->description }}</div>
 				<div class="pb-1 font-weight-bold">機台規格：</div>
 				<div class="pb-1 cert mb-3">
-					<img src="images/icon_duplex.png">
+					@foreach($logo1s as $logo1)
+						<img src="{{ asset('storage/'.$logo1->file) }}">
+					@endforeach
+					<!--img src="images/icon_duplex.png">
 					<img src="images/icon_Staples_detection.png">
-					<img src="images/icon_Ultra3sensor.png">
+					<img src="images/icon_Ultra3sensor.png"-->
 				</div>
 				<div class="pb-1 font-weight-bold">附贈軟體：</div>
 				<div class="pb-1 cert mb-3">
-					<img src="images/icon_energyStar.png">
-					<img src="images/icon_BM2.png">
+					@foreach($logo2s as $logo2)
+						<img src="{{ asset('storage/'.$logo2->file) }}">
+					@endforeach
+					<!--img src="images/icon_energyStar.png">
+					<img src="images/icon_BM2.png"-->
 				</div>
 				<div class="pb-1 font-weight-bold">認證標章：</div>
 				<div class="pb-1 cert mb-3">
-					<img src="images/icon_energyStar.png">
-					<img src="images/icon_BM2.png">
+					@foreach($logo3s as $logo3)
+						<img src="{{ asset('storage/'.$logo3->file) }}">
+					@endforeach
+					<!--img src="images/icon_energyStar.png">
+					<img src="images/icon_BM2.png"-->
 				</div>
 				<div class="contact_btn">
 					<a class="btn">聯絡我們</a>

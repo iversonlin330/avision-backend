@@ -372,7 +372,22 @@
 				</div>
 
 				<div class="left-side-title">產品類型</div>
-				<div class="form-check ml-3">
+				@foreach($group_types as $group_type)
+					<div class="form-check ml-3">
+						<input class="form-check-input checkbox-20 filter" type="checkbox" value="{{ $group_type->id }}" data-type="type">
+						<label class="form-check-label left-side-item" for="defaultCheck1">{{ $group_type->title }}</label>
+					</div>
+					@foreach($group_type->types as $type)
+					<div class="form-check ml-5">
+						<input class="form-check-input checkbox-15 filter" type="checkbox" value="{{ $type->id }}" data-type="type">
+						<label class="form-check-label" for="defaultCheck1">
+						{{ $type->title }}
+						</label>
+					</div>
+					@endforeach
+				@endforeach
+				
+				<!--div class="form-check ml-3">
 					<input class="form-check-input checkbox-20 filter" type="checkbox" value="scanner" data-type="type">
 					<label class="form-check-label left-side-item" for="defaultCheck1">掃描器</label>
 				</div>
@@ -429,7 +444,7 @@
 					<label class="form-check-label" for="defaultCheck1">
 						多功能事務系列
 					</label>
-				</div>
+				</div-->
 				<hr>
 				<div class="left-side-title">產品功能</div>
 				@foreach($filters as $filter)
@@ -530,6 +545,7 @@
 
 		function refresh_compare(){
 			var json_str = localStorage.getItem("product-compare");
+			var compare_link = "{{ url('frontends/compare') }}?";
 			if (JSON.parse(json_str)) {
 				var arr = JSON.parse(json_str);
 				$(".compare_list").empty();
@@ -542,7 +558,9 @@
 					var picture_src = $('#product_'+arr[x]).closest('.card-body').find('.product_pic').attr('src');
 					var picture_title = $('#product_'+arr[x]).closest('.card-body').find('.product_title').text();
 					$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+arr[x]+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
+					compare_link = compare_link + "&product_id[]=" + arr[x];
 				}
+				$(".compare_btn").attr("href",compare_link);
 				$(".compare").show();
 			}
 		}
@@ -608,6 +626,12 @@
 			if(data_type == 'type'){
 				let type = $(this).val();
 				let is_checked = $(this).prop('checked');
+				let type_map = {!! json_encode($type_map) !!};
+				
+				for( x in type_map[type]){
+					$(".filter[value=" + type_map[type][x] + "]").prop('checked',is_checked);
+				}
+				/*
 				if(type == 'scanner'){
 					$(".filter[value=1]").prop('checked',is_checked);
 					$(".filter[value=2]").prop('checked',is_checked);
@@ -619,7 +643,7 @@
 					$(".filter[value=7]").prop('checked',is_checked);
 					$(".filter[value=8]").prop('checked',is_checked);
 				}
-
+				*/
 				/*
 				var values = $(".filter:checked").map(function(index,domElement) {
 					return $(domElement).val();
