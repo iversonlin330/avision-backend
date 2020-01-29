@@ -98,12 +98,22 @@ class FrontendController extends Controller
     public function getFaq(Request $request){
         $data = $request->all();
         if($data){
+			$faqs = Faq::where("title","LIKE","%".$data["search"]."%")
+				->where("title","LIKE","%".$data["search"]."%")
+				->get()->pluck("id")->toArray();
             $products = Product::all();
+			foreach($products as $k => $v){
+				if(array_intersect($faqs,$products[$k]->faq)){
+					
+				}else{
+					unset($products[$k]);
+				}
+			}
         }else {
             $products = Product::all();
         }
 
-        return view("frontends.faq",compact("products"));
+        return view("frontends.faq",compact("products","data"));
     }
 
 }

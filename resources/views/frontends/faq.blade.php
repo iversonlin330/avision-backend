@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="page_title mb-20">搜尋 “ ＷＩＦＩ ”</p>
+                <p class="page_title mb-20">搜尋{{ isset($data['search'])? " “ ".$data['search']."”" : "" }}</p>
                 <hr class="mb-5">
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="text" class="form-control search_input" id="exampleInputPassword1" placeholder="WIFI">
+                    <input type="text" class="form-control search_input" id="exampleInputPassword1" placeholder="{{ isset($data['search'])? $data['search'] : "" }}">
                 </div>
             </div>
             <div class="col-md-2">
@@ -42,7 +42,17 @@
 <div class="search_result container">
     <p class="blue_line_title">搜尋結果：</p>
     <div class="row">
-        <div class="col-md-3 col-6">
+	@foreach($products as $product)
+		<div class="col-md-3 col-6">
+            <div class="search_box text-center text-center">
+                <img src="{{ asset('storage/'.$product->picture) }}" class="img-fluid " alt="">
+                <div class="search_product_name">
+                    <p class="mb-0">{{ $product->title }}</p>
+                </div>
+            </div>
+        </div>
+	@endforeach
+        <!--div class="col-md-3 col-6">
             <div class="search_box text-center text-center">
                 <img src="images/all_product_01.png" class="img-fluid " alt="">
                 <div class="search_product_name">
@@ -73,11 +83,11 @@
                     <p class="mb-0">AD120</p>
                 </div>
             </div>
-        </div>
+        </div-->
     </div>
-    <div class="more_btn">
+    <!--div class="more_btn">
         <a class="btn" href="3-1-1-1_product-detail.html">瀏覽更多</a>
-    </div>
+    </div-->
 </div>
 
 
