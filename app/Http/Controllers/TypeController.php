@@ -46,7 +46,7 @@ class TypeController extends Controller
 			}
 		}else{
 			//$data['banner'] = $request->file('banner')->store('group_types');
-			//$data['picture'] = $request->file('picture')->store('group_types');
+			$data['picture'] = $request->file('picture')->store('types');
 			$data['order'] = Type::all()->max('order') + 1;
 			Type::create($data);
 
@@ -87,6 +87,9 @@ class TypeController extends Controller
     {
         //
         $data = $request->all();
+		if(array_key_exists('picture',$data)){
+			$data['picture'] = $request->file('picture')->store('types');
+		}
         $type->update($data);
         return back();
     }

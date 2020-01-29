@@ -60,7 +60,7 @@ class GroupTypeController extends Controller
      * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function show(Type $type)
+    public function show(GroupType $type)
     {
         //
     }
@@ -71,7 +71,7 @@ class GroupTypeController extends Controller
      * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Type $type)
+    public function edit(GroupType $type)
     {
         //
     }
@@ -83,9 +83,15 @@ class GroupTypeController extends Controller
      * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, GroupType $type)
     {
         //
+		$data = $request->all();
+		if(array_key_exists('picture',$data)){
+			$data['picture'] = $request->file('picture')->store('group_types');
+		}
+        $type->update($data);
+        return back();
     }
 
     /**

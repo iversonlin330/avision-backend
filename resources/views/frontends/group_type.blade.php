@@ -17,14 +17,14 @@
 <!--top keyvision-->
 <div class="container-fulid">
     <div class="row">
-        <div class="top_banner" style="background-image:url(./images/scanner_bg.png);">
+        <div class="top_banner" style="background-image:url({{ asset('storage/'.$group_type->banner) }});">
             <div class="col-md-10 mx-auto">
                 <p class="page_title">{{ $group_type->title }}</p>
                 <hr class="gray_line">
                 <p class="page_des">
                     {{ $group_type->description }}
                 </p>
-                <img class="img-fluid" src="images/scanner_top.png" alt="">
+                <img class="img-fluid" src="{{ asset('storage/'.$group_type->picture) }}" alt="">
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
     <div class="row">
         @foreach($group_type->types as $type)
             <div class="col-md-4">
-                <div class="product_box d-flex align-items-end" style="background-image:url(./images/scanner_product_01.png);" >
+                <div class="product_box d-flex align-items-end" style="background-image:url({{ asset('storage/'.$type->picture) }});" >
                     <div class="product_name">
                         <p>{{ $type->title }}</p>
                     </div>
