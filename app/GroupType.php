@@ -11,6 +11,6 @@ class GroupType extends Model
 	
 	public function types()
     {
-        return $this->hasMany('App\type','type');
+        return $this->hasMany('App\Type','type');
     }
 }
