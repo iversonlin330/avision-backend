@@ -17,7 +17,7 @@ class AccessoryController extends Controller
         //
         $data = $request->all();
         $group_type_id = $data['group_type_id'];
-        $accessories = Accessory::where("group_type_id",$group_type_id)->get();
+        $accessories = Accessory::where("group_type_id",$group_type_id)->orderBy('order')->get();
         $type_text = "配件";
         return view("accessories.index",compact("accessories","type_text","group_type_id"));
     }

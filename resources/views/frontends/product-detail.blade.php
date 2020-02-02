@@ -512,6 +512,7 @@
 			<div class="col-md-5">
 				<div class="pt-4 pb-1 font-weight-bold product-des">{{ $product->slogan }}</div>
 				<div class="mb-3">{{ $product->description }}</div>
+				@if($logo1s)
 				<div class="pb-1 font-weight-bold">機台規格：</div>
 				<div class="pb-1 cert mb-3">
 					@foreach($logo1s as $logo1)
@@ -521,6 +522,8 @@
 					<img src="images/icon_Staples_detection.png">
 					<img src="images/icon_Ultra3sensor.png"-->
 				</div>
+				@endif
+				@if($logo2s)
 				<div class="pb-1 font-weight-bold">附贈軟體：</div>
 				<div class="pb-1 cert mb-3">
 					@foreach($logo2s as $logo2)
@@ -529,6 +532,8 @@
 					<!--img src="images/icon_energyStar.png">
 					<img src="images/icon_BM2.png"-->
 				</div>
+				@endif
+				@if($logo3s)
 				<div class="pb-1 font-weight-bold">認證標章：</div>
 				<div class="pb-1 cert mb-3">
 					@foreach($logo3s as $logo3)
@@ -537,6 +542,7 @@
 					<!--img src="images/icon_energyStar.png">
 					<img src="images/icon_BM2.png"-->
 				</div>
+				@endif
 				<div class="contact_btn">
 					<a class="btn">聯絡我們</a>
 					<div class="form-check form-check-inline ml-3 d-none d-md-inline ">
@@ -616,6 +622,7 @@
 				</div>
 				<div class="tab-pane fade" id="T3" role="tabpanel" aria-labelledby="T3-tab">
 					@foreach(Config('map.download_type') as $key=>$val)
+						@if($product->downloads->where('type',$key)->count() > 0)
 						<div class="row mb-4">
 							<div class="col-md-1"></div>
 							<div class="col-md-12 mb-3">
@@ -647,8 +654,10 @@
 							</div>
 							<div class="col-md-1"></div>
 						</div>
+						@endif
 					@endforeach
 					@foreach(Config('map.software_type') as $key=>$val)
+						@if($softwares->where('type',$key)->count() > 0)
 						<div class="row mb-4">
 							<div class="col-md-1"></div>
 							<div class="col-md-12 mb-3">
@@ -682,6 +691,7 @@
 							</div>
 							<div class="col-md-1"></div>
 						</div>
+						@endif
 					@endforeach
 				</div>
 				<div class="tab-pane fade" id="T4" role="tabpanel" aria-labelledby="T4-tab">
@@ -713,6 +723,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							@foreach(Config('map.faq_type') as $key=>$val)
+							@if($faqs->where('type',$key)->count() > 0)
 							<div class="faq-table">
 								<blockquote>{{$val}}</blockquote>
 								<div class="accordion mb-4" id="QAsoftware">
@@ -735,6 +746,7 @@
 									@endforeach
 								</div>
 							</div>
+							@endif
 							@endforeach
 						</div>
 					</div>

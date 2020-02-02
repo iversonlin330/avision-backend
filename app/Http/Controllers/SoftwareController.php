@@ -17,7 +17,7 @@ class SoftwareController extends Controller
         //
 		$data = $request->all();
 		$type = $data['type'];
-		$softwares = Software::where('type',$data['type'])->get();
+		$softwares = Software::where('type',$data['type'])->orderBy('order')->get();
 		$type_text = \Config::get('map.software_type')[$data['type']];
 		return view("softwares.index",compact('softwares','type_text','type'));
     }

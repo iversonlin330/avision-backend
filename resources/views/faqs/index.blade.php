@@ -29,7 +29,7 @@
 				<tbody>
 				@foreach($faqs as $faq)
                 <tr data-id="{{ $faq->id }}">
-                    <td data-val="{{ $faq->id }}">{{ $faq->type_text }}</td>
+                    <td data-val="{{ $faq->type }}">{{ $faq->type_text }}</td>
                     <td>{{ $faq->title }}</td>
                     <td>{{ $faq->description }}</td>
                     <td>

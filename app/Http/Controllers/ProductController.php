@@ -150,7 +150,7 @@ class ProductController extends Controller
 		$product->update($data);
         //$product->fill($data)->save();
         $type = Type::find($product->type_id);
-		return redirect('products?type='.$type->type);
+		return redirect('products?type='.$product->type_id);
 		//return redirect('products');
     }
 

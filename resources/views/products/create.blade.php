@@ -221,7 +221,7 @@
 							@foreach($group->specs as $spec)
 								<tr>
 									<td>{{ $spec->title }}</td>
-									<td><input type="text" class="form-control" name="spec[{{$spec->id}}]" aria-describedby="emailHelp" placeholder="{{ $spec->title }}" required></td>
+									<td><input type="text" class="form-control" name="spec[{{$spec->id}}]" aria-describedby="emailHelp" placeholder="{{ $spec->title }}"></td>
 								</tr>
 							@endforeach
 						</tbody>

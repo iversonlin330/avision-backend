@@ -100,7 +100,7 @@
 		  <span aria-hidden="true">&times;</span>
 		</button>
 	  </div>
-	  <form action="{{ url('$accessories') }}" enctype="multipart/form-data" method="post">
+	  <form action="{{ url('accessories') }}" enctype="multipart/form-data" method="post">
 	  <div class="modal-body">
 		  <ul id="group_sort">
 				@foreach($accessories as $accessory)

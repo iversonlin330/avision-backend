@@ -17,7 +17,7 @@ class FaqController extends Controller
         //
         $data = $request->all();
         $type = $data['type'];
-        $faqs = Faq::where("type",$data["type"])->get();
+        $faqs = Faq::where("type",$data["type"])->orderBy('order')->get();
         $type_text = \Config::get("map.faq_type")[$data['type']];
         return view("faqs.index",compact("faqs","type","type_text"));
     }
