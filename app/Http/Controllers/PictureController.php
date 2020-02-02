@@ -85,7 +85,10 @@ class PictureController extends Controller
     {
         //
 		$data = $request->all();
-		$data['file'] = $request->file('file')->store('pictures');
+		if($data['type'] == 2){
+			//$data['file'] = $request->file('file')->store('pictures');
+			$data['path'] = $request->file('path')->store('pictures');
+		}
 		$picture->update($data);
 		return back()->with('tab', 'T2');
     }

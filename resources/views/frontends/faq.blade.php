@@ -45,7 +45,9 @@
 	@foreach($products as $product)
 		<div class="col-md-3 col-6">
             <div class="search_box text-center text-center">
-                <img src="{{ asset('storage/'.$product->picture) }}" class="img-fluid " alt="">
+				<a href="{{ url('/frontends/product-detail/'.$product->id.'#T5') }}">
+					<img src="{{ asset('storage/'.$product->picture) }}" class="img-fluid " alt="">
+				</a>
                 <div class="search_product_name">
                     <p class="mb-0">{{ $product->title }}</p>
                 </div>
