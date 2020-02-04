@@ -88,7 +88,9 @@ class SoftwareController extends Controller
     {
         //
 		$data = $request->all();
-		$data['file'] = $request->file('file')->store('downloads');
+		if(array_key_exists('file',$data)){
+			$data['file'] = $request->file('file')->store('downloads');
+		}
 		$software->update($data);
 		return back();
     }

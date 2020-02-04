@@ -150,6 +150,7 @@ function software_modal(obj){
 		$("#software [name='_method']").val('POST');
 		$("#software form").attr('action',"{{ url('softwares') }}");
 		$("#software .modal-title").text('新增下載-{{ $type_text }}');
+		$("#software [name='file']").prop("required",true);
 	}else{
 		$("#software [name='_method']").val('PUT');
 		//$("#software [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -159,6 +160,7 @@ function software_modal(obj){
 		$("#software [name='sha1']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#software form").attr('action',"{{ url('softwares') }}/"+$(obj).closest('tr').data('id'));
 		$("#software .modal-title").text('修改下載-{{ $type_text }}');
+		$("#software [name='file']").prop("required",false);
 	}
 	$("#software").modal('show');
 }
