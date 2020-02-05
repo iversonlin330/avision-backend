@@ -39,6 +39,9 @@ class ProductSpecController extends Controller
 		$data = $request->all();
 		ProductSpec::where('product_id',$data['product_id'])->delete();
 		foreach($data['spec'] as $key =>$val){
+			if(!$val){
+				$val = "";
+			}
 			ProductSpec::create([
 				'product_id' => $data['product_id'],
 				'spec_id' => $key,

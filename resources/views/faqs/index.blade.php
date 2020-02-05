@@ -24,7 +24,7 @@
                     <th>分類</th>
                     <th>題目</th>
                     <th>內容</th>
-                    <th>編輯</th>
+                    <th style="min-width: 155px;">編輯</th>
 				</thead>
 				<tbody>
 				@foreach($faqs as $faq)

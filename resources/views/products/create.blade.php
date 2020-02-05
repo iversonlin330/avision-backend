@@ -486,7 +486,7 @@
 							@if($picture->type == 2)
 								<td><img src="{{ asset('storage/'.$picture->path) }}"></td>
 							@else
-								<td>{{ $picture->path }}</td>
+								<td><img src="{{ $picture->path }}"></td>
 							@endif
 							<td>
 								<a class="btn btn-primary edit_btn" href="#" onclick="picture_modal(this)">編輯</a>
