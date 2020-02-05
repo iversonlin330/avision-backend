@@ -512,7 +512,7 @@
 			<div class="col-md-5">
 				<div class="pt-4 pb-1 font-weight-bold product-des">{{ $product->slogan }}</div>
 				<div class="mb-3">{{ $product->description }}</div>
-				@if($logo1s)
+				@if($logo1s->count() != 0)
 				<div class="pb-1 font-weight-bold">機台規格：</div>
 				<div class="pb-1 cert mb-3">
 					@foreach($logo1s as $logo1)
@@ -523,7 +523,7 @@
 					<img src="images/icon_Ultra3sensor.png"-->
 				</div>
 				@endif
-				@if($logo2s)
+				@if($logo2s->count() != 0)
 				<div class="pb-1 font-weight-bold">附贈軟體：</div>
 				<div class="pb-1 cert mb-3">
 					@foreach($logo2s as $logo2)
@@ -533,7 +533,7 @@
 					<img src="images/icon_BM2.png"-->
 				</div>
 				@endif
-				@if($logo3s)
+				@if($logo3s->count() != 0)
 				<div class="pb-1 font-weight-bold">認證標章：</div>
 				<div class="pb-1 cert mb-3">
 					@foreach($logo3s as $logo3)

@@ -147,6 +147,27 @@ class ProductController extends Controller
 		if(array_key_exists('picture',$data)){
 			$data['picture'] = $request->file('picture')->store('products');
 		}
+		if(!array_key_exists('spec',$data)){
+				$data['spec'] = [];
+			}
+			if(!array_key_exists('software',$data)){
+				$data['software'] = [];
+			}
+			if(!array_key_exists('cert',$data)){
+				$data['cert'] = [];
+			}
+			if(!array_key_exists('filter',$data)){
+				$data['filter'] = [];
+			}
+            if(!array_key_exists('accessory',$data)){
+                $data['accessory'] = [];
+            }
+            if(!array_key_exists('faq',$data)){
+                $data['faq'] = [];
+            }
+            if(!array_key_exists('bonus',$data)){
+                $data['bonus'] = [];
+            }
 		$product->update($data);
         //$product->fill($data)->save();
         $type = Type::find($product->type_id);
