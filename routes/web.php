@@ -47,4 +47,6 @@ Route::group(['prefix' => 'frontends'], function () {
     Route::get('group_type','FrontendController@getGroupType');
     Route::get('download','FrontendController@getDownload');
     Route::get('faq','FrontendController@getFaq');
+	Route::get('software-download/{id}','FrontendController@getSoftwareDownload');
+	Route::get('download-download/{id}','FrontendController@getDownloadDownload');
 });

@@ -231,7 +231,9 @@
 			</div>
 		</div>
 		@endforeach
-		<button type="submit" class="btn btn-primary send_button">送出</button>
+		<div class="submit_fixed">
+			<button type="submit" class="btn btn-primary send_button">送出</button>
+		  </div>
 		</form>
 	</div>
 	<div class="tab-pane fade" id="pills-download" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -294,7 +296,9 @@
                 <label class="checkbox-inline"><input type="checkbox" name="software[]" value="{{ $software->id }}">{{ $software->title }}</label>
             @endforeach
         </div>
-        <button type="submit" class="btn btn-primary send_button">送出</button>
+        <div class="submit_fixed">
+			<button type="submit" class="btn btn-primary send_button">送出</button>
+		  </div>
     </form>
         @if(0)
 	<div class="row mt-2">
@@ -354,7 +358,9 @@
                     @endforeach
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary send_button">送出</button>
+            <div class="submit_fixed">
+				<button type="submit" class="btn btn-primary send_button">送出</button>
+			  </div>
         </form>
 	@if(0)
     <div class="row mt-2">
@@ -413,7 +419,9 @@
                     @endforeach
                 </div>
             @endforeach
-            <button type="submit" class="btn btn-primary send_button">送出</button>
+            <div class="submit_fixed">
+				<button type="submit" class="btn btn-primary send_button">送出</button>
+			  </div>
         </form>
     @if(0)
     <div class="row mt-2">

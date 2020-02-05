@@ -646,7 +646,7 @@
 												<td>VB21</td>
 												<td>{{ $download->file_size }}</td>
 												<td>{{ $download->lang }}</td>
-												<td><a class="btn btn-primary btn-download">下載</a></td>
+												<td><a href="{{ url('frontends/download-download/'.$download->id) }}" class="btn btn-primary btn-download">下載</a></td>
 											</tr>
 										@endforeach
 									</tbody>
@@ -683,7 +683,7 @@
 												<td>{{ $software->file_size }}</td>
 												<td>{{ $software->compatibility }}</td>
 												<td>{{ $software->sha1 }}</td>
-												<td><a class="btn btn-primary btn-download">下載</a></td>
+												<td><a href="{{ url('frontends/software-download/'.$software->id) }}" class="btn btn-primary btn-download">下載</a></td>
 											</tr>
 										@endforeach
 									</tbody>
@@ -781,7 +781,25 @@
 	</div>
 	<div class="tab">
 	</div-->
-
+<div class="compare">
+		<div class="row">
+			<div class="col-md-4 col-sm-4">
+				<div class="text-left">
+					<div class="compare_title">產品比較</div>
+					<div class="d-none d-md-block">右側產品皆已加入比較，至多可選擇三項或立即比較來查看比較結果。</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<div class="row compare_list mx-auto">
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 flexbox">
+				<div style="float:left;margin:20px auto;"><a class="btn compare_btn"
+						href="compare.html">立即比較</a></div>
+			</div>
+			<div class="compare_close" style="position: absolute; top:0; right:1%;"><img src="{{asset('/images/cross-icons.png')}}" alt=""></div>
+		</div>
+	</div>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -800,6 +818,7 @@
 		}
 		
 		$('.down').hide();
+		/*
 		$(".compare").hide();
 		var json_str = localStorage.getItem("product-compare");
 
@@ -842,7 +861,87 @@
 			$(".compare").hide();
 			localStorage.setItem("product-compare", JSON.stringify([]));
 		});
+		*/
+		
+		var json_str = localStorage.getItem("product-compare");
+		if(json_str == null){
+			localStorage.setItem("product-compare", JSON.stringify([]));
+		}
+		$(".compare").hide();
+		refresh_compare();
 
+		function refresh_compare(){
+			var json_str = localStorage.getItem("product-compare");
+			var compare_link = "{{ url('frontends/compare') }}?";
+			if (JSON.parse(json_str)) {
+				var arr = JSON.parse(json_str);
+				$(".compare_list").empty();
+				$(".add-compare").prop('checked',false);
+				if(arr.length == 0)
+					return;
+				for (x in arr) {
+					//$('[value="'+arr[x]+'"]').prop('checked',true);
+					$('#product_'+arr[x]).prop('checked',true);
+					var picture_src = $('#product_'+arr[x]).closest('.card-body').find('.product_pic').attr('src');
+					var picture_title = $('#product_'+arr[x]).closest('.card-body').find('.product_title').text();
+					$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+arr[x]+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
+					compare_link = compare_link + "&product_id[]=" + arr[x];
+				}
+				$(".compare_btn").attr("href",compare_link);
+				$(".compare").show();
+			}
+		}
+
+		function remove_compare(id){
+			var id = String(id);
+			var json_str = localStorage.getItem("product-compare");
+			var arr = JSON.parse(json_str);
+			if (arr.indexOf(id) > -1) {
+				arr.splice(arr.indexOf(id), 1);
+				localStorage.setItem("product-compare", JSON.stringify(arr));
+			}
+			refresh_compare();
+		}
+
+
+		$(".add-compare").click(function () {
+			$(".compare").show();
+			var json_str = localStorage.getItem("product-compare");
+			if (JSON.parse(json_str)) {
+				var arr = JSON.parse(json_str);
+				if (arr.indexOf($(this).val()) > -1) {
+					arr.splice(arr.indexOf($(this).val()), 1);
+				} else {
+					if (arr.length >= 3) {
+						alert('大於三');
+						return false;
+					}else{
+						arr.push($(this).val());
+					}
+				}
+			} else {
+				var arr = [];
+			}
+
+			//var json_str = JSON.stringify(arr);
+			localStorage.setItem("product-compare", JSON.stringify(arr));
+			refresh_compare();
+		});
+
+		$(".compare_close").click(function () {
+			$(".compare").hide();
+			$(".compare_show_btn").show();
+			//localStorage.setItem("product-compare", JSON.stringify([]));
+		});
+
+		$(".compare_show_btn").click(function () {
+			$(".compare").show();
+			$(".compare_show_btn").hide();
+			//localStorage.setItem("product-compare", JSON.stringify([]));
+		});
+		
+		
+		
 		$('[data-toggle="collapse"]').click(function () {
 			if ($(this).attr('aria-expanded') == 'true') {
 				$(this).find('.down').show();

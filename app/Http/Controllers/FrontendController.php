@@ -14,6 +14,7 @@ use App\ProductSpec;
 use App\Software;
 use App\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FrontendController extends Controller
 {
@@ -115,5 +116,15 @@ class FrontendController extends Controller
 
         return view("frontends.faq",compact("products","data"));
     }
+	
+	public function getSoftwareDownload($id){
+		$file = Software::find($id);
+		return Storage::download($file->file, $file->title . "." . explode(".",$file->file)[1]);
+	}
+	
+	public function getDownloadDownload($id){
+		$file = Download::find($id);
+		return Storage::download($file->file, $file->title . "." . explode(".",$file->file)[1]);
+	}
 
 }
