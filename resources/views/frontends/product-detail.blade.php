@@ -11,7 +11,7 @@
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+	<link rel="stylesheet" href="/css/style.css">
 	<title>Avision</title>
 </head>
 <style>
@@ -447,7 +447,10 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-5 bread">
-				<span class="">產品 > {{ Config('map.product_type')[$product->type->type] }} > {{ $product->type->title }} > {{ $product->title }}</span>
+				<span class="">產品 > 
+				<a href="{{ url('frontends/group_type?group_type_id='.$product->type->group_type->id) }}">{{ $product->type->group_type->title }}</a> > 
+				<a href="{{ url('frontends/products?type_id='.$product->type->id) }}">{{ $product->type->title }}</a> > 
+				{{ $product->title }}</span>
 				<div class="col-md-12 d-md-none search_text" onclick="sidebar('show')"></div>
 			</div>
 		</div>
@@ -802,9 +805,7 @@
 	</div>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		crossorigin="anonymous"></script>
@@ -880,12 +881,21 @@
 				if(arr.length == 0)
 					return;
 				for (x in arr) {
-					//$('[value="'+arr[x]+'"]').prop('checked',true);
-					$('#product_'+arr[x]).prop('checked',true);
-					var picture_src = $('#product_'+arr[x]).closest('.card-body').find('.product_pic').attr('src');
-					var picture_title = $('#product_'+arr[x]).closest('.card-body').find('.product_title').text();
-					$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+arr[x]+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
+					var picture_src = "";
+					var picture_title = "";
+					$.get("{{ url('frontends/ajax-product') }}", { id: arr[x] },function(data){
+						//console.log(data);
+						//console.log(data.src);
+						picture_src = data.src;
+						picture_title = data.title;
+						$('#product_'+arr[x]).prop('checked',true);
+						$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+arr[x]+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
 					compare_link = compare_link + "&product_id[]=" + arr[x];
+					});
+					//$('[value="'+arr[x]+'"]').prop('checked',true);
+					//var picture_src = $('#product_'+arr[x]).closest('.card-body').find('.product_pic').attr('src');
+					//var picture_title = $('#product_'+arr[x]).closest('.card-body').find('.product_title').text();
+					
 				}
 				$(".compare_btn").attr("href",compare_link);
 				$(".compare").show();

@@ -13,4 +13,9 @@ class Type extends Model
     {
         return $this->hasMany('App\Product');
     }
+	
+	public function group_type()
+    {
+        return $this->belongsTo('App\GroupType',"type","id");
+    }
 }

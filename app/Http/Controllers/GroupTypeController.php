@@ -83,14 +83,15 @@ class GroupTypeController extends Controller
      * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GroupType $type)
+    public function update(Request $request, $id)
     {
         //
 		$data = $request->all();
+		unset($data["_method"]);
 		if(array_key_exists('picture',$data)){
 			$data['picture'] = $request->file('picture')->store('group_types');
 		}
-        $type->update($data);
+        GroupType::where("id",$id)->update($data);
         return back();
     }
 

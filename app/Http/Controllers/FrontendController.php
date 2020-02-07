@@ -126,5 +126,9 @@ class FrontendController extends Controller
 		$file = Download::find($id);
 		return Storage::download($file->file, $file->title . "." . explode(".",$file->file)[1]);
 	}
+	
+	public function getAjaxProduct(Request $request){
+		return response()->json(['src' => 'test', 'title' => '11']);
+	}
 
 }

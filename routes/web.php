@@ -49,4 +49,5 @@ Route::group(['prefix' => 'frontends'], function () {
     Route::get('faq','FrontendController@getFaq');
 	Route::get('software-download/{id}','FrontendController@getSoftwareDownload');
 	Route::get('download-download/{id}','FrontendController@getDownloadDownload');
+	Route::get('ajax-product','FrontendController@getAjaxProduct');
 });
