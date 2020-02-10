@@ -14,6 +14,7 @@
 </head>
 
 <body>
+{!! get_header() !!}
 	<!--選取的產品區-->
 	<div class="container-fluid section_product_compare">
 		<div class="row">
@@ -94,7 +95,7 @@
 			</div>
 		</div>
 	</div>
-
+{!! get_footer() !!}
 
 
 

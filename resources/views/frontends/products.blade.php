@@ -16,6 +16,7 @@
 </style>
 
 <body>
+{!! get_header() !!}
 	<div class="container-fluid" id="app">
 		<div class="row">
 			<div class="col-md-12 d-md-none search_text" onclick="sidebar('show')">進階搜尋></div>
@@ -186,7 +187,7 @@
 			<div class="compare_close" style="position: absolute; top:0; right:1%;"><img src="{{asset('/images/cross-icons.png')}}" alt=""></div>
 		</div>
 	</div>
-
+{!! get_footer() !!}
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
