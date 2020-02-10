@@ -443,14 +443,14 @@
 </style>
 
 <body>
-{!! get_header() !!}
+@include("layouts.header")
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-5 bread">
-				<span class="">產品 > 
-				<a href="{{ url('frontends/group_type?group_type_id='.$product->type->group_type->id) }}">{{ $product->type->group_type->title }}</a> > 
-				<a href="{{ url('frontends/products?type_id='.$product->type->id) }}">{{ $product->type->title }}</a> > 
+				<span class="">產品 >
+				<a href="{{ url('frontends/group_type?group_type_id='.$product->type->group_type->id) }}">{{ $product->type->group_type->title }}</a> >
+				<a href="{{ url('frontends/products?type_id='.$product->type->id) }}">{{ $product->type->title }}</a> >
 				{{ $product->title }}</span>
 				<div class="col-md-12 d-md-none search_text" onclick="sidebar('show')"></div>
 			</div>
@@ -804,7 +804,7 @@
 			<div class="compare_close" style="position: absolute; top:0; right:1%;"><img src="{{asset('/images/cross-icons.png')}}" alt=""></div>
 		</div>
 	</div>
-	{!! get_footer() !!}
+@include("layouts.footer")
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -819,7 +819,7 @@
 			var hash = window.location.hash.substring(1);
 			$("#"+hash+"-tab").click();
 		}
-		
+
 		$('.down').hide();
 		/*
 		$(".compare").hide();
@@ -865,7 +865,7 @@
 			localStorage.setItem("product-compare", JSON.stringify([]));
 		});
 		*/
-		
+
 		var json_str = localStorage.getItem("product-compare");
 		if(json_str == null){
 			localStorage.setItem("product-compare", JSON.stringify([]));
@@ -897,7 +897,7 @@
 					//$('[value="'+arr[x]+'"]').prop('checked',true);
 					//var picture_src = $('#product_'+arr[x]).closest('.card-body').find('.product_pic').attr('src');
 					//var picture_title = $('#product_'+arr[x]).closest('.card-body').find('.product_title').text();
-					
+
 				}
 				$(".compare_btn").attr("href",compare_link);
 				$(".compare").show();
@@ -951,9 +951,9 @@
 			$(".compare_show_btn").hide();
 			//localStorage.setItem("product-compare", JSON.stringify([]));
 		});
-		
-		
-		
+
+
+
 		$('[data-toggle="collapse"]').click(function () {
 			if ($(this).attr('aria-expanded') == 'true') {
 				$(this).find('.down').show();

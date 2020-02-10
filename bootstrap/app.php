@@ -1,5 +1,9 @@
 <?php
-
+if(env("APP_ENV") == "production"){
+	require '../../wp-load.php';
+	wp_enqueue_style('app', '/app/public/app.css'); // or whatever your css is called
+	wp_enqueue_script('app', '/app/public/app.js'); // or whatever your js is called
+}
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -51,7 +55,4 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
-require '../../wp-load.php';
-wp_enqueue_style('app', '/app/public/app.css'); // or whatever your css is called
-wp_enqueue_script('app', '/app/public/app.js'); // or whatever your js is called
 return $app;

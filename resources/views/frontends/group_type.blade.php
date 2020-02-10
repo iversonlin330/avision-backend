@@ -14,7 +14,7 @@
 </head>
 
 <body>
-{!! get_header() !!}
+@include("layouts.header")
 <!--top keyvision-->
 <div class="container-fulid">
     <div class="row">
@@ -53,7 +53,7 @@
     </div>
 </div>
 
-{!! get_footer() !!}
+@include("layouts.footer")
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"

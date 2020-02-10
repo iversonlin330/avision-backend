@@ -258,9 +258,12 @@
 $("#group_sort,#spec_sort").sortable();
 function group_modal(obj){
 	if(obj == 'create'){
-		$("#spec_modal [name='title']").val('');
+		$("#group_modal [name='title']").val('');
+        $("#group_modal [name='description']").val('');
 		$("#group_modal [name='_method']").val('POST');
 		$("#group_modal form").attr('action',"{{ url('group_types') }}");
+        $("#group .modal-title").text('新增第一層');
+        $("#group_modal [type='file']").prop('required',true);
 	}else{
 		$("#group_modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -268,6 +271,8 @@ function group_modal(obj){
         $("#group_modal [name='description']").val($(obj).closest('tr').find('td:eq(1)').text());
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#group_modal form").attr('action',"{{ url('group_types') }}/"+$(obj).closest('tr').data('id'));
+        $("#group .modal-title").text('修改第一層');
+        $("#group_modal [type='file']").prop('required',false);
 	}
 	$("#group_modal").modal('show');
 }
@@ -275,8 +280,11 @@ function group_modal(obj){
 function spec_modal(obj){
 	if(obj == 'create'){
 		$("#spec_modal [name='title']").val('');
+        $("#spec_modal [name='description']").val('');
 		$("#spec_modal [name='_method']").val('POST');
 		$("#spec_modal form").attr('action',"{{ url('types') }}");
+        $("#group .modal-title").text('新增第二層');
+        $("#group_modal [type='file']").prop('required',true);
 	}else{
 		$("#spec_modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -285,6 +293,8 @@ function spec_modal(obj){
 		$("#spec_modal [name='description']").val($(obj).closest('tr').data('description'));
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#spec_modal form").attr('action',"{{ url('types') }}/"+$(obj).closest('tr').data('id'));
+        $("#group .modal-title").text('修改第二層');
+        $("#group_modal [type='file']").prop('required',false);
 	}
 	$("#spec_modal").modal('show');
 }

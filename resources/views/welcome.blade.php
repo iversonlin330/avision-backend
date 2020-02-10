@@ -64,7 +64,7 @@
         </style>
     </head>
     <body>
-	{!! get_header() !!}
+    @include("layouts.header")
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -96,6 +96,6 @@
                 </div>
             </div>
         </div>
-		{!! get_footer() !!}
+		@include("layouts.footer")
     </body>
 </html>

@@ -49,7 +49,7 @@ class GroupTypeController extends Controller
 			$data['picture'] = $request->file('picture')->store('group_types');
 			$data['order'] = GroupType::all()->max('order') + 1;
 			GroupType::create($data);
-			
+
 		}
 		return back();
     }
@@ -98,11 +98,13 @@ class GroupTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Type  $type
+     * @param  \App\GroupType  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy(GroupType $type)
     {
         //
+        $type->delete();
+        return back();
     }
 }

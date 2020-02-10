@@ -14,7 +14,7 @@
 </head>
 
 <body>
-{!! get_header() !!}
+@include("layouts.header")
 <!--top filter-->
 <div class="top_banner_type2" style="background-image:url(./images/faq_top.png); min-height:285px;">
     <div class="container">
@@ -93,7 +93,7 @@
     </div-->
 </div>
 
-{!! get_footer() !!}
+@include("layouts.footer")
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

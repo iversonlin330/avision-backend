@@ -103,5 +103,7 @@ class TypeController extends Controller
     public function destroy(Type $type)
     {
         //
+        $type->delete();
+        return back();
     }
 }

@@ -16,7 +16,7 @@
 </style>
 
 <body>
-{!! get_header() !!}
+@include("layouts.header")
 	<div class="container-fluid" id="app">
 		<div class="row">
 			<div class="col-md-12 d-md-none search_text" onclick="sidebar('show')">進階搜尋></div>
@@ -49,7 +49,7 @@
 					</div>
 					@endforeach
 				@endforeach
-				
+
 				<!--div class="form-check ml-3">
 					<input class="form-check-input checkbox-20 filter" type="checkbox" value="scanner" data-type="type">
 					<label class="form-check-label left-side-item" for="defaultCheck1">掃描器</label>
@@ -187,7 +187,7 @@
 			<div class="compare_close" style="position: absolute; top:0; right:1%;"><img src="{{asset('/images/cross-icons.png')}}" alt=""></div>
 		</div>
 	</div>
-{!! get_footer() !!}
+@include("layouts.footer")
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -290,7 +290,7 @@
 				let type = $(this).val();
 				let is_checked = $(this).prop('checked');
 				let type_map = {!! json_encode($type_map) !!};
-				
+
 				for( x in type_map[type]){
 					$(".filter[data-type=type][value=" + type_map[type][x] + "]").prop('checked',is_checked);
 				}
