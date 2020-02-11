@@ -49,7 +49,7 @@
 					</div>
 					@endforeach
 				@endforeach
-
+				
 				<!--div class="form-check ml-3">
 					<input class="form-check-input checkbox-20 filter" type="checkbox" value="scanner" data-type="type">
 					<label class="form-check-label left-side-item" for="defaultCheck1">掃描器</label>
@@ -290,7 +290,7 @@
 				let type = $(this).val();
 				let is_checked = $(this).prop('checked');
 				let type_map = {!! json_encode($type_map) !!};
-
+				
 				for( x in type_map[type]){
 					$(".filter[data-type=type][value=" + type_map[type][x] + "]").prop('checked',is_checked);
 				}
