@@ -147,6 +147,7 @@ class ProductController extends Controller
 		if(array_key_exists('picture',$data)){
 			$data['picture'] = $request->file('picture')->store('products');
 		}
+		/*
 		if(!array_key_exists('spec',$data)){
 				$data['spec'] = [];
 			}
@@ -168,6 +169,7 @@ class ProductController extends Controller
             if(!array_key_exists('bonus',$data)){
                 $data['bonus'] = [];
             }
+			*/
 		$product->update($data);
         //$product->fill($data)->save();
         $type = Type::find($product->type_id);

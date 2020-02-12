@@ -5,6 +5,9 @@
 @section('style')
 @parent
 <style>
+table td{
+   word-break: break-all;
+}
 </style>
 @endsection
 @section('content')
@@ -23,11 +26,11 @@
 		  <div class="card-body">
 			<table class="table">
 				<thead>
-					<th>第一層名稱</th>
-					<th>描述文字</th>
+					<th style="width: 20%!important;">第一層名稱</th>
+					<th style="width: 60%!important;">描述文字</th>
 					<!--th>Banner</th>
 					<th>產品圖片</th-->
-					<th>編輯</th>
+					<th style="width: 20%!important;">編輯</th>
 				</thead>
 				<tbody>
 				@foreach($group_types as $group_type)
@@ -58,10 +61,10 @@
 		  <div class="card-body">
 			<table class="table">
 				<thead>
-					<th>第二層名稱</th>
-					<th>所屬第一層</th>
+					<th style="width: 20%!important;">第二層名稱</th>
+					<th style="width: 60%!important;">所屬第一層</th>
 					<!--th>規格內容</th-->
-					<th>編輯</th>
+					<th style="width: 20%!important;">編輯</th>
 				</thead>
 				<tbody>
 				@foreach($group_types as $group_type)

@@ -5,6 +5,9 @@
 @section('style')
 @parent
 <style>
+table td{
+   word-break: break-all;
+}
 </style>
 @endsection
 @section('content')

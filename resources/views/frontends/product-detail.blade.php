@@ -585,7 +585,7 @@
 		</div>
 		<div class="row">
 			<div class="tab-content col-md-10 mx-auto" id="myTabContent">
-				<div class="tab-pane fade show active" id="T1" role="tabpanel" aria-labelledby="T1-tab">超高速的雙面掃描/文字編輯器區塊
+				<div class="tab-pane fade show active" id="T1" role="tabpanel" aria-labelledby="T1-tab">{!! $product->characteristic !!}
 				</div>
 				<div class="tab-pane fade" id="T2" role="tabpanel" aria-labelledby="T2-tab">
 					<div class="row">

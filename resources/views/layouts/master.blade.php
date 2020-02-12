@@ -14,8 +14,9 @@
     <title>產品</title>
   </head>
   <style>
-
   </style>
+  @section('style')
+@show
   <body>
 	<div class="d-flex" id="wrapper">
 	<?php

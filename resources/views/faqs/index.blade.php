@@ -5,6 +5,9 @@
 @section('style')
 @parent
 <style>
+table td{
+   word-break: break-all;
+}
 </style>
 @endsection
 @section('content')
@@ -21,10 +24,10 @@
 		  <div class="card-body">
 			<table class="table">
 				<thead>
-                    <th>分類</th>
-                    <th>題目</th>
-                    <th>內容</th>
-                    <th style="min-width: 155px;">編輯</th>
+                    <th style="width: 10%!important;">分類</th>
+                    <th style="width: 20%!important;">題目</th>
+                    <th style="width: 50%!important;">內容</th>
+                    <th style="width: 20%!important;">編輯</th>
 				</thead>
 				<tbody>
 				@foreach($faqs as $faq)
