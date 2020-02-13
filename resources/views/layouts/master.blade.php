@@ -77,6 +77,14 @@
 			$sidebar_active[8] = 'sidebar-active';
 			break;
 		}
+
+		function sidebar_active($url){
+		    if(Request::fullUrl() == url($url)){
+		        return "sidebar-active";
+            }else{
+		        return "";
+            }
+        }
 	?>
     <!-- Sidebar -->
     <!--div class="bg-light border-right" id="sidebar-wrapper">
@@ -99,7 +107,7 @@
       <div class="list-group list-group-flush">
       	<div class="menu-group">
 	      	<h5 class="menu_title">產品維護</h5>
-			<a href="{{ url('group_types') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[8] }}">產品類別維護</a>
+			<a href="{{ url('group_types') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('group_types') }}">產品類別維護</a>
 	      	@php
 				$group_types = \App\GroupType::orderBy('order')->get();
 			@endphp
@@ -107,7 +115,7 @@
 				<button class="dropdown-btn list-group-item list-group-item-action bg-light">{{ $group_type->title }}<i class="fa fa-caret-down"></i></button>
 				<div class="dropdown-container">
 				@foreach($group_type->types as $type)
-				<a class="dropdown-item {{ $sidebar_active[17] }}" href="{{ url('products?type='.$type->id) }}">{{ $type->title }}</a>
+				<a class="dropdown-item {{ sidebar_active('products?type='.$type->id) }}" href="{{ url('products?type='.$type->id) }}">{{ $type->title }}</a>
 				@endforeach
 				</div>
 			@endforeach
@@ -129,7 +137,7 @@
 	    <div class="menu-group">
 	    	<h5 class="menu_title">規格維護</h5>
 			@foreach($group_types as $group_type)
-			<a href="{{ url('groups?type='.$group_type->id) }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">{{ $group_type->title }}</a>
+			<a href="{{ url('groups?type='.$group_type->id) }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('groups?type='.$group_type->id) }}">{{ $group_type->title }}</a>
 			@endforeach
 			<!--a href="{{ url('groups?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">印表機</a>
 	    	<a href="{{ url('groups?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[2] }}">掃描器</a-->
@@ -137,30 +145,30 @@
 
 	    <div class="menu-group">
 	    	<h5 class="menu_title">Logo維護</h5>
-			<a href="{{ url('logos?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">機台規格</a>
-			<a href="{{ url('logos?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">附贈軟體</a>
-			<a href="{{ url('logos?type=3') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[6] }}">認證標章</a>
+			<a href="{{ url('logos?type=1') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('logos?type=1') }}">機台規格</a>
+			<a href="{{ url('logos?type=2') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('logos?type=2') }}">附贈軟體</a>
+			<a href="{{ url('logos?type=3') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('logos?type=3') }}">認證標章</a>
 	    </div>
         <div class="menu-group">
             <h5 class="menu_title">下載/軟體維護</h5>
-            <a href="{{ url('softwares?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">驅動程式</a>
-            <a href="{{ url('softwares?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">應用軟體</a>
+            <a href="{{ url('softwares?type=1') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('softwares?type=1') }}">驅動程式</a>
+            <a href="{{ url('softwares?type=2') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('softwares?type=2') }}">應用軟體</a>
         </div>
           <div class="menu-group">
               <h5 class="menu_title">配件維護</h5>
               @foreach($group_types as $group_type)
-                  <a href="{{ url('accessories?group_type_id='.$group_type->id) }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[3] }}">{{ $group_type->title }}</a>
+                  <a href="{{ url('accessories?group_type_id='.$group_type->id) }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('accessories?group_type_id='.$group_type->id) }}">{{ $group_type->title }}</a>
               @endforeach
           </div>
 		<div class="menu-group">
 	    	<h5 class="menu_title">常見問答維護</h5>
-			<a href="{{ url('faqs?type=1') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[4] }}">硬體相關</a>
-			<a href="{{ url('faqs?type=2') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[5] }}">軟體相關</a>
-			<a href="{{ url('faqs?type=3') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[6] }}">操作指南</a>
+			<a href="{{ url('faqs?type=1') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('faqs?type=1') }}">硬體相關</a>
+			<a href="{{ url('faqs?type=2') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('faqs?type=2') }}">軟體相關</a>
+			<a href="{{ url('faqs?type=3') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('faqs?type=3') }}">操作指南</a>
 	    </div>
 	    <div class="menu-group">
 	    	<h5 class="menu_title">篩選條件維護</h5>
-			<a href="{{ url('filters') }}" class="list-group-item list-group-item-action bg-light {{ $sidebar_active[7] }}">產品側欄篩選</a>
+			<a href="{{ url('filters') }}" class="list-group-item list-group-item-action bg-light {{ sidebar_active('filters') }}">產品側欄篩選</a>
 	    </div>
       </div>
     </div>

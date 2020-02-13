@@ -100,12 +100,14 @@ function modal(obj){
 	if(obj == 'create'){
 		$("#modal [name='_method']").val('POST');
 		$("#modal form").attr('action',"{{ url('filters') }}");
+        $("#modal .modal-title").text('新增-篩選');
 	}else{
 		$("#modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
 		$("#modal [name='title']").val($(obj).closest('tr').find('td:eq(0)').text());
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#modal form").attr('action',"{{ url('filters') }}/"+$(obj).closest('tr').data('id'));
+        $("#modal .modal-title").text('修改-篩選');
 	}
 	$("#modal").modal('show');
 }
