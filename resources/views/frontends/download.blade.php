@@ -32,20 +32,28 @@
                     <hr>
                     <div class="form-group">
                         <select class="form-control" id="product_category">
-                            <option selected="true" disabled="disabled">產品分類</option>
-                            <option>2</option>
-                            <option>3</option>
+                            <option disabled="disabled" selected="selected" hidden>產品分類</option>
+                            @foreach($group_types as $group_type)
+                                <optgroup label="{{ $group_type->title }}">
+                                    @foreach($group_type->types as $type)
+                                        <option value="{{ $type->id  }}">{{ $type->title }}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
                         </select>
                     </div>
+                    <form id="form_1" action="{{ url('frontends/download') }}" method="get">
                     <div class="form-group">
-                        <select class="form-control" id="product_model">
+                        <select class="form-control" id="product_model" name="product_id">
                             <option selected="true" disabled="disabled">產品型號</option>
-                            <option>2</option>
-                            <option>3</option>
+                            @foreach($all_products as $all_product)
+                                <option data-type-id="{{ $all_product->type_id }}" value="{{ $all_product->id }}">{{ $all_product->title }}</option>
+                            @endforeach
                         </select>
                     </div>
+                    </form>
                     <div class="blue_btn">
-                        <a class="btn " href="#">搜尋</a>
+                        <a class="btn " href="javascript:void(0)" onclick="form_submit(1)">搜尋</a>
                     </div>
                 </div>
             </div>
@@ -53,12 +61,14 @@
                 <div class="filter_box mb-3">
                     <p class="filter_title">方式二：輸入產品型號</p>
                     <hr>
+                    <form id="form_2" action="{{ url('frontends/download') }}" method="get">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1"
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="product_title"
                                aria-describedby="emailHelp" placeholder="輸入產品序型號">
                     </div>
+                    </form>
                     <div class="blue_btn" style="position: absolute; bottom:30px; left:50%; transform: translate(-50%, 0);">
-                        <a class="btn " href="#">搜尋</a>
+                        <a class="btn " href="javascript:void(0)" onclick="form_submit(2)">搜尋</a>
                     </div>
                 </div>
             </div>
@@ -76,22 +86,23 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <!--scanner product-->
 <div class="search_result container">
     <p class="blue_line_title">搜尋結果：</p>
     <div class="row">
+        @foreach($products as $product)
         <div class="col-md-3 col-6">
             <div class="search_box text-center text-center">
-                <img src="images/all_product_01.png" class="img-fluid " alt="">
+                <img src="{{ asset('storage/'.$product->picture) }}" class="img-fluid " alt="">
                 <div class="search_product_name">
-                    <p class="mb-0">AD120</p>
+                    <p class="mb-0">{{ $product->title }}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-6">
+        @endforeach
+        <!--div class="col-md-3 col-6">
             <div class="search_box text-center">
                 <img src="images/all_product_02.png" class="img-fluid" alt="">
                 <div class="search_product_name">
@@ -114,7 +125,7 @@
                     <p class="mb-0">AD120</p>
                 </div>
             </div>
-        </div>
+        </div-->
     </div>
     <div class="more_btn">
         <a class="btn" href="3-1-1-1_product-detail.html">瀏覽更多</a>
@@ -132,6 +143,19 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script>
+    $("#product_model option").hide();
+    $("#product_category").change(function () {
+        var type_val = $(this).val();
+        console.log(type_val);
+        $("#product_model option").hide();
+        $("#product_model option[data-type-id='"+type_val+"']").show();
+    });
+
+    function form_submit(id) {
+        $("#form_"+id).submit();
+    }
+</script>
 </body>
 
 </html>

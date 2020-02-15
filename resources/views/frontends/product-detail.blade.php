@@ -814,7 +814,11 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+<script charset="utf-8" src="//cdn.iframe.ly/embed.js?api_key=key"></script>
 	<script>
+        document.querySelectorAll( 'oembed[url]' ).forEach( element => {
+            iframely.load( element, element.attributes.url.value );
+        } );
 		if(window.location.hash) {
 			var hash = window.location.hash.substring(1);
 			$("#"+hash+"-tab").click();

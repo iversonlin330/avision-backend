@@ -893,10 +893,15 @@ table td{
 @parent
 <script>
 ClassicEditor
-        .create( document.querySelector( "#product_form  [name='characteristic']") )
+        .create( document.querySelector( "#product_form  [name='characteristic']"),{
+            mediaEmbed: {
+                // configuration...
+                //previewsInData:true
+            }
+        })
         .catch( error => {
             console.error( error );
-        } );
+        });
 @if(isset($is_type))
 	var is_type = {!! json_encode($is_type) !!};
 	$("#product_form [name='type_id'][value='"+is_type+"']").prop("checked",true);

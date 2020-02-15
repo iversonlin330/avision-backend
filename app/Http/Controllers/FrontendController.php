@@ -33,7 +33,7 @@ class FrontendController extends Controller
 			$products = Product::all();
 		}
 		$filters = Filter::all();
-		
+
 		$group_types = GroupType::all();
 		$types = Type::all();
 
@@ -41,7 +41,7 @@ class FrontendController extends Controller
 		foreach( $types as $type ){
 			$type_map[$type->type][] = $type->id;
 		}
-		
+
 		return view('frontends.products',compact('products','filters','group_types','type_map'));
     }
 
@@ -87,13 +87,21 @@ class FrontendController extends Controller
 
     public function getDownload(Request $request){
         $data = $request->all();
+        $group_types = GroupType::all();
+        $all_products = Product::all();
         if($data){
-            $products = Product::all();
+            if(array_key_exists("product_id",$data)){
+                $products = Product::where("id",$data["product_id"])->get();
+            }elseif (array_key_exists("product_title",$data)){
+                $products = Product::where("title",$data["product_title"])->get();
+            }else{
+                $products = Product::all();
+            }
         }else {
             $products = Product::all();
         }
 
-        return view("frontends.download",compact("products"));
+        return view("frontends.download",compact("products","group_types","all_products"));
     }
 
     public function getFaq(Request $request){
@@ -105,7 +113,7 @@ class FrontendController extends Controller
             $products = Product::all();
 			foreach($products as $k => $v){
 				if(array_intersect($faqs,$products[$k]->faq)){
-					
+
 				}else{
 					unset($products[$k]);
 				}
@@ -116,17 +124,17 @@ class FrontendController extends Controller
 
         return view("frontends.faq",compact("products","data"));
     }
-	
+
 	public function getSoftwareDownload($id){
 		$file = Software::find($id);
 		return Storage::download($file->file, $file->title . "." . explode(".",$file->file)[1]);
 	}
-	
+
 	public function getDownloadDownload($id){
 		$file = Download::find($id);
 		return Storage::download($file->file, $file->title . "." . explode(".",$file->file)[1]);
 	}
-	
+
 	public function getAjaxProduct(Request $request){
 		return response()->json(['src' => 'test', 'title' => '11']);
 	}
