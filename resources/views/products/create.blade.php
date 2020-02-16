@@ -255,11 +255,11 @@ table td{
 			  <div class="card-body">
 				<table class="table">
 					<thead>
-						<th>文件類型</th>
-						<th>文件名稱</th>
-						<th>檔案大小</th>
-						<th>文件語系</th>
-						<th>編輯</th>
+						<th style="width: 20%!important;">文件類型</th>
+						<th style="width: 30%!important;">文件名稱</th>
+						<th style="width: 15%!important;">檔案大小</th>
+						<th style="width: 15%!important;">文件語系</th>
+						<th style="width: 20%!important;">編輯</th>
 					</thead>
 					<tbody>
 					@foreach($product->downloads->sortBy('order') as $download)

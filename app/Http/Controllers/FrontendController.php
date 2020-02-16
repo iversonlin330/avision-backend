@@ -136,7 +136,11 @@ class FrontendController extends Controller
 	}
 
 	public function getAjaxProduct(Request $request){
-		return response()->json(['src' => 'test', 'title' => '11']);
+		$data = $request->all();
+		$product = Product::find($data['id']);
+		$src = asset('storage/'.$product->picture);
+		$title = $product->title;
+		return response()->json(['src' => $src, 'title' => $title]);
 	}
 
 }
