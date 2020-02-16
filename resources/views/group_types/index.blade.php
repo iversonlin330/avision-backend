@@ -265,7 +265,7 @@ function group_modal(obj){
         $("#group_modal [name='description']").val('');
 		$("#group_modal [name='_method']").val('POST');
 		$("#group_modal form").attr('action',"{{ url('group_types') }}");
-        $("#group .modal-title").text('新增第一層');
+        $("#group_modal .modal-title").text('新增第一層');
         $("#group_modal [type='file']").prop('required',true);
 	}else{
 		$("#group_modal [name='_method']").val('PUT');
@@ -274,7 +274,7 @@ function group_modal(obj){
         $("#group_modal [name='description']").val($(obj).closest('tr').find('td:eq(1)').text());
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#group_modal form").attr('action',"{{ url('group_types') }}/"+$(obj).closest('tr').data('id'));
-        $("#group .modal-title").text('修改第一層');
+        $("#group_modal .modal-title").text('修改第一層');
         $("#group_modal [type='file']").prop('required',false);
 	}
 	$("#group_modal").modal('show');

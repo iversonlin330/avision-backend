@@ -91,6 +91,9 @@ class GroupTypeController extends Controller
 		if(array_key_exists('picture',$data)){
 			$data['picture'] = $request->file('picture')->store('group_types');
 		}
+		if(array_key_exists('banner',$data)){
+			$data['banner'] = $request->file('banner')->store('group_types');
+		}
         GroupType::where("id",$id)->update($data);
         return back();
     }
@@ -101,10 +104,11 @@ class GroupTypeController extends Controller
      * @param  \App\GroupType  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GroupType $type)
+    public function destroy($id)
     {
         //
-        $type->delete();
+        GroupType::where("id",$id)->delete();
+		Type::where('type',$id)->delete();
         return back();
     }
 }
