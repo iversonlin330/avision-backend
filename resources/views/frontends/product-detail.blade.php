@@ -607,12 +607,16 @@
 										<div class="card-body" style="background-color: #FAFAFA;">
 											<table class="table table-borderless">
 												@foreach($group->specs as $spec)
-												<tbody>
-													<tr>
-														<td style="width:25%;">{{ $spec->title }}</td>
-														<td style="width:75%;">{{ (array_key_exists($spec->id,$product_specs))? $product_specs[$spec->id] : '' }}</td>
-													</tr>
-												</tbody>
+													@if(array_key_exists($spec->id,$product_specs))
+													@if($product_specs[$spec->id])
+													<tbody>
+														<tr>
+															<td style="width:25%;">{{ $spec->title }}</td>
+															<td style="width:75%;">{{ (array_key_exists($spec->id,$product_specs))? $product_specs[$spec->id] : '' }}</td>
+														</tr>
+													</tbody>
+													@endif
+													@endif
 												@endforeach
 											</table>
 										</div>
