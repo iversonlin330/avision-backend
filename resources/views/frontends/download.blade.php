@@ -63,8 +63,8 @@
                     <hr>
                     <form id="form_2" action="{{ url('frontends/download') }}" method="get">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" name="product_title"
-                               aria-describedby="emailHelp" placeholder="輸入產品序型號">
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="product_title"
+                               aria-describedby="emailHelp" placeholder="輸入產品型號">
                     </div>
                     </form>
                     <div class="blue_btn" style="position: absolute; bottom:30px; left:50%; transform: translate(-50%, 0);">
@@ -147,7 +147,7 @@
     $("#product_model option").hide();
     $("#product_category").change(function () {
         var type_val = $(this).val();
-        console.log(type_val);
+		$("#product_model").val("");
         $("#product_model option").hide();
         $("#product_model option[data-type-id='"+type_val+"']").show();
     });

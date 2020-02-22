@@ -237,12 +237,14 @@ function group_modal(obj){
 		$("#spec_modal [name='title']").val('');
 		$("#group_modal [name='_method']").val('POST');
 		$("#group_modal form").attr('action',"{{ url('groups') }}");
+		$("#group_modal .modal-title").text('新增群組');
 	}else{
 		$("#group_modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
 		$("#group_modal [name='title']").val($(obj).closest('tr').find('td:eq(0)').text());
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#group_modal form").attr('action',"{{ url('groups') }}/"+$(obj).closest('tr').data('id'));
+		$("#group_modal .modal-title").text('修改群組');
 	}
 	$("#group_modal").modal('show');
 }
@@ -252,6 +254,7 @@ function spec_modal(obj){
 		$("#spec_modal [name='title']").val('');
 		$("#spec_modal [name='_method']").val('POST');
 		$("#spec_modal form").attr('action',"{{ url('specs') }}");
+		$("#spec_modal .modal-title").text('新增規格');
 	}else{
 		$("#spec_modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -260,6 +263,7 @@ function spec_modal(obj){
 		$("#spec_modal [name='description']").val($(obj).closest('tr').find('td:eq(2)').text());
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#spec_modal form").attr('action',"{{ url('specs') }}/"+$(obj).closest('tr').data('id'));
+		$("#spec_modal .modal-title").text('修改規格');
 	}
 	$("#spec_modal").modal('show');
 }

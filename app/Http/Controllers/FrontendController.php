@@ -140,7 +140,7 @@ class FrontendController extends Controller
 		$product = Product::find($data['id']);
 		$src = asset('storage/'.$product->picture);
 		$title = $product->title;
-		return response()->json(['src' => $src, 'title' => $title]);
+		return response()->json(['id' => $product->id,'src' => $src, 'title' => $title]);
 	}
 
 }

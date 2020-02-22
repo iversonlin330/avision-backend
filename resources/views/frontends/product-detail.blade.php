@@ -461,7 +461,7 @@
 				<div class="row mb-3">
 					<div class="col-md-12 main-title">{{ $product->title }}
 						<div class="d-md-none form-check form-check-inline ml-3" style="float: right;">
-							<input class="form-check-input" type="checkbox" value="1" id="product_1">
+							<input class="form-check-input product_{{ $product->id }}" type="checkbox" value="{{ $product->id }}" id="product_{{ $product->id }}">
 							<label class="form-check-label add-compare" for="defaultCheck1">
 								加入比較
 							</label>
@@ -550,7 +550,7 @@
 				<div class="contact_btn">
 					<a class="btn">聯絡我們</a>
 					<div class="form-check form-check-inline ml-3 d-none d-md-inline ">
-						<input class="form-check-input add-compare" type="checkbox" value="1" id="product_1">
+						<input class="form-check-input add-compare product_{{ $product->id }}" type="checkbox" value="{{ $product->id }}" id="product_{{ $product->id }}">
 						<label class="form-check-label" for="defaultCheck1">
 							加入比較
 						</label>
@@ -898,16 +898,17 @@
 						//console.log(data.src);
 						picture_src = data.src;
 						picture_title = data.title;
-						$('#product_'+arr[x]).prop('checked',true);
-						$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+arr[x]+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
-					compare_link = compare_link + "&product_id[]=" + arr[x];
+						id = data.id
+						$('.product_'+arr[x]).prop('checked',true);
+						$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+id+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
+						compare_link = compare_link + "&product_id[]=" + id;
+						$(".compare_btn").attr("href",compare_link);
 					});
 					//$('[value="'+arr[x]+'"]').prop('checked',true);
 					//var picture_src = $('#product_'+arr[x]).closest('.card-body').find('.product_pic').attr('src');
 					//var picture_title = $('#product_'+arr[x]).closest('.card-body').find('.product_title').text();
-
 				}
-				$(".compare_btn").attr("href",compare_link);
+				
 				$(".compare").show();
 			}
 		}

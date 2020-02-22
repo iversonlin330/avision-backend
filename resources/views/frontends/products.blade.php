@@ -37,12 +37,12 @@
 				<div class="left-side-title">產品類型</div>
 				@foreach($group_types as $group_type)
 					<div class="form-check ml-3">
-						<input class="form-check-input checkbox-20 filter" type="checkbox" value="{{ $group_type->id }}" data-type="type">
+						<input class="form-check-input checkbox-20 filter" type="checkbox" value="{{ $group_type->id }}" data-type="group">
 						<label class="form-check-label left-side-item" for="defaultCheck1">{{ $group_type->title }}</label>
 					</div>
 					@foreach($group_type->types as $type)
 					<div class="form-check ml-5">
-						<input class="form-check-input checkbox-15 filter" type="checkbox" value="{{ $type->id }}" data-type="type">
+						<input class="form-check-input checkbox-15 filter" type="checkbox" value="{{ $type->id }}" data-type="type" data-group-id="{{ $type->type }}">
 						<label class="form-check-label" for="defaultCheck1">
 						{{ $type->title }}
 						</label>
@@ -286,7 +286,7 @@
 
 		$(".filter").change(function(){
 			let data_type = $(this).data('type');
-			if(data_type == 'type'){
+			if(data_type == 'group'){
 				let type = $(this).val();
 				let is_checked = $(this).prop('checked');
 				let type_map = {!! json_encode($type_map) !!};
@@ -294,7 +294,25 @@
 				for( x in type_map[type]){
 					$(".filter[data-type=type][value=" + type_map[type][x] + "]").prop('checked',is_checked);
 				}
+			}else if(data_type == 'type'){
+				let group_id = $(this).data("group-id");
+				
+				let total = $("[data-group-id='"+group_id+"']").length;
+				let is_checked = $("[data-group-id='"+group_id+"']:checked").length;
+				if(total == is_checked){
+					$("[data-type='group'][value='"+group_id+"']").prop('checked',true);
+				}else{
+					$("[data-type='group'][value='"+group_id+"']").prop('checked',false);
+				}
 				/*
+				let type = $(this).val();
+				let is_checked = $(this).prop('checked');
+				let type_map = {!! json_encode($type_map) !!};
+				
+				for( x in type_map[type]){
+					$(".filter[data-type=type][value=" + type_map[type][x] + "]").prop('checked',is_checked);
+				}
+				
 				if(type == 'scanner'){
 					$(".filter[value=1]").prop('checked',is_checked);
 					$(".filter[value=2]").prop('checked',is_checked);
