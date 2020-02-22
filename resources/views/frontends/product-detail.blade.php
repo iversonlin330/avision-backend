@@ -462,7 +462,7 @@
 					<div class="col-md-12 main-title">{{ $product->title }}
 						<div class="d-md-none form-check form-check-inline ml-3" style="float: right;">
 							<input class="form-check-input product_{{ $product->id }}" type="checkbox" value="{{ $product->id }}" id="product_{{ $product->id }}">
-							<label class="form-check-label add-compare" for="defaultCheck1">
+							<label class="form-check-label add-compare" for="defaultCheck1" data-type="{{ $product->type->type }}">
 								加入比較
 							</label>
 						</div>
@@ -550,7 +550,7 @@
 				<div class="contact_btn">
 					<a class="btn">聯絡我們</a>
 					<div class="form-check form-check-inline ml-3 d-none d-md-inline ">
-						<input class="form-check-input add-compare product_{{ $product->id }}" type="checkbox" value="{{ $product->id }}" id="product_{{ $product->id }}">
+						<input class="form-check-input add-compare product_{{ $product->id }}" type="checkbox" value="{{ $product->id }}" id="product_{{ $product->id }}" data-type="{{ $product->type->type }}">
 						<label class="form-check-label" for="defaultCheck1">
 							加入比較
 						</label>
@@ -898,11 +898,14 @@
 						//console.log(data.src);
 						picture_src = data.src;
 						picture_title = data.title;
-						id = data.id
+						id = data.id;
+						type = data.type;
 						$('.product_'+arr[x]).prop('checked',true);
 						$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+id+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
 						compare_link = compare_link + "&product_id[]=" + id;
 						$(".compare_btn").attr("href",compare_link);
+						var compare_type = $('#product_'+arr[x]).data("type");
+						localStorage.setItem("product-compare-type", type);
 					});
 					//$('[value="'+arr[x]+'"]').prop('checked',true);
 					//var picture_src = $('#product_'+arr[x]).closest('.card-body').find('.product_pic').attr('src');
@@ -926,6 +929,13 @@
 
 
 		$(".add-compare").click(function () {
+			var compare_type = localStorage.getItem("product-compare-type");
+			if(compare_type != "null"){
+				if($(this).data('type') != compare_type){
+					alert("請選擇相同類型產品比較");
+					return false;
+				}
+			}
 			$(".compare").show();
 			var json_str = localStorage.getItem("product-compare");
 			if (JSON.parse(json_str)) {

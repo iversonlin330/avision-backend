@@ -137,7 +137,7 @@
 								<h5 class="card-title">
 									<div class="form-check text-right">
 										<input class="form-check-input add-compare" type="checkbox" value="{{ $product->id }}"
-											id="product_{{ $product->id }}">
+											id="product_{{ $product->id }}" data-type="{{ $product->type->type }}">
 										<label class="form-check-label" for="defaultCheck1">
 											加入比較
 										</label>
@@ -200,6 +200,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 	<script>
 		var json_str = localStorage.getItem("product-compare");
+		var compare_type = localStorage.getItem("product-compare-type");
+		console.log(compare_type);
 		if(json_str == null){
 			localStorage.setItem("product-compare", JSON.stringify([]));
 		}
@@ -213,8 +215,10 @@
 				var arr = JSON.parse(json_str);
 				$(".compare_list").empty();
 				$(".add-compare").prop('checked',false);
-				if(arr.length == 0)
+				if(arr.length == 0){
+					localStorage.setItem("product-compare-type", null);
 					return;
+				}
 				for (x in arr) {
 					//$('[value="'+arr[x]+'"]').prop('checked',true);
 					$('#product_'+arr[x]).prop('checked',true);
@@ -222,6 +226,8 @@
 					var picture_title = $('#product_'+arr[x]).closest('.card-body').find('.product_title').text();
 					$(".compare_list").append("<div class='col-md-4 col-sm-4'><div onclick='remove_compare("+arr[x]+")'><img src='/images/cross-icons" + ".png' style='width:15px; margin-left:8px; float:right; '></div><div><img src='"+picture_src+"'></div><div>"+picture_title+"</div></div>");
 					compare_link = compare_link + "&product_id[]=" + arr[x];
+					var compare_type = $('#product_'+arr[x]).data("type");
+					localStorage.setItem("product-compare-type", compare_type);
 				}
 				$(".compare_btn").attr("href",compare_link);
 				$(".compare").show();
@@ -241,6 +247,13 @@
 
 
 		$(".add-compare").click(function () {
+			var compare_type = localStorage.getItem("product-compare-type");
+			if(compare_type != "null"){
+				if($(this).data('type') != compare_type){
+					alert("請選擇相同類型產品比較");
+					return false;
+				}
+			}
 			$(".compare").show();
 			var json_str = localStorage.getItem("product-compare");
 			if (JSON.parse(json_str)) {
