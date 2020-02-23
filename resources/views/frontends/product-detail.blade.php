@@ -479,7 +479,7 @@
 								</div>
 								@foreach($product->pictures->sortBy('order') as $picture)
 									<div class="carousel-item col-3 col-md-3 col-lg-3 active" onclick="change_pic(this)">
-										<img class="img-fluid mx-auto d-block" src="{{ ($picture->type = 2)? $picture->path : asset('storage/'.$picture->path) }}" alt="slide 1">
+										<img class="img-fluid mx-auto d-block" src="{{ ($picture->type == 2)? asset('storage/'.$picture->path) : $picture->path  }}" alt="slide 1">
 									</div>
 								@endforeach
 								<!--div class="carousel-item col-3 col-md-3 col-lg-3 active" onclick="change_pic(this)">

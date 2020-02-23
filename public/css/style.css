@@ -731,6 +731,7 @@ body {
 		padding: 30px 130px;
 		box-shadow:0px 0px 10px rgba(0,0,0,0.2);
 		//padding-left:165px;
+		z-index: 1;
 	}
 
 	.compare_list{
