@@ -93,7 +93,7 @@ class FrontendController extends Controller
             if(array_key_exists("product_id",$data)){
                 $products = Product::where("id",$data["product_id"])->get();
             }elseif (array_key_exists("product_title",$data)){
-                $products = Product::where("title",$data["product_title"])->get();
+                $products = Product::where("title","LIKE","%".$data["product_title"]."%")->get();
             }else{
                 $products = Product::all();
             }
