@@ -24,19 +24,20 @@
                 <hr class="mb-5">
             </div>
         </div>
-
+		<form id="form_1" action="{{ url('frontends/faq') }}" method="get">
         <div class="row d-flex justify-content-center">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="text" class="form-control search_input" id="exampleInputPassword1" placeholder="{{ isset($data['search'])? $data['search'] : "" }}">
+                    <input type="text" name="search" class="form-control search_input" id="exampleInputPassword1" placeholder="{{ isset($data['search'])? $data['search'] : "" }}">
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="blue_btn m-0">
-                    <a class="btn " href="#">搜尋</a>
+                    <a class="btn" href="javascript:void(0)" onclick="form_submit(1)">搜尋</a>
                 </div>
             </div>
         </div>
+		</form>
     </div>
 </div>
 <!--scanner product-->
@@ -104,6 +105,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script>
+
+    function form_submit(id) {
+        $("#form_"+id).submit();
+    }
+</script>
 </body>
 
 </html>
