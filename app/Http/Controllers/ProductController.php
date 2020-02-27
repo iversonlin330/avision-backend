@@ -189,4 +189,60 @@ class ProductController extends Controller
 		$product->delete();
 		return back();
     }
+	
+	public function uploadFile(Request $request){
+		$postFile = 'upload';
+		$allowedPrefix = ['jpg','png','doc','docx','xls','xlsx','zip','ppt','pptx','rar','pdf'];
+		//检查文件是否上传成功
+		if(!$request->hasFile($postFile) || !$request->file($postFile)->isValid()){
+			return $this->CKEditorUploadResponse(0,'文件上傳失败');
+		}
+		$extension = $request->file($postFile)->extension();
+		$size = $request->file($postFile)->getClientSize();
+		$filename = $request->file($postFile)->getClientOriginalName();
+		//检查后缀名
+		//Log::info('extension',[$filename=>$extension]);
+		if(!in_array($extension, $allowedPrefix)){
+			return $this->CKEditorUploadResponse(0,'文件類型不合法');
+		}
+		//检查大小
+		//Log::info('size',[$filename=>$size]);
+		if($size > 10*1024*1024){
+			return $this->CKEditorUploadResponse(0,'文件大小超過限制');
+		}
+		//保存文件
+		$path = '/storage/'.$request->file($postFile)->store('images');
+		return $this->CKEditorUploadResponse(1,'',$filename,$path);
+	}
+	
+	private function CKEditorUploadResponse($uploaded,$error='',$filename='',$url=''){
+		return [
+			"uploaded" => $uploaded,
+			"fileName" => $filename,
+			"url" => $url,
+			"error" => [
+				"message" => $error
+			]
+		];
+	}
+	
+	public function upload(Request $request)
+    {
+        if($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
+        
+            $request->file('upload')->move(public_path('images'), $fileName);
+   
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('images/'.$fileName); 
+            $msg = 'Image uploaded successfully'; 
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+               
+            @header('Content-type: text/html; charset=utf-8'); 
+            echo $response;
+        }
+    }
 }

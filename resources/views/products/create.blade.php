@@ -104,7 +104,7 @@ table td{
   </div>
   <div class="form-group">
 	<label for="exampleInputEmail1">產品特色</label>
-	<textarea name="characteristic" placeholder="產品特色"></textarea>
+	<textarea id="characteristic" name="characteristic" placeholder="產品特色"></textarea>
   </div>
 
 
@@ -285,7 +285,7 @@ table td{
 	</div>
     <hr class="nature_hr">
     <label for="exampleFormControlSelect2">下載</label><br>
-    <form id="product_form" action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
+    <form action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
         @method('PUT')
         <div class="form-group">
             <label for="exampleFormControlSelect2">驅動程式</label><br>
@@ -348,7 +348,7 @@ table td{
             @endif
 	</div>
 	<div class="tab-pane fade" id="pills-acc" role="tabpanel" aria-labelledby="pills-contact-tab">
-        <form id="product_form" action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
+        <form action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
             @method('PUT')
             <div class="form-group">
                 <label for="exampleInputEmail1"></label>
@@ -412,7 +412,7 @@ table td{
         @endif
 	</div>
 	<div class="tab-pane fade" id="pills-qa" role="tabpanel" aria-labelledby="pills-contact-tab">
-        <form id="product_form" action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
+        <form action="{{url('products/'.$product->id)}}" enctype="multipart/form-data" method="POST">
             @method('PUT')
             @foreach(Config::get("map.faq_type") as $faq_type_id => $faq_type_title)
                 <div class="form-group">
@@ -891,10 +891,22 @@ table td{
 
 @section('script')
 @parent
+<!--script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script-->
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
+CKEDITOR.replace("characteristic", {
+        filebrowserUploadUrl: "/product/uploadFile",
+        filebrowserUploadMethod: 'form'
+    });
+/*
 ClassicEditor
         .create( document.querySelector( "#product_form  [name='characteristic']"),{
-            mediaEmbed: {
+             //fileTools_requestHeaders : {
+			//	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			//},
+			isFileUploadSupported : true,
+			filebrowserUploadUrl : '/product/uploadFile',
+			mediaEmbed: {
                 // configuration...
                 //previewsInData:true
             }
@@ -902,6 +914,8 @@ ClassicEditor
         .catch( error => {
             console.error( error );
         });
+		config.extraPlugins = 'filebrowser';
+		*/
 @if(isset($is_type))
 	var is_type = {!! json_encode($is_type) !!};
 	$("#product_form [name='type_id'][value='"+is_type+"']").prop("checked",true);

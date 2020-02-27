@@ -27,10 +27,11 @@ table td{
 			<table class="table">
 				<thead>
 					<th style="width: 20%!important;">第一層名稱</th>
-					<th style="width: 60%!important;">描述文字</th>
+					<th style="width: 50%!important;">描述文字</th>
 					<!--th>Banner</th>
 					<th>產品圖片</th-->
 					<th style="width: 20%!important;">編輯</th>
+					<th style="width: 10%!important;">id編號</th>
 				</thead>
 				<tbody>
 				@foreach($group_types as $group_type)
@@ -46,6 +47,7 @@ table td{
 							<button type="submit" class="btn btn-primary delete_btn">刪除</button>
 						 </form>
 					</td>
+					<td>{{ $group_type->id }}</td>
 				</tr>
 				@endforeach
 				</tbody>

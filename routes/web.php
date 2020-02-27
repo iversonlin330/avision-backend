@@ -29,6 +29,9 @@ Route::resource('filters','FilterController');
 Route::resource('product_specs','ProductSpecController');
 Route::resource('pictures','PictureController');
 
+Route::post('/product/uploadFile','ProductController@upload');
+Route::post('/product/uploadFile&responseType=json','ProductController@upload');
+
 Route::group(['prefix' => 'frontends'], function () {
     /*
 	Route::get('products', function ()    {

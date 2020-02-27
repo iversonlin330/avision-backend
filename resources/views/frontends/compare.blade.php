@@ -21,7 +21,7 @@
 			<div class="col-md-12 mx-auto">
 				<p class="page_title text-left">比較結果</p>
 				<hr>
-				<p class="bread" style="margin:20px 0;">< BACK </p>
+				<p class="bread" style="margin:20px 0;" onclick="window.history.back();">< BACK </p>
 			</div>
 		</div>
 		<div id="sticky-anchor"></div>
