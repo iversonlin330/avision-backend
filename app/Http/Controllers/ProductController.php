@@ -211,7 +211,7 @@ class ProductController extends Controller
 			return $this->CKEditorUploadResponse(0,'文件大小超過限制');
 		}
 		//保存文件
-		$path = '/storage/'.$request->file($postFile)->store('images');
+		$path = '/storage/'.$request->file($postFile)->store('uploadImages');
 		return $this->CKEditorUploadResponse(1,'',$filename,$path);
 	}
 	
@@ -234,10 +234,12 @@ class ProductController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName.'_'.time().'.'.$extension;
         
-            $request->file('upload')->move(public_path('images'), $fileName);
+            //$request->file('upload')->move(public_path('images'), $fileName);
    
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('images/'.$fileName); 
+            //$url = asset('images/'.$fileName);
+			//$request->file('upload')->store('products');
+			$url = asset('/storage/'.$request->file('upload')->store('products'));			
             $msg = 'Image uploaded successfully'; 
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
                
