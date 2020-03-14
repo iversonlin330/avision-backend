@@ -53,4 +53,10 @@ Route::group(['prefix' => 'frontends'], function () {
 	Route::get('software-download/{id}','FrontendController@getSoftwareDownload');
 	Route::get('download-download/{id}','FrontendController@getDownloadDownload');
 	Route::get('ajax-product','FrontendController@getAjaxProduct');
+	Route::get('header',function(){
+		return view('layouts.header');
+	});
+	Route::get('footer',function(){
+		return view('layouts.footer');
+	});
 });
