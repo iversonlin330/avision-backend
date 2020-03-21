@@ -50,7 +50,7 @@ class FrontendController extends Controller
         //
 		$product = Product::find($id);
 		$logo1s = Logo::where('type',1)->whereIn('id',$product->spec)->get();
-		$logo2s = Logo::where('type',2)->whereIn('id',$product->software)->get();
+		$logo2s = Logo::where('type',2)->whereIn('id',$product->bonus)->get();
 		$logo3s = Logo::where('type',3)->whereIn('id',$product->cert)->get();
 		$type = $product->type->type;
 		$types = Type::where('type',$type)->get();

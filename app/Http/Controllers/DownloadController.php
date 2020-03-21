@@ -82,7 +82,9 @@ class DownloadController extends Controller
     {
         //
 		$data = $request->all();
-		$data['file'] = $request->file('file')->store('downloads');
+		if(array_key_exists('file',$data)){
+			$data['file'] = $request->file('file')->store('downloads');
+		}
 		$download->update($data);
 		return back()->with('tab', 'T4');
     }

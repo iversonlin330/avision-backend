@@ -288,8 +288,8 @@ function spec_modal(obj){
         $("#spec_modal [name='description']").val('');
 		$("#spec_modal [name='_method']").val('POST');
 		$("#spec_modal form").attr('action',"{{ url('types') }}");
-        $("#group .modal-title").text('新增第二層');
-        $("#group_modal [type='file']").prop('required',true);
+        $("#spec_modal .modal-title").text('新增第二層');
+        $("#spec_modal [type='file']").prop('required',true);
 	}else{
 		$("#spec_modal [name='_method']").val('PUT');
 		//$("#modal [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -298,8 +298,8 @@ function spec_modal(obj){
 		$("#spec_modal [name='description']").val($(obj).closest('tr').data('description'));
 		//$("#modal [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#spec_modal form").attr('action',"{{ url('types') }}/"+$(obj).closest('tr').data('id'));
-        $("#group .modal-title").text('修改第二層');
-        $("#group_modal [type='file']").prop('required',false);
+        $("#spec_modal .modal-title").text('修改第二層');
+        $("#spec_modal [type='file']").prop('required',false);
 	}
 	$("#spec_modal").modal('show');
 }

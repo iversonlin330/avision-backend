@@ -18,10 +18,10 @@
 	<div class="col-12">
 	<table class="table">
 		<thead>
-			<th>產品名稱</th>
-			<th>圖片</th>
-			<th>Flag</th>
-			<th>編輯</th>
+			<th style="width:20%;">產品名稱</th>
+			<th style="width:40%;">圖片</th>
+			<th style="width:15%;">Flag</th>
+			<th style="width:25%;">編輯</th>
 		</thead>
 		<tbody>
 		@foreach($products as $product)

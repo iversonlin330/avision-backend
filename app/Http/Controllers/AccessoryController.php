@@ -89,7 +89,10 @@ class AccessoryController extends Controller
     {
         //
 		$data = $request->all();
-		$data['file'] = $request->file('file')->store('accessories');
+		if(array_key_exists('file',$data)){
+			$data['file'] = $request->file('file')->store('accessories');
+		}
+		//$data['file'] = $request->file('file')->store('accessories');
 		$accessory->update($data);
 		return back();
 		//return back()->with('tab', 'T5');

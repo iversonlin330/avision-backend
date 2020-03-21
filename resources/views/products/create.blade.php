@@ -136,7 +136,7 @@ table td{
 	@foreach($logo2s as $logo2)
 	<div class="col-2" style="text-align: center;">
 		<img src="{{ asset('storage/'.$logo2->file) }}" style="width:100%;">
-		<input type="checkbox" name="software[]" value="{{ $logo2->id }}">{{ $logo2->title }}</input>
+		<input type="checkbox" name="bonus[]" value="{{ $logo2->id }}">{{ $logo2->title }}</input>
 	</div>
 	@endforeach
 	@if(0)
@@ -484,10 +484,10 @@ table td{
 			  <div class="card-body">
 				<table class="table">
 					<thead>
-						<th>類別</th>
-						<th>說明</th>
-						<th>檔案</th>
-						<th>編輯</th>
+						<th style="width:15%;">類別</th>
+						<th style="width:25%;">說明</th>
+						<th style="width:35%;">檔案</th>
+						<th style="width:25%;">編輯</th>
 					</thead>
 					<tbody>
 					@foreach($product->pictures->sortBy('order') as $picture)
@@ -943,13 +943,13 @@ ClassicEditor
 	$("#product_form  [name='characteristic_3']").val(product.characteristic_3);
 	$("#product_form  [name='description']").val(product.description);
 	$("#product_form  [name='spec[]']").val(product.spec);
-	$("#product_form  [name='software[]']").val(product.software);
+	$("[name='software[]']").val(product.software);
 	$("#product_form  [name='cert[]']").val(product.cert);
 	$("#product_form  [name='filter[]']").val(product.filter);
 	$("#product_form  [name='status']").val(product.status);
 	//$("[name='picture']").val(product.picture);
-    $("#product_form  [name='faq[]']").val(product.faq);
-    $("#product_form  [name='accessory[]']").val(product.accessory);
+    $("[name='faq[]']").val(product.faq);
+    $("[name='accessory[]']").val(product.accessory);
     $("#product_form  [name='bonus[]']").val(product.bonus);
 	/*
 	$("[name='gender']").filter('[value='+user.gender+']').prop('checked', true);
@@ -972,6 +972,7 @@ ClassicEditor
 			$("#group [name='_method']").val('POST');
 			$("#group form").attr('action',"{{ url('downloads') }}");
 			$("#group .modal-title").text('新增下載');
+			$("#group [type='file']").prop('required',true);
 		}else{
 			$("#group [name='_method']").val('PUT');
 			$("#group [name='type']").val($(obj).closest('tr').find('td:eq(0)').data('val'));
@@ -979,6 +980,7 @@ ClassicEditor
 			$("#group [name='lang']").val($(obj).closest('tr').find('td:eq(3)').text());
 			$("#group form").attr('action',"{{ url('downloads') }}/"+$(obj).closest('tr').data('id'));
 			$("#group .modal-title").text('編輯下載');
+			$("#group [type='file']").prop('required',false);
 		}
 		$("#group").modal('show');
 	}

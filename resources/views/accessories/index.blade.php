@@ -145,6 +145,7 @@ function software_modal(obj){
 		$("#software [name='_method']").val('POST');
 		$("#software form").attr('action',"{{ url('accessories') }}");
 		$("#software .modal-title").text('新增-{{ $type_text }}');
+		$("#software [name='file']").prop('required',true);
 	}else{
 		$("#software [name='_method']").val('PUT');
         $("#software [name='title']").val($(obj).closest('tr').find('td:eq(0)').text());
@@ -152,6 +153,7 @@ function software_modal(obj){
         $("#software [name='url']").val($(obj).closest('tr').find('td:eq(3)').text());
 		$("#software form").attr('action',"{{ url('accessories') }}/"+$(obj).closest('tr').data('id'));
 		$("#software .modal-title").text('修改-{{ $type_text }}');
+		$("#software [name='file']").prop('required',false);
 	}
 	$("#software").modal('show');
 }
