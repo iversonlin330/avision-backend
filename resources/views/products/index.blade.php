@@ -5,6 +5,9 @@
 @section('style')
 @parent
 <style>
+img{
+    width:100%
+}
 </style>
 @endsection
 @section('content')
